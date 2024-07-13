@@ -41,11 +41,9 @@ class Categoria extends Conexion {
     }
 
     public function agregarCategoria() {
-        $sql = "INSERT INTO Categoria (ID_Categoria, Nombre, Estado) VALUES (:ID_Categoria, :Nombre, :Estado)";
+        $sql = "INSERT INTO Categoria (Nombre) VALUES (:Nombre)";
         $stmt = $this->conexion->prepare($sql);
-        $stmt->bindParam(':ID_Categoria', $this->ID_Categoria);
         $stmt->bindParam(':Nombre', $this->Nombre);
-        $stmt->bindParam(':Estado', $this->Estado);
         $result = $stmt->execute();
         return $result ? 1 : 0;
     }

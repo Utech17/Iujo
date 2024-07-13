@@ -1,3 +1,6 @@
+<?php
+require_once("../controlador/categoria_controlador.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,16 +55,8 @@
             <form id="categoriaForm" action="" method="POST">
                 <div id="f1" class="row col-md-4">
                     <div class="col-md-12">
-                        <label for="ID_Categoria">ID de Categoría</label>
-                        <input type="text" id="ID_Categoria" name="ID_Categoria" class="form-control form-control-sm">
-                    </div>
-                    <div class="col-md-12">
                         <label for="Nombre">Nombre</label>
                         <input type="text" id="Nombre" name="Nombre" class="form-control form-control-sm">
-                    </div>
-                    <div class="col-md-12">
-                        <label for="Estado">Estado</label>
-                        <input type="text" id="Estado" name="Estado" class="form-control form-control-sm">
                     </div>
                     <div class="col-md-12"><br>
                         <center>
