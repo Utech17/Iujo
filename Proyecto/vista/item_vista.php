@@ -48,6 +48,11 @@
                 <div class="modal__contenedor">
                     
                 <div id="subtabla_div">
+
+                <form id="itemForm" action="" method="POST" target="_self" onsubmit="return confirmacion()"> 
+
+                
+
 <table id="subtabla" class="table table-striped" style="width:100%">
         <thead>
                             <th>Seleccionar</th>
@@ -72,43 +77,17 @@
     </table>
     </div>
           
-    <form id="itemForm" action="" method="POST" target="_self" onsubmit="return confirmacion()"> <br>
-                <div id="f1" class="row col-md-4">
-                    <div class="col-md-12">
-                        <label for=id_cliente>Codigo de cliente</label>
-                        <input type="text" id="cliente_codigo_input" name="cliente_codigo_input" class="form-control form-control-sm" readonly>
-                    </div>
-                    <div class="col-md-12">
-                        <label for=fecha_salida>Fecha</label>
-                        <input type="date" id="fecha_s" name="fecha_s" readonly class="form-control form-control-sm">
-                    </div>
-                    <div class="col-md-12 aqui"> <br>
-                        <label for=titulo>Producto</label>
-                        <a href="#" class="btn btn-info modal_abrir2">+</a>
-                        <div class="lista_productos"></div>
-                        <input type="hidden" id="id_producto" name="id_producto">
-                        <input type="hidden" id="cant_salida" name="cant_salida">
-                        
-                    </div>
+   <br>
                 
-                    
-                    <div class="col-md-12"><br>
-                        <center>
-                        <div id="botones">
-                            
-                            <input type="submit" value="Enviar" name="Enviar" class="btn btn-info">
-                            <input type="submit" value="Limpiar" name="Limpiar" onclick="Limpiar();" id=limpiar  class="btn btn-info">
-                        </div>
-                        </center>
-                    </div>
-				</div>
-                </form>
+                
 
     <div class="modal__botones-contenedor">
-                    <input type="submit" for value="Guardar" class="modal__agregar finalizar" id="modal_cliente">
+                    <input type="submit" for value="Guardar" name="Enviar" class="modal__agregar finalizar" id="modal_cliente">
                     <input type="button" value="Cancelar" class=" modal__cerrar finalizar">
                 </div>
     </div>
+
+    </form>
          </section>
 
     <script src="../vista/js/jquery-3.7.1.js"></script>
