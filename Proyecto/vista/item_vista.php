@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../vista/css/bootstrap.min.css">
     <link rel="stylesheet" href="../vista/css/dataTables.bootstrap5.css">
     <link rel="stylesheet" href="../vista/css/estilo_item.css">
-    <title>Document</title>
+    <title>Item</title>
 </head>
 <body>
     <div id="tabla_div">
@@ -86,12 +86,14 @@
                     
                     <p>Elegir estado:</p>
 <p>
-	Activo: <input type="radio" name="estado" checked="yes" /><br />
-	Inactivo: <input type="radio" name="estado" />
+	Activo: <input type="radio" value="1" id="estado" name="estado" checked="yes" /><br />
+	Inactivo: <input type="radio" value="0" id="estado" name="estado" />
 </p>
 
+<input type="submit" value="Enviar" name="Enviar" class="btn btn-info">
+
     <div class="modal__botones-contenedor">
-                    <input type="submit" for value="Guardar" name="Enviar" class="modal__agregar finalizar" id="modal_cliente">
+                    <input type="submit" for value="Guardar" name="Guardar" class="modal__agregar finalizar" id="modal_cliente">
                     <input type="button" value="Cancelar" class=" modal__cerrar finalizar">
                 </div>
     </div>

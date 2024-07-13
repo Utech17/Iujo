@@ -3,7 +3,6 @@
 
     class ItemModelo extends Conexion {
         private $id_item;
-        private $id_proyecto;
         private $id_categoria;
         private $nombre;
         private $estado;
@@ -16,27 +15,20 @@
 		 
 		 // métodos 
 		public function get_iditem(){
-			return $this->iditem;
+			return $this->id_item;
 		}
 		
-		public function set_iditem( $iditem ){
-			$this->iditem = $iditem;	
+		public function set_iditem( $id_item ){
+			$this->id_item = $id_item;	
 		}
 	
-		public function get_idproyecto(){
-			return $this->idproyecto;
-		}
-		
-		public function set_idproyecto( $idproyecto ){
-			$this->idproyecto = $idproyecto;
-		}
 	
 		public function get_idcategoria(){
-			return $this->idcategoria;
+			return $this->id_categoria;
 		}
 		
-		public function set_idcategoria( $idcategoria ){
-			$this->idcategoria = $idcategoria;
+		public function set_idcategoria( $id_categoria ){
+			$this->id_categoria = $id_categoria;
 		}
 	
 		public function get_nombre(){
@@ -68,10 +60,10 @@
 		} */
 		
 		public function incluir() { // funcion para Incluir
-			$registro = "INSERT INTO item (id_item, id_proyecto, id_categoria, nombre, estado) VALUES (:idproyecto,:idcategoria,:nombre,:estado)";
+			$registro = "INSERT INTO item (id_item, id_categoria, nombre, estado) VALUES (:id_item,:id_categoria,:nombre,:estado)";
 			$preparado = $this->objbd->prepare($registro);
-			$preparado->bindParam(':idproyecto', $this->idproyecto);
-			$preparado->bindParam(':idcategoria', $this->idcategoria); 
+			$preparado->bindParam(':id_item', $this->id_item);
+			$preparado->bindParam(':id_categoria', $this->id_categoria); 
 			$preparado->bindParam(':nombre', $this->nombre);
 			$preparado->bindParam(':estado', $this->estado);
 			$resul= $preparado->execute();
@@ -84,15 +76,14 @@
 		}
 	
 		 public function buscar(){ // funcion para Buscar
-			$registro="SELECT * from item where id_item='".$this->iditem."'";
+			$registro="SELECT * from item where id_item='".$this->id_item."'";
 			$preparado = $this->objbd->prepare($registro);
 			$preparado->execute();
 			$datos = $preparado->fetch(PDO::FETCH_ASSOC);
 			if( $datos) {
 				$encontro = 1;
-				$this->iditem = $datos['id_item'];
-				$this->idproyecto = $datos['id_proyecto'];
-				$this->idcategoria = $datos['id_categoria'];
+				$this->id_item = $datos['id_item'];
+				$this->id_categoria = $datos['id_categoria'];
 				$this->nombre = $datos['nombre'];
 				$this->estado = $datos['estado'];
 			} else
@@ -102,7 +93,7 @@
 		} 
 		 
 		public function modificar(){ 
-			$registro= "UPDATE item SET id_proyecto='".$this->idproyecto."',id_categoria='".$this->idcategoria."', nombre='".$this->nombre."', estado='".$this->estado."' WHERE id_item='".$this->iditem."'";  
+			$registro= "UPDATE item SET id_categoria='".$this->id_categoria."', nombre='".$this->nombre."', estado='".$this->estado."' WHERE id_item='".$this->id_item."'";  
 			$preparado = $this->objbd->prepare($registro);
 			$resul = $preparado->execute();
 			return $resul;
@@ -110,7 +101,7 @@
 		}
 		
 		public function eliminar() 	{ // funcion para Eliminar
-			$registro = "DELETE FROM item WHERE id_item='".$this->iditem."'";
+			$registro = "DELETE FROM item WHERE id_item='".$this->id_item."'";
 			$preparado = $this->objbd->prepare( $registro );
 			$resul = $preparado->execute();
 			return $resul;
