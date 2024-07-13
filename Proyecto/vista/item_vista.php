@@ -82,7 +82,13 @@
                     <div class="col-md-12">
                         <label for=nombre_item>Nombre</label> 
                         <input type="text" id="nombre_item_input" name="nombre_item_input" class="form-control form-control-sm">
-                    </div>      
+                    </div>
+                    
+                    <p>Elegir estado:</p>
+<p>
+	Activo: <input type="radio" name="estado" checked="yes" /><br />
+	Inactivo: <input type="radio" name="estado" />
+</p>
 
     <div class="modal__botones-contenedor">
                     <input type="submit" for value="Guardar" name="Enviar" class="modal__agregar finalizar" id="modal_cliente">
