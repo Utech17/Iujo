@@ -1,5 +1,5 @@
 <?php
-require_once ("../Conexion/Conexion.php");
+require_once("../modelo/conexionPDO.php");
 
 class Categoria extends Conexion {
     // Attributes
@@ -12,7 +12,7 @@ class Categoria extends Conexion {
     // Constructor
     public function __construct() {
         $this->conexion = new Conexion();
-        $this->conexion = $this->conexion->getConexion();
+        $this->conexion = $this->conexion->conectar();
     }
 
     // Getters and Setters
