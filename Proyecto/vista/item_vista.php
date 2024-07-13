@@ -60,7 +60,7 @@
                         </tr>
                         <tbody>
                             <?php
-                            foreach ($data as $row) {
+                            foreach ($data2 as $row) {
                                 echo "<tr>";
                                 echo "<td><input type='radio' class='categoria_seleccionada' name='categoria_seleccionada' value='" . $row['id_categoria'] . "'></td>";
                                 echo "<td>" . $row['nombre'] . "</td>";
@@ -79,7 +79,10 @@
           
    <br>
                 
-                
+                    <div class="col-md-12">
+                        <label for=nombre_item>Nombre</label> 
+                        <input type="text" id="nombre_item_input" name="nombre_item_input" class="form-control form-control-sm">
+                    </div>      
 
     <div class="modal__botones-contenedor">
                     <input type="submit" for value="Guardar" name="Enviar" class="modal__agregar finalizar" id="modal_cliente">

@@ -1,14 +1,22 @@
 <?php
     require_once("../modelo/item_modelo.php");
+    require_once("../modelo/CCategoria.php");
     $objItem = new ItemModelo();
+    $objCategoria = new Categoria();
     
     $item_conexion = new Conexion();
+    $categoria_conexion = new Conexion();
     $conexion = $item_conexion->conectar();
+    $conexion2 = $categoria_conexion->conectar();
 
     $consulta = "SELECT * FROM item";
+    $consulta2 = "SELECT * FROM categoria";
     $resultado = $conexion->prepare($consulta);
+    $resultado2 = $conexion2->prepare($consulta2);
     $resultado->execute();
+    $resultado2->execute();
     $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+    $data2 = $resultado2->fetchAll(PDO::FETCH_ASSOC);
 
     
     /*if(isset($_POST['Enviar'])){
