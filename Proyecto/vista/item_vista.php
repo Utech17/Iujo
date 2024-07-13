@@ -37,7 +37,16 @@
                                 echo "<td>" . $row['nombre'] . "</td>";
                                 echo "<td></td>"; // Columna vacía
                                 echo "<td></td>"; // Columna vacía
-                                echo "<td></td>"; // Columna vacía
+                                echo "<td>";
+    
+                                
+                                echo '<a href="#" class="btn btn-azul">';
+        echo '<img src="../vista/img/pencil.png" alt="Modificar" width="16" height="16"></a>';
+        
+        echo '<a href="#" class="btn btn-rojo">';
+        echo '<img src="../vista/img/trash.png" alt="Eliminar" width="16" height="16"></a>';
+                                
+                                echo "</td>";
                                 echo "</tr>";
                             }
                             ?>

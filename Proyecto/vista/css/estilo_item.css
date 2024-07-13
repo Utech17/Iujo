@@ -85,3 +85,25 @@
 }
 
 /* Estilos para el modal desplegable */
+
+.btn-azul {
+    background-color: #009fe3 !important;
+    color: #fff !important;
+    padding: 3px 8px !important;
+    font-size: 18px !important;
+    transition: background-color 0.3s !important;;
+  }
+  
+  .btn-rojo {
+    background-color: #ff4848 !important;
+    padding: 3px 8px !important;
+    font-size: 18px !important;
+  }
+  
+  .btn-azul:hover {
+    background-color: #0088c2 !important;
+  }
+  
+  .btn-rojo:hover {
+    background-color: #db3b3b !important;
+  }
