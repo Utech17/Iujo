@@ -14,7 +14,8 @@
 <table id="tabla" class="table table-striped" style="width:100%">
         <thead>
                             <th>Estado</th>
-                            <th>Nombre</th>
+                            <th>Categoria</th>
+                            <th>Item</th>
                             <th>Presupuesto</th>
                             <th>Monto Gastado</th>
                             <th>Acciones</th>
@@ -24,6 +25,15 @@
                             foreach ($data as $row) {
                                 echo "<tr>";
                                 echo "<td>" . $row['estado'] . "</td>";
+                                                        $Nombre_categoria = '';
+                            foreach ($data2 as $categoria) {
+                                if ($categoria['id_categoria'] == $row['id_categoria']) {
+                                    $Nombre_categoria = $categoria['nombre'];
+                                    break;
+                                }
+                            }
+
+                                echo "<td>" . $Nombre_categoria . "</td>";
                                 echo "<td>" . $row['nombre'] . "</td>";
                                 echo "<td></td>"; // Columna vacía
                                 echo "<td></td>"; // Columna vacía
@@ -35,7 +45,8 @@
         <tfoot>
             <tr>
                 <th>Estado</th>
-                <th>Nombre</th>
+                <th>Categoria</th>
+                <th>Item</th>
                 <th>Presupuesto</th>
                 <th>Monto Gastado</th>
                 <th>Acciones</th>
