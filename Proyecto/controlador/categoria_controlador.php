@@ -1,10 +1,10 @@
 <?php
-require_once("../modelo/categoria_modelo.php");
+require_once("../modelo/CCategoria.php");
 
 $objCategoria = new Categoria();
 
 // Listar todas las categorías
-$data = $objCategoria->buscarTodos();
+$data = $objCategoria->buscarTodos(); 
 
 // Incluir una nueva categoría
 if (isset($_POST['Enviar'])) {

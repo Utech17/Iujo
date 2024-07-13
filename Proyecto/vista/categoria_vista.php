@@ -22,13 +22,17 @@
             </thead>
             <tbody>
                 <?php
-                foreach ($data as $row) {
-                    echo "<tr>";
-                    echo "<td>" . $row['ID_Categoria'] . "</td>";
-                    echo "<td>" . $row['Nombre'] . "</td>";
-                    echo "<td>" . $row['Estado'] . "</td>";
-                    echo "<td><a href='?editarId=" . $row['ID_Categoria'] . "'>Editar</a> | <a href='?eliminarId=" . $row['ID_Categoria'] . "'>Eliminar</a></td>";
-                    echo "</tr>";
+                if (isset($data) && is_array($data)) {
+                    foreach ($data as $row) {
+                        echo "<tr>";
+                        echo "<td>" . $row['ID_Categoria'] . "</td>";
+                        echo "<td>" . $row['Nombre'] . "</td>";
+                        echo "<td>" . $row['Estado'] . "</td>";
+                        echo "<td><a href='?editarId=" . $row['ID_Categoria'] . "'>Editar</a> | <a href='?eliminarId=" . $row['ID_Categoria'] . "'>Eliminar</a></td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='4'>No hay datos disponibles.</td></tr>";
                 }
                 ?>
             </tbody>
@@ -48,8 +52,16 @@
             <form id="categoriaForm" action="" method="POST">
                 <div id="f1" class="row col-md-4">
                     <div class="col-md-12">
+                        <label for="ID_Categoria">ID de Categoría</label>
+                        <input type="text" id="ID_Categoria" name="ID_Categoria" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-md-12">
                         <label for="Nombre">Nombre</label>
                         <input type="text" id="Nombre" name="Nombre" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="Estado">Estado</label>
+                        <input type="text" id="Estado" name="Estado" class="form-control form-control-sm">
                     </div>
                     <div class="col-md-12"><br>
                         <center>
