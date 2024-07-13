@@ -6,7 +6,7 @@ class Conexion {
         $servidor="localhost";
         $usuarioBD="root";
         $claveBD="";
-        $bd="Fiscor";
+        $bd="fiscor";
         
         try {
             $this->conexion=new PDO("mysql:host=$servidor;dbname=$bd",$usuarioBD,$claveBD);
