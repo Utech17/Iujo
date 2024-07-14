@@ -1,3 +1,11 @@
+<?php
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+$nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +17,13 @@
     <title>Item</title>
 </head>
 <body>
+
+<?php imprimirTopBar($nombreUsuario); ?>
+    <div class="contenedor">
+        <div class="barra-lateral">
+            <?php imprimirBarraLateral(); ?>
+        </div>
+
     <div id="tabla_div">
     <a href="#" class="btn btn-info modal_abrir">Agregar item</a>
 <table id="tabla" class="table table-striped" style="width:100%">
