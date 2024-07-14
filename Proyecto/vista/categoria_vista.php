@@ -103,7 +103,7 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
 
         <section class="modal_section modal_section_editar">
             <div class="modal__contenedor">
-                <form id="formEditarCategoria" action="../controlador/categoria_controlador.php" method="POST">
+                <form id="formEditarCategoria" action="" method="POST">
                     <input type="hidden" id="editarId" name="editarId">
                     <div class="form-group">
                         <label for="editarNombre">Nombre</label>

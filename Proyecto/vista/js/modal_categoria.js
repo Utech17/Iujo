@@ -17,13 +17,23 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     });
 
-
-    const abrir_modal_editar = document.querySelector('.editarCategoria');
-    const modal_section_editar = document.querySelector('.modal_section_editar');
+    // Obtener todos los botones de editar
+    const abrir_modales_editar = document.querySelectorAll('.editarCategoria');
 
     // Abrir modal editar
-    abrir_modal_editar.addEventListener('click', (e) => {
-        e.preventDefault();
-        modal_section_editar.classList.add('modal--show');
+    abrir_modales_editar.forEach((boton) => {
+        boton.addEventListener('click', (e) => {
+            e.preventDefault();
+            const modal_editar_id = boton.getAttribute('data-id');
+            const modal_editar_nombre = boton.getAttribute('data-nombre');
+            const modal_editar_estado = boton.getAttribute('data-estado');
+
+            // Asignar valores al formulario de edición
+            document.getElementById('editarId').value = modal_editar_id;
+            document.getElementById('editarNombre').value = modal_editar_nombre;
+            document.getElementById('editarEstado').value = modal_editar_estado;
+
+            modal_section_editar.classList.add('modal--show');
+        });
     });
 });
