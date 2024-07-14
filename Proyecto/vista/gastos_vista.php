@@ -1,12 +1,11 @@
 <?php
-require_once("../controlador/gastos_controlador.php");
-require_once("../controlador/vista_controlador.php");
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado';
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -18,6 +17,9 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
     <title>Categorías</title>
 </head>
 <body>
+
+
+
 <?php imprimirTopBar($nombreUsuario); ?>
     <div class="contenedor">
         <div class="barra-lateral">
@@ -164,7 +166,7 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
             </form>
         </div>
     </section>
-    
+
     </div>
     <script src="../vista/js/jquery-3.7.1.js"></script>
     <script src="../vista/js/bootstrap.bundle.min.js"></script>

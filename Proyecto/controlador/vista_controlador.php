@@ -18,7 +18,7 @@ function imprimirBarraLateral() {
     </div>
     <ul class="menu">
         <li><img src="../vista/img/dashboard.png" alt="dashboard"><a href="#"><i class="icon-dashboard"></i><b>Dashboard</b></a></li>
-        <li><img src="../vista/img/gastos.png" alt="usuargastosios"><a href="../vista/gastos_vista.php"><i class="icon-gastos"></i><b>Gastos</b></a></li>
+        <li><img src="../vista/img/gastos.png" alt="usuargastosios"><a href="../controlador/gastos_controlador.php"><i class="icon-gastos"></i><b>Gastos</b></a></li>
         <li><img src="../vista/img/configuracion.png" alt="configuracion"><a href="#"><i class="icon-configuracion"></i><b>Configuración</b></a></li>
         <li><img src="../vista/img/usuarios.png" alt="usuarios"><a href="#"><i class="icon-usuarios"></i><b>Usuarios</b></a></li>
         <li><img src="../vista/img/reportes.png" alt="reportes"><a href="#"><i class="icon-reportes"></i><b>Reportes</b></a></li>

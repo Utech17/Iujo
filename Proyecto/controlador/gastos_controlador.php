@@ -6,6 +6,11 @@ $objGastos = new Gastos();
 // Listar todos los gastos
 $data = $objGastos->buscarTodos(); 
 
+// Llamar controlador con funciones de diseño, para no repetir el mismo código
+require_once("vista_controlador.php");
+
+
+
 // Incluir un nuevo gasto
 if (isset($_POST['Enviar'])) {
     if (isset($_POST['ID_Proyecto'], $_POST['ID_Item'], $_POST['ID_Usuario'], $_POST['Fecha'], $_POST['Monto_Gasto'], $_POST['Comprobante'], $_POST['Observacion'])) {
