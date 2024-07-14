@@ -28,7 +28,15 @@
                         echo "<td>" . $row['ID_Categoria'] . "</td>";
                         echo "<td>" . $row['Nombre'] . "</td>";
                         echo "<td>" . $row['Estado'] . "</td>";
-                        echo "<td><a href='?editarId=" . $row['ID_Categoria'] . "'>Editar</a> | <a href='?eliminarId=" . $row['ID_Categoria'] . "'>Eliminar</a></td>";
+                        echo "<td>
+                                <a href='#' class='editarCategoria' data-id='" . $row['ID_Categoria'] . "' data-nombre='" . $row['Nombre'] . "' data-estado='" . $row['Estado'] . "'>
+                                    <img src='../vista/img/editar.png' alt='editar'>
+                                </a> 
+                                | 
+                                <a href='?eliminarId=" . $row['ID_Categoria'] . "'>
+                                    <img src='../vista/img/eliminar.png' alt='eliminar'>
+                                </a>
+                            </td>";
                         echo "</tr>";
                     }
                 } else {

@@ -1,70 +1,83 @@
 <?php
-    require_once("conexionPDO.php");
-    //session_start();
-    class Usuario extends Conexion {
-        private $id_usuario;
-        private $usuario;
-        private $clave;
-        private $correo_u;
-        private $objbd;
+require_once("conexionPDO.php");
 
-        public function __construct(){
-			parent::__construct();
-			$this->objbd = parent::conectar();
-		}
+class Usuario extends Conexion {
+    private $ID_Usuario;
+    private $Usuario;
+    private $Contraseña;
+    private $Nombre;
+    private $Apellido;
+    private $objbd;
 
-        public function get_idusuario(){
-            return $this->id_usuario;
-        }
-        
-        public function set_idusuario($id_usuario){
-            $this->id_usuario = $id_usuario;
-        }
-    
-        public function get_usuario() {
-            return $this->usuario;
-        }
-        
-        public function set_nombre($usuario){
-            $this->usuario = $usuario;
-        }
-        
-        public function get_clave(){
-            return $this->clave;
-        }
-        
-        public function set_clave($clave){
-            $this->clave=$clave;
-        }
-    
-        public function get_correou(){
-            return $this->correo_u;
-        }
-        
-        public function set_correou($correo_u){
-            $this->correo_u=$correo_u;
-        }
-		
-		public function usuario_buscar(){
-			$lista = array();
-			$consulta=$this->db->query("SELECT* from dulcitos");
-			while($filas=$consulta->fetch_assoc()){
-				$lista[]=$filas;
-			}
-			return $this->dulces;	
-		}
-		public function autenticarUsuario($usuario, $clave) {
-			$registro = "SELECT * FROM usuario WHERE usuario = '$usuario' AND clave = '$clave'";
-			$preparado = $this->objbd->prepare($registro);
-			$resul = $preparado->execute();
-			$datos = $preparado->fetch(PDO::FETCH_ASSOC);
-			if ($datos) {
-				$this->id_usuario = $datos['id_usuario'];
-				$encontro = 1;
-			} else
-				$encontro = 0;
-				
-			return $encontro;
-		} // Fin de autenticar
+    public function __construct(){
+        parent::__construct();
+        $this->objbd = parent::conectar();
     }
+
+    public function get_ID_Usuario(){
+        return $this->ID_Usuario;
+    }
+    
+    public function set_ID_Usuario($ID_Usuario){
+        $this->ID_Usuario = $ID_Usuario;
+    }
+
+    public function get_Usuario() {
+        return $this->Usuario;
+    }
+    
+    public function set_Usuario($Usuario){
+        $this->Usuario = $Usuario;
+    }
+
+    public function get_Contraseña(){
+        return $this->Contraseña;
+    }
+    
+    public function set_Contraseña($Contraseña){
+        $this->Contraseña = $Contraseña;
+    }
+
+    public function get_Nombre(){
+        return $this->Nombre;
+    }
+    
+    public function set_Nombre($Nombre){
+        $this->Nombre = $Nombre;
+    }
+
+    public function get_Apellido(){
+        return $this->Apellido;
+    }
+    
+    public function set_Apellido($Apellido){
+        $this->Apellido = $Apellido;
+    }
+
+    public function usuario_buscar(){
+        $lista = array();
+        $consulta=$this->objbd->query("SELECT * FROM usuario");
+        while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
+            $lista[]=$filas;
+        }
+        return $lista;    
+    }
+
+    public function autenticarUsuario($usuario, $clave) {
+        $registro = "SELECT * FROM usuario WHERE Usuario = '$usuario' AND Contraseña = '$clave'";
+        $preparado = $this->objbd->prepare($registro);
+        $preparado->execute();
+        $datos = $preparado->fetch(PDO::FETCH_ASSOC);
+        if ($datos) {
+            $this->ID_Usuario = $datos['ID_Usuario'];
+            $this->Usuario = $datos['Usuario'];
+            $this->Contraseña = $datos['Contraseña'];
+            $this->Nombre = $datos['Nombre'];
+            $this->Apellido = $datos['Apellido'];
+            return true;
+        } else {
+            return false;
+        }
+    }    
+}
 ?>
