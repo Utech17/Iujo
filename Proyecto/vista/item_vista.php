@@ -64,62 +64,66 @@ echo '<img src="../vista/img/trash.png" alt="Eliminar" width="16" height="16"></
     </table>
     </div>
 
+
+
+
+
+
+
     <section class="modal_section">
                 <div class="modal__contenedor">
+
+                    <form id="itemForm" action="" method="POST" target="_self" onsubmit="return confirmacion()">
                     
-                <div id="subtabla_div">
+                        <div id="subtabla_div">        
 
-                <form id="itemForm" action="" method="POST" target="_self" onsubmit="return confirmacion()"> 
-
+                                <table id="subtabla" class="table table-striped" style="width:100%">
+                                        <thead>
+                                                            <th>Seleccionar</th>
+                                                            <th>Nombre</th>
+                                                        </tr>
+                                                        <tbody>
+                                                            <?php
+                                                            foreach ($data2 as $row) {
+                                                                echo "<tr>";
+                                                                echo "<td><input type='radio' class='categoria_seleccionada' name='categoria_seleccionada' value='" . $row['id_categoria'] . "'></td>";
+                                                                echo "<td>" . $row['nombre'] . "</td>";
+                                                                echo "</tr>";
+                                                            }
+                                                            ?>
+                                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Seleccionar</th>
+                                                <th>Nombre</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                        </div>
                 
+        <br>
+                        
+                            <div class="col-md-12">
+                                <label for=nombre_item>Nombre</label> 
+                                <input type="text" id="nombre_item_input" name="nombre_item_input" class="form-control form-control-sm">
+                            </div>
+                            
+                            <p>Elegir estado:</p>
+                            <p>
+                                Activo: <input type="radio" value="1" id="estado" name="estado" checked="yes" />
+                                Inactivo: <input type="radio" value="0" id="estado" name="estado" />
+                            </p>
 
-<table id="subtabla" class="table table-striped" style="width:100%">
-        <thead>
-                            <th>Seleccionar</th>
-                            <th>Nombre</th>
-                        </tr>
-                        <tbody>
-                            <?php
-                            foreach ($data2 as $row) {
-                                echo "<tr>";
-                                echo "<td><input type='radio' class='categoria_seleccionada' name='categoria_seleccionada' value='" . $row['id_categoria'] . "'></td>";
-                                echo "<td>" . $row['nombre'] . "</td>";
-                                echo "</tr>";
-                            }
-                            ?>
-                        </tbody>
-        <tfoot>
-            <tr>
-                <th>Seleccionar</th>
-                <th>Nombre</th>
-            </tr>
-        </tfoot>
-    </table>
-    </div>
-          
-   <br>
-                
-                    <div class="col-md-12">
-                        <label for=nombre_item>Nombre</label> 
-                        <input type="text" id="nombre_item_input" name="nombre_item_input" class="form-control form-control-sm">
-                    </div>
-                    
-                    <p>Elegir estado:</p>
-<p>
-	Activo: <input type="radio" value="1" id="estado" name="estado" checked="yes" /><br />
-	Inactivo: <input type="radio" value="0" id="estado" name="estado" />
-</p>
+                            <input type="submit" value="Enviar" name="Enviar" class="btn btn-info">
 
-<input type="submit" value="Enviar" name="Enviar" class="btn btn-info">
+                            <div class="modal__botones-contenedor">
+                                <input type="submit" for value="Guardar" name="Guardar" class="modal__agregar finalizar" id="modal_cliente">
+                                <input type="button" value="Cancelar" class=" modal__cerrar finalizar">
+                            </div>
 
-    <div class="modal__botones-contenedor">
-                    <input type="submit" for value="Guardar" name="Guardar" class="modal__agregar finalizar" id="modal_cliente">
-                    <input type="button" value="Cancelar" class=" modal__cerrar finalizar">
-                </div>
-    </div>
-
-    </form>
-         </section>
+                    </form>
+                </div>                                           
+    </section>
 
     <script src="../vista/js/jquery-3.7.1.js"></script>
     <script src="../vista/js/bootstrap.bundle.min.js"></script>
