@@ -82,20 +82,14 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
         <section class="modal_section">
             <div class="modal__contenedor">
                 <form id="categoriaForm" action="" method="POST">
-                    <div class="row col-md-4">
-                        <div class="col-md-12">
+                    <div class="form-group">
                             <label for="Nombre">Nombre</label>
                             <input type="text" id="Nombre" name="Nombre" class="form-control form-control-sm">
-                        </div>
-                        <div class="col-md-12"><br>
-                            <div id="botones">
-                                <input type="submit" value="Enviar" name="Enviar" class="btn btn-info">
-                                <input type="reset" value="Limpiar" class="btn btn-info">
-                            </div>
-                        </div>
                     </div>
                 </form>
                 <div class="modal__botones-contenedor">
+                <input type="submit" value="Enviar" name="Enviar" class="btn btn-primary">
+                <input type="reset" value="Limpiar" class="btn btn-warning">
                     <input type="button" value="Cancelar" class="modal__cerrar finalizar btn btn-secondary">
                 </div>
             </div>
@@ -118,7 +112,7 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                     </div>
                     <div class="modal__botones-contenedor">
                         <input type="submit" value="Guardar cambios" class="btn btn-primary">
-                        <input type="button" value="Cancelar" class="modal__cerrar finalizar btn btn-secondary">
+                        <input type="button" value="Cancelar" class="modal__cerrar finalizarEditar btn btn-secondary">
                     </div>
                 </form>
             </div>
