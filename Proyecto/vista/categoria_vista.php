@@ -9,43 +9,50 @@
     <title>Categorías</title>
 </head>
 <body>
-    <div id="tabla_div">
-        <a href="#" class="modal_abrir">Agregar categoría</a>
-        <table id="tabla" class="table table-striped" style="width:100%">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if (isset($data) && is_array($data)) {
-                    foreach ($data as $row) {
-                        echo "<tr>";
-                        echo "<td>" . $row['ID_Categoria'] . "</td>";
-                        echo "<td>" . $row['Nombre'] . "</td>";
-                        echo "<td>" . $row['Estado'] . "</td>";
-                        echo "<td><a href='?editarId=" . $row['ID_Categoria'] . "'>Editar</a> | <a href='?eliminarId=" . $row['ID_Categoria'] . "'>Eliminar</a></td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='4'>No hay datos disponibles.</td></tr>";
-                }
-                ?>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
+    <div class="contenedor">
+        <div class="barra-lateral">
+            <?php menuLateralOpcion(); ?>
+        </div>
+
+        <div class="contenedor-categoria px-6 pt-5">
+            <div id="tabla_div">
+                <a href="#" class="modal_abrir btn btn-primary">Agregar categoría</a>
+                <table id="tabla" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if (isset($data) && is_array($data)) {
+                            foreach ($data as $row) {
+                                echo "<tr>";
+                                echo "<td>" . $row['ID_Categoria'] . "</td>";
+                                echo "<td>" . $row['Nombre'] . "</td>";
+                                $estado = ($row['Estado'] == 1) ? 'Activo' : 'Inactivo';
+                                echo "<td>" . $estado . "</td>";
+                                echo "<td><a href='#' class='editarCategoria' data-id='" . $row['ID_Categoria'] . "' data-nombre='" . $row['Nombre'] . "' data-estado='" . $row['Estado'] . "'>Editar</a> | <a href='?eliminarId=" . $row['ID_Categoria'] . "'>Eliminar</a></td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='4'>No hay datos disponibles.</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
 
     <section class="modal_section">
         <div class="modal__contenedor">
