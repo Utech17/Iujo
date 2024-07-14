@@ -14,7 +14,7 @@
 <table id="tabla" class="table table-striped" style="width:100%">
         <thead>
                             <th>Estado</th>
-                            <th>Categoria</th>
+                            <!--<th>Categoria</th>-->
                             <th>Item</th>
                             <th>Presupuesto</th>
                             <th>Monto Gastado</th>
@@ -25,7 +25,7 @@
                             foreach ($data as $row) {
                                 echo "<tr>";
                                 echo "<td>" . $row['estado'] . "</td>";
-                                                        $Nombre_categoria = '';
+                                                        /*$Nombre_categoria = '';
                             foreach ($data2 as $categoria) {
                                 if ($categoria['id_categoria'] == $row['id_categoria']) {
                                     $Nombre_categoria = $categoria['nombre'];
@@ -33,7 +33,7 @@
                                 }
                             }
 
-                                echo "<td>" . $Nombre_categoria . "</td>";
+                                echo "<td>" . $Nombre_categoria . "</td>";*/
                                 echo "<td>" . $row['nombre'] . "</td>";
                                 echo "<td></td>"; // Columna vacía
                                 echo "<td></td>"; // Columna vacía
@@ -54,7 +54,7 @@ echo '<img src="../vista/img/trash.png" alt="Eliminar" width="16" height="16"></
         <tfoot>
             <tr>
                 <th>Estado</th>
-                <th>Categoria</th>
+                <!--<th>Categoria</th>-->
                 <th>Item</th>
                 <th>Presupuesto</th>
                 <th>Monto Gastado</th>
@@ -75,7 +75,7 @@ echo '<img src="../vista/img/trash.png" alt="Eliminar" width="16" height="16"></
 
                     <form id="itemForm" action="" method="POST" target="_self" onsubmit="return confirmacion()">
                     
-                        <div id="subtabla_div">        
+                        <!--<div id="subtabla_div">        
 
                                 <table id="subtabla" class="table table-striped" style="width:100%">
                                         <thead>
@@ -99,9 +99,9 @@ echo '<img src="../vista/img/trash.png" alt="Eliminar" width="16" height="16"></
                                             </tr>
                                         </tfoot>
                                     </table>
-                        </div>
-                
-        <br>
+                        </div>-->
+                <h2>Agregar item</h2>
+                <br>
                         
                             <div class="col-md-12">
                                 <label for=nombre_item>Nombre</label> 
