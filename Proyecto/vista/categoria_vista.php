@@ -1,7 +1,4 @@
 <?php
-require_once("../controlador/categoria_controlador.php");
-require_once("../controlador/vista_controlador.php");
-
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
