@@ -31,6 +31,18 @@
         echo "<script>console.log('Conectado3')</script>";
     }
 
+    if (isset($_GET['eliminarId'])){
+			
+        $objItem->set_iditem($_GET['eliminarId']);
+    
+        if($objItem->eliminar()){
+            echo "<script>alert('Registro Eliminado con éxito');location.href='item_controlador.php'; </script>";
+            
+        } else {
+            echo "<script>alert('No se pudo Eliminar')</script>";
+        }
+    }
+
     
     /*if(isset($_POST['Enviar'])){
         echo "<script>console.log('Conectado')</script>";
