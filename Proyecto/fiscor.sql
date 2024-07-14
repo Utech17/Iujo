@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-07-2024 a las 07:08:17
+-- Tiempo de generación: 14-07-2024 a las 20:17:57
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -38,7 +38,8 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`ID_Categoria`, `Nombre`, `Estado`) VALUES
-(1, 'Costos indirectos', 1);
+(1, 'Limpieza', 1),
+(3, 'Costos fijos', 1);
 
 -- --------------------------------------------------------
 
@@ -111,6 +112,13 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`ID_Usuario`, `Usuario`, `Contraseña`, `Nombre`, `Apellido`) VALUES
+(1, 'ByC', 'prueba123', 'SAE', 'WEB');
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -163,7 +171,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `ID_Categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_Categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `ID_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
