@@ -1,6 +1,5 @@
 <?php
-
-require_once BASE_PATH . '/controlador/cntrl_proyecto.php';
+require_once("../controlador/cntrl_proyecto.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
