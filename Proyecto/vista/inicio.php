@@ -7,6 +7,14 @@ if (session_status() == PHP_SESSION_NONE) {
 
 $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado';
 
+// Desconectar, si le da clic en Volver
+if( isset($_GET['Volver'])){
+    session_destroy();
+    echo "<script>
+        location.href='../index.php';
+    </script>";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">

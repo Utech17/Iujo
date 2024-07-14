@@ -56,16 +56,18 @@ class Usuario extends Conexion {
 
     public function usuario_buscar(){
         $lista = array();
-        $consulta=$this->objbd->query("SELECT * FROM usuario");
-        while($filas=$consulta->fetch(PDO::FETCH_ASSOC)){
-            $lista[]=$filas;
+        $consulta = $this->objbd->query("SELECT * FROM usuario");
+        while($filas = $consulta->fetch(PDO::FETCH_ASSOC)){
+            $lista[] = $filas;
         }
         return $lista;    
     }
 
     public function autenticarUsuario($usuario, $clave) {
-        $registro = "SELECT * FROM usuario WHERE Usuario = '$usuario' AND Contraseña = '$clave'";
+        $registro = "SELECT * FROM usuario WHERE Usuario = :usuario AND Contraseña = :clave";
         $preparado = $this->objbd->prepare($registro);
+        $preparado->bindParam(':usuario', $usuario);
+        $preparado->bindParam(':clave', $clave);
         $preparado->execute();
         $datos = $preparado->fetch(PDO::FETCH_ASSOC);
         if ($datos) {
