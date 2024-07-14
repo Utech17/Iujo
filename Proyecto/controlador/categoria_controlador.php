@@ -6,6 +6,9 @@ $objCategoria = new Categoria();
 // Listar todas las categorías
 $data = $objCategoria->buscarTodos(); 
 
+// Llamar controlador con funciones de diseño, para no repetir el mismo código
+require_once("vista_controlador.php");
+
 // Incluir una nueva categoría
 if (isset($_POST['Enviar'])) {
     if ( isset($_POST['Nombre'])) {
