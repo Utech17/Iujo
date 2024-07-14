@@ -1,10 +1,17 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif !important;
+    background-color: #f5f5f5;
 }
 
 .contenedor {
     display: flex;
+}
+
+.contenido {
+    padding: 50px;
+    height: auto;
+    padding-left: 250px;
 }
 
 .px-5 {
@@ -21,26 +28,29 @@ body {
 }
 
 .contenedor-categoria {
-    margin-top: 30px;
     background-color: white;
-    width: auto;
-    height: 800px;
     border: 1px solid rgb(255, 255, 255);
-    border-radius: 40px;
     padding: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 75%;
+    max-width: 1200px;
+    margin-left: 250px;
 }
 
 .barra-lateral {
     width: 200px;
     height: 100%;
-    background-color: #009fe3;
+    background-color: #045fb4;
     position: fixed;
     top: 0;
     left: 0;
     overflow-x: hidden;
     padding-top: 20px;
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
 }
 
 .logo {
@@ -69,27 +79,21 @@ body {
     display: flex;
     color: #fff;
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 10px 10px;
     margin-left: 10px;
     align-items: center;
     font-size: 15px;
 }
 
 .menu li:hover {
-    background-color: #0079adc0;
+    background-color: #045fb4;
 }
 
 .menu li:hover a {
     color: #fff;
 }
 
-.contenido {
-    flex: 1;
-    padding: 50px;
-    height: auto;
-    padding-left: 250px;
-    background-color: #4858cf10;
-}
+
 
 h1 {
     font-size: 24px;
@@ -115,7 +119,7 @@ h1 {
 }
 
 .top-bar {
-    background-color: #007bff;
+    background-color: #045fb4 ;
     color: white;
     padding: 10px;
     display: flex;
@@ -128,12 +132,6 @@ h1 {
     align-items: center;
 }
 
-.top-bar .user-info img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
 
 .top-bar .user-info span {
     font-weight: bold;
@@ -141,6 +139,18 @@ h1 {
 
 .modal_section {
     display: none; /* El modal está oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal_section_editar{
+    display: none; 
     position: fixed;
     top: 0;
     left: 0;
@@ -165,4 +175,22 @@ h1 {
 .modal__botones-contenedor {
     text-align: center;
     margin-top: 10px;
+}
+
+.btn-azul {
+    background-color: #007bff;
+    color: white; 
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.btn-rojo {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 10px;
 }

@@ -24,10 +24,11 @@ if (isset($_POST['Enviar'])) {
 
 // Actualizar una categoría
 if (isset($_POST['editarId'])) {
-    if (isset($_POST['ID_Categoria']) && isset($_POST['editarNombre']) && isset($_POST['editarEstado'])) {
-        $objCategoria->setID_Categoria($_POST['ID_Categoria']);
+    if (isset($_POST['editarNombre']) && isset($_POST['editarEstado'])) {
+        $objCategoria->setID_Categoria($_POST['editarId']); // Asegúrate de utilizar editarId aquí
         $objCategoria->setNombre($_POST['editarNombre']);
         $objCategoria->setEstado($_POST['editarEstado']);
+        
         $resultado = $objCategoria->actualizarCategoria();
         
         if ($resultado) {
