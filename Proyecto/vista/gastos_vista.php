@@ -78,43 +78,93 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
         </div>
     
         <section class="modal_section">
-            <div class="modal__contenedor">
-                <form id="categoriaForm" action="" method="POST">
-                    <div class="form-group">
-                            <label for="Nombre">Nombre</label>
-                            <input type="text" id="Nombre" name="Nombre" class="form-control form-control-sm">
-                    </div>
-                </form>
+        <div class="modal__contenedor">
+            <form id="gastoForm" action="" method="POST">
+                <div class="form-group">
+                    <label for="ID_Proyecto">Proyecto</label>
+                    <input type="text" id="ID_Proyecto" name="ID_Proyecto" class="form-control form-control-sm">
+                </div>
+                <div class="form-group">
+                    <label for="ID_Item">Item</label>
+                    <input type="text" id="ID_Item" name="ID_Item" class="form-control form-control-sm">
+                </div>
+                <div class="form-group">
+                    <label for="ID_Usuario">Usuario</label>
+                    <input type="text" id="ID_Usuario" name="ID_Usuario" class="form-control form-control-sm">
+                </div>
+                <div class="form-group">
+                    <label for="Fecha">Fecha</label>
+                    <input type="date" id="Fecha" name="Fecha" class="form-control form-control-sm">
+                </div>
+                <div class="form-group">
+                    <label for="Monto_Gasto">Monto</label>
+                    <input type="number" id="Monto_Gasto" name="Monto_Gasto" class="form-control form-control-sm">
+                </div>
+                <div class="form-group">
+                    <label for="Comprobante">Comprobante</label>
+                    <input type="text" id="Comprobante" name="Comprobante" class="form-control form-control-sm">
+                </div>
+                <div class="form-group">
+                    <label for="Observacion">Observación</label>
+                    <input type="text" id="Observacion" name="Observacion" class="form-control form-control-sm">
+                </div>
+                <div class="form-group">
+                    <label for="ID_Categoria">Categoría</label>
+                    <input type="text" id="ID_Categoria" name="ID_Categoria" class="form-control form-control-sm">
+                </div>
                 <div class="modal__botones-contenedor">
-                <input type="submit" value="Enviar" name="Enviar" class="btn btn-primary">
-                <input type="reset" value="Limpiar" class="btn btn-warning">
+                    <input type="submit" value="Enviar" name="Enviar" class="btn btn-primary">
+                    <input type="reset" value="Limpiar" class="btn btn-warning">
                     <input type="button" value="Cancelar" class="modal__cerrar finalizar btn btn-secondary">
                 </div>
-            </div>
-        </section>
+            </form>
+        </div>
+    </section>
 
-        <section class="modal_section modal_section_editar">
-            <div class="modal__contenedor">
-                <form id="formEditarCategoria" action="" method="POST">
-                    <input type="hidden" id="editarId" name="editarId">
-                    <div class="form-group">
-                        <label for="editarNombre">Nombre</label>
-                        <input type="text" class="form-control" id="editarNombre" name="editarNombre">
-                    </div>
-                    <div class="form-group">
-                        <label for="editarEstado">Estado</label>
-                        <select class="form-control" id="editarEstado" name="editarEstado">
-                            <option value="1">Activo</option>
-                            <option value="0">Inactivo</option>
-                        </select>
-                    </div>
-                    <div class="modal__botones-contenedor">
-                        <input type="submit" value="Guardar cambios" class="btn btn-primary">
-                        <input type="button" value="Cancelar" class="modal__cerrar finalizarEditar btn btn-secondary">
-                    </div>
-                </form>
-            </div>
-        </section>
+    <section class="modal_section modal_section_editar">
+        <div class="modal__contenedor">
+            <form id="formEditarGasto" action="" method="POST">
+                <input type="hidden" id="editarId" name="editarId">
+                <div class="form-group">
+                    <label for="editarID_Proyecto">Proyecto</label>
+                    <input type="text" class="form-control" id="editarID_Proyecto" name="editarID_Proyecto">
+                </div>
+                <div class="form-group">
+                    <label for="editarID_Item">Item</label>
+                    <input type="text" class="form-control" id="editarID_Item" name="editarID_Item">
+                </div>
+                <div class="form-group">
+                    <label for="editarID_Usuario">Usuario</label>
+                    <input type="text" class="form-control" id="editarID_Usuario" name="editarID_Usuario">
+                </div>
+                <div class="form-group">
+                    <label for="editarFecha">Fecha</label>
+                    <input type="date" class="form-control" id="editarFecha" name="editarFecha">
+                </div>
+                <div class="form-group">
+                    <label for="editarMonto_Gasto">Monto</label>
+                    <input type="number" class="form-control" id="editarMonto_Gasto" name="editarMonto_Gasto">
+                </div>
+                <div class="form-group">
+                    <label for="editarComprobante">Comprobante</label>
+                    <input type="text" class="form-control" id="editarComprobante" name="editarComprobante">
+                </div>
+                <div class="form-group">
+                    <label for="editarObservacion">Observación</label>
+                    <input type="text" class="form-control" id="editarObservacion" name="editarObservacion">
+                </div>
+                <div class="form-group">
+                    <label for="editarID_Categoria">Categoría</label>
+                    <input type="text" class="form-control" id="editarID_Categoria" name="editarID_Categoria">
+                </div>
+                <div class="modal__botones-contenedor">
+                    <input type="submit" value="Guardar cambios" class="btn btn-primary">
+                    <input type="button" value="Cancelar" class="modal__cerrar finalizarEditar btn btn-secondary">
+                </div>
+            </form>
+        </div>
+    </section>
+    
     </div>
     <script src="../vista/js/jquery-3.7.1.js"></script>
     <script src="../vista/js/bootstrap.bundle.min.js"></script>
