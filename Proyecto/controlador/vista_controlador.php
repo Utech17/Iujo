@@ -4,7 +4,6 @@ function imprimirTopBar($nombreUsuario) {
     ?>
     <div class="top-bar">
         <div class="user-info">
-            <img src="../vista/img/user.png" alt="usuario">
             <span><?php echo htmlspecialchars($nombreUsuario, ENT_QUOTES, 'UTF-8'); ?></span>
         </div>
     </div>
