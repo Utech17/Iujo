@@ -17,8 +17,7 @@ if (isset($_POST['iniciar_sesion'])) {
         header('Location: vista/inicio.php');
         exit();
     } else {
-        // Mostrar mensaje de error
-        echo "Usuario o contraseña incorrectos.";
+        echo "<script>alert('Usuario o contraseña incorrectos.');</script>";
     }
 }
 ?>
