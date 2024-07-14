@@ -8,29 +8,35 @@ $data = $objCategoria->buscarTodos();
 
 // Incluir una nueva categoría
 if (isset($_POST['Enviar'])) {
-    $objCategoria->setID_Categoria($_POST['ID_Categoria']);
-    $objCategoria->setNombre($_POST['Nombre']);
-    $objCategoria->setEstado($_POST['Estado']);
-    $resultado = $objCategoria->agregarCategoria();
-    
-    if ($resultado == 1) {
-        echo "<script>alert('Categoría agregada con éxito');location.href='categoria_controlador.php';</script>";
+    if ( isset($_POST['Nombre'])) {
+        $objCategoria->setNombre($_POST['Nombre']);
+        $resultado = $objCategoria->agregarCategoria();
+        
+        if ($resultado == 1) {
+            echo "<script>alert('Categoría agregada con éxito');location.href='../vista/categoria_vista.php';</script>";
+        } else {
+            echo "<script>alert('Error al agregar categoría');</script>";
+        }
     } else {
-        echo "<script>alert('Error al agregar categoría');</script>";
+        echo "<script>alert('Faltan datos para agregar la categoría');</script>";
     }
 }
 
 // Actualizar una categoría
 if (isset($_POST['editarId'])) {
-    $objCategoria->setID_Categoria($_POST['ID_Categoria']);
-    $objCategoria->setNombre($_POST['editarNombre']);
-    $objCategoria->setEstado($_POST['editarEstado']);
-    $resultado = $objCategoria->actualizarCategoria();
-    
-    if ($resultado) {
-        echo "<script>alert('Categoría actualizada con éxito');location.href='../vista/categoria_vista.php';</script>";
+    if (isset($_POST['ID_Categoria']) && isset($_POST['editarNombre']) && isset($_POST['editarEstado'])) {
+        $objCategoria->setID_Categoria($_POST['ID_Categoria']);
+        $objCategoria->setNombre($_POST['editarNombre']);
+        $objCategoria->setEstado($_POST['editarEstado']);
+        $resultado = $objCategoria->actualizarCategoria();
+        
+        if ($resultado) {
+            echo "<script>alert('Categoría actualizada con éxito');location.href='../vista/categoria_vista.php';</script>";
+        } else {
+            echo "<script>alert('Error al actualizar categoría');</script>";
+        }
     } else {
-        echo "<script>alert('Error al actualizar categoría');</script>";
+        echo "<script>alert('Faltan datos para actualizar la categoría');</script>";
     }
 }
 
