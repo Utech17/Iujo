@@ -1,6 +1,14 @@
 <?php
     require_once("../modelo/item_modelo.php");
     require_once("../modelo/CCategoria.php");
+    require_once("../controlador/vista_controlador.php");
+
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado';
+
+
     $objItem = new ItemModelo();
     $objCategoria = new Categoria();
     
