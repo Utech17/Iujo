@@ -30,9 +30,7 @@
         </form>
     </div>
     <div class="info-section">
-        <h2>¡Optimiza tus procesos y Ahorra Tiempo!</h2>
-        <img src="path_to_dashboard_image.jpg" alt="Dashboard">
-        <p>Gestiona <strong>Control de Gastos</strong><br>Crea <strong>Estructura de Costos</strong></p>
+        <img src="vista/img/login2.png" alt="Dashboard">
     </div>
 </div>
 </body>

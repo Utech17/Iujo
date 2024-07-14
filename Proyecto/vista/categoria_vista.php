@@ -18,10 +18,16 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
     <title>Categorías</title>
 </head>
 <body>
+
 <?php imprimirTopBar($nombreUsuario); ?>
+
     <div class="contenedor">
         <div class="barra-lateral">
             <?php imprimirBarraLateral(); ?>
+        </div>
+
+        <div class="contenido">
+            <h1>Categoría</h1>
         </div>
 
         <div class="contenedor-categoria px-6 pt-5">
@@ -81,12 +87,10 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                         <input type="text" id="Nombre" name="Nombre" class="form-control form-control-sm">
                     </div>
                     <div class="col-md-12"><br>
-                        <center>
-                            <div id="botones">
-                                <input type="submit" value="Enviar" name="Enviar" class="btn btn-info">
-                                <input type="reset" value="Limpiar" class="btn btn-info">
-                            </div>
-                        </center>
+                        <div id="botones">
+                            <input type="submit" value="Enviar" name="Enviar" class="btn btn-info">
+                            <input type="reset" value="Limpiar" class="btn btn-info">
+                        </div>
                     </div>
                 </div>
             </form>
