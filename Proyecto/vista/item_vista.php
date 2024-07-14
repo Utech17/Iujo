@@ -13,6 +13,7 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../vista/css/bootstrap.min.css">
     <link rel="stylesheet" href="../vista/css/dataTables.bootstrap5.css">
+    <link rel="stylesheet" type="text/css" href="../vista/css/estilosinicio.css">
     <link rel="stylesheet" href="../vista/css/estilo_item.css">
     <title>Item</title>
 </head>
@@ -39,7 +40,7 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                             <?php
                             foreach ($data as $row) {
                                 echo "<tr>";
-                                echo "<td>" . $row['estado'] . "</td>";
+                                echo "<td>" . ($row['estado'] == 1 ? 'Activo' : 'Inactivo') . "</td>";
                                                         /*$Nombre_categoria = '';
                             foreach ($data2 as $categoria) {
                                 if ($categoria['id_categoria'] == $row['id_categoria']) {
