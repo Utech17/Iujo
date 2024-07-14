@@ -2,7 +2,7 @@
 
 require_once BASE_PATH . "/conexionPOD.php";
 
-class cls_Cliente extends conexion
+class cls_proyecto extends conexion
 {
 
     private $ID_Proyecto;
