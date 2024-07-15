@@ -22,10 +22,16 @@
     $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
     $data2 = $resultado2->fetchAll(PDO::FETCH_ASSOC);
 
+    // maikel aqui recibes el id de la categoria recuerda que solo debes mostrar, agregar y 
+    // editar segun la categoria que se te esta enviando, puedes revisar mi controlador para que te guies
+    if (isset($_GET['id'])) {
+        $idcategoria = $_GET['id'];
+    }
+
     if(isset($_POST['Enviar'])){
         echo "<script>console.log('Conectado')</script>";
 
-        $objItem->set_idcategoria($_POST['categoria_seleccionada']);
+        $objItem->set_idcategoria($idcategoria);
         $objItem->set_nombre($_POST['nombre_item_input']);
         $objItem->set_estado($_POST['estado']);
         echo "<script>console.log('Conectado2')</script>";
