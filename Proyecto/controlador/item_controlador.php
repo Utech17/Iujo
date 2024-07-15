@@ -24,8 +24,9 @@
 
     // maikel aqui recibes el id de la categoria recuerda que solo debes mostrar, agregar y 
     // editar segun la categoria que se te esta enviando, puedes revisar mi controlador para que te guies
-    if (isset($_GET['id'])) {
+    if (isset($_GET['id']) && isset($_GET['idProyecto'])) {
         $idcategoria = $_GET['id'];
+        $idProyecto = $_GET['idProyecto'];
     }
 
     if(isset($_POST['Enviar'])){

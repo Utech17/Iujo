@@ -1,8 +1,17 @@
 <?php
+// Inicia la sesión si no está iniciada aún
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-$nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado';
+
+// Verifica si el usuario está autenticado
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ../index.php");
+    exit();
+}
+
+$nombreUsuario = $_SESSION['usuario'];
+$idProyecto = isset($_GET['idProyecto']) ? $_GET['idProyecto'] : '0';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -46,7 +55,7 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                                 echo "<td>" . htmlspecialchars($estado, ENT_QUOTES, 'UTF-8') . "</td>";
                                 echo "<td>" . htmlspecialchars($row['Nombre'], ENT_QUOTES, 'UTF-8') . "</td>";
                                 echo "<td>
-                                        <a href='../controlador/item_controlador.php?id=" . htmlspecialchars($row['ID_Categoria'], ENT_QUOTES, 'UTF-8') . "'>
+                                        <a href='../controlador/item_controlador.php?id=" . htmlspecialchars($row['ID_Categoria'], ENT_QUOTES, 'UTF-8') . "&idProyecto=" . htmlspecialchars($idProyecto, ENT_QUOTES, 'UTF-8') . "'>
                                             <button class='btn-azul'>
                                                 <img src='../vista/img/ojo.png' alt='ojo'>
                                             </button>
