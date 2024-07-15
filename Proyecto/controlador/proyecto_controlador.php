@@ -1,7 +1,7 @@
 <?php
 require_once("../modelo/proyecto_modelo.php");
 
-$objProyecto = new proyecto();
+$objProyecto = new Proyecto();
 
 $data = $objProyecto->buscarTodos();
 
@@ -9,7 +9,6 @@ $data = $objProyecto->buscarTodos();
 require_once("vista_controlador.php");
 
 if (isset($_POST['Enviar'])) {
-
     if (isset($_POST['Nombre'])) {
         $objProyecto->set_Nombre($_POST['Nombre']);
         $objProyecto->set_Descripcion($_POST['Descripcion']);
@@ -21,7 +20,7 @@ if (isset($_POST['Enviar'])) {
             echo "<script>alert('Error al agregar proyecto');</script>";
         }
     } else {
-        echo "<script>alert('Faltan datos para agregar la proyecto');</script>";
+        echo "<script>alert('Faltan datos para agregar el proyecto');</script>";
     }
 }
 
@@ -41,20 +40,20 @@ if (isset($_POST['editarId'])) {
             echo "<script>alert('Error al actualizar proyecto');</script>";
         }
     } else {
-        echo "<script>alert('Faltan datos para actualizar la proyecto');</script>";
+        echo "<script>alert('Faltan datos para actualizar el proyecto');</script>";
     }
 }
 
-// Eliminar una proyecto
 if (isset($_GET['eliminarId'])) {
-    $objProyecto->set_ID_Proyecto($_GET['eliminarId']);
+    $objProyecto->setID_Proyecto($_GET['eliminarId']);
     $resultado = $objProyecto->eliminarProyecto();
 
     if ($resultado) {
-        echo "<script>alert('Proyecto eliminada con éxito');location.href='../controlador/Proyecto_controlador.php';</script>";
+        echo "<script>alert('Proyecto eliminado con éxito');location.href='../controlador/Proyecto_controlador.php';</script>";
     } else {
         echo "<script>alert('Error al eliminar proyecto');</script>";
     }
 }
 
 require_once("../vista/proyecto_vista.php");
+?>
