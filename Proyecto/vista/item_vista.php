@@ -1,17 +1,11 @@
 <?php
-// Inicia la sesión si no está iniciada aún
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
-// Verifica si el usuario está autenticado
-if (!isset($_SESSION['usuario'])) {
-    header("Location: ../index.php");
-    exit();
-}
-
-$nombreUsuario = $_SESSION['usuario'];
+$nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,11 +44,8 @@ $nombreUsuario = $_SESSION['usuario'];
                         </tr>
                         <tbody>
                             <?php
-                            if (isset($data) && is_array($data) && isset($data2) && is_array($data2)) {
+                            if (isset($data) && is_array($data)) {
                             foreach ($data as $row) {
-                                foreach ($data2 as $row2) {
-                                    
-                                
                                 echo "<tr>";
                                 echo "<td>" . ($row['estado'] == 1 ? 'Activo' : 'Inactivo') . "</td>";
                                                         /*$Nombre_categoria = '';
@@ -67,7 +58,7 @@ $nombreUsuario = $_SESSION['usuario'];
                                 echo "<td>" . $Nombre_categoria . "</td>";*/
                                 echo "<td>" . $row['nombre'] . "</td>";
                                 echo "<td>
-                                        <button class='agregar_presupuesto btn-azul' data-iditem='" . $row['id_item'] . "' data-idproyecto='" . $row2['id_proyecto'] . "'>
+                                        <button class='agregar_presupuesto btn-azul' data-id='" . $row['id_item'] . "' data-nombre='" . $row['nombre'] . "' data-estado='" . $row['estado'] . "'>
                                             <img src='../vista/img/ojo.png' alt='presupuesto'>
                                         </button>
                                         |
@@ -82,15 +73,10 @@ $nombreUsuario = $_SESSION['usuario'];
                                         </a>
                                     </td>";
                                     echo "</tr>";
-
-                                    echo "<script>";
-            echo "console.log('id_proyecto:', " . $row2['id_proyecto'] . ", 'id_item:', " . $row['id_item'] . ");";
-            echo "</script>";
                                 }
                             } else {
                                 echo "<tr><td colspan='4'>No hay datos disponibles.</td></tr>";
                             }
-                        }
                         ?>
                     </tbody>
         <tfoot>
