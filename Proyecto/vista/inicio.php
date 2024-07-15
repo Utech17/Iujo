@@ -25,7 +25,6 @@ if( isset($_GET['Volver'])){
 </head>
 <body>
     <?php imprimirTopBar($nombreUsuario); ?>
-
     <div class="contenedor">
         <div class="barra-lateral">
             <?php imprimirBarraLateral() ?>

@@ -1,7 +1,4 @@
 <?php
-require_once("../controlador/categoria_controlador.php");
-require_once("../controlador/vista_controlador.php");
-
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -100,16 +97,17 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                 <form id="formEditarCategoria" action="" method="POST">
                     <input type="hidden" id="editarId" name="editarId">
                     <div class="form-group">
-                        <label for="editarNombre">Nombre</label>
-                        <input type="text" class="form-control" id="editarNombre" name="editarNombre">
-                    </div>
-                    <div class="form-group">
                         <label for="editarEstado">Estado</label>
                         <select class="form-control" id="editarEstado" name="editarEstado">
                             <option value="1">Activo</option>
                             <option value="0">Inactivo</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="editarNombre">Nombre</label>
+                        <input type="text" class="form-control" id="editarNombre" name="editarNombre">
+                    </div>
+                    
                     <div class="modal__botones-contenedor">
                         <input type="submit" value="Guardar cambios" class="btn btn-primary">
                         <input type="button" value="Cancelar" class="modal__cerrar finalizarEditar btn btn-secondary">
