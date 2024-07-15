@@ -2,6 +2,7 @@
     require_once("../modelo/item_modelo.php");
     require_once("../modelo/categoria_modelo.php");
     require_once("vista_controlador.php");
+    require_once("presupuesto_controlador.php");
 
 
     $objItem = new ItemModelo();
@@ -24,15 +25,19 @@
     if(isset($_POST['Enviar'])){
         echo "<script>console.log('Conectado')</script>";
 
-        //$objItem->set_idcategoria($_POST['categoria_seleccionada']);
+        $objItem->set_idcategoria($_POST['categoria_seleccionada']);
         $objItem->set_nombre($_POST['nombre_item_input']);
         $objItem->set_estado($_POST['estado']);
         echo "<script>console.log('Conectado2')</script>";
         
         $result=$objItem->incluir();
 
-        echo "<script>console.log('Conectado3')</script>";
-    }
+        if ($result == 1) {
+            echo "<script>alert('Item agregado con éxito');location.href='../controlador/item_controlador.php';</script>";
+        } else {
+            echo "<script>alert('Error al agregar item');</script>";
+        }
+    } 
 
     if (isset($_GET['eliminarId'])){
 			

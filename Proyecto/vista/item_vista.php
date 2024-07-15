@@ -98,12 +98,12 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                                                         </tr>
                                                         <tbody>
                                                             <?php
-                                                            foreach ($data2 as $row) {
-                                                                echo "<tr>";
-                                                                echo "<td><input type='radio' class='categoria_seleccionada' name='categoria_seleccionada' value='" . $row['id_categoria'] . "'></td>";
-                                                                echo "<td>" . $row['nombre'] . "</td>";
-                                                                echo "</tr>";
-                                                            }
+                                                           // foreach ($data2 as $row) {
+                                                               // echo "<tr>";
+                                                               // echo "<td><input type='radio' class='categoria_seleccionada' name='categoria_seleccionada' value='" . $row['id_categoria'] . "'></td>";
+                                                                //echo "<td>" . $row['nombre'] . "</td>";
+                                                                //echo "</tr>";
+                                                          //  }
                                                             ?>
                                                         </tbody>
                                         <tfoot>
@@ -128,10 +128,10 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                                 <input type="text" id="nombre_item_input" name="nombre_item_input" class="form-control form-control-sm">
                             </div>
 
-                            <input type="submit" value="Enviar" name="Enviar" class="btn btn-info">
+                            
 
                             <div class="modal__botones-contenedor">
-                                <input type="submit" for value="Guardar" name="Guardar" class="modal__agregar finalizar" id="modal_cliente">
+                                <input type="submit" value="Agregar" name="Enviar">
                                 <input type="button" value="Cancelar" class=" modal__cerrar finalizar">
                             </div>
                     </form>
