@@ -47,11 +47,9 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                                 $estado = ($row['Estado'] == 1) ? 'Activo' : 'Inactivo';
                                 echo "<td>" . $estado . "</td>";
                                 echo "<td>
-                                        <a href="../controlador/item_controlador.php">
-                                            <button class="btn-azul">
-                                                <img src="../vista/img/ojo.png" alt="ojo">
-                                            </button>
-                                        </a>
+                                        <button class="btn-azul" onclick="window.location.href='../controlador/item_controlador.php'">
+                                            <img src="../vista/img/ojo.png" alt="ojo">
+                                        </button>
                                         | 
                                         <button class='editarCategoria btn-azul' data-id='" . $row['ID_Categoria'] . "' data-nombre='" . $row['Nombre'] . "' data-estado='" . $row['Estado'] . "'>
                                             <img src='../vista/img/editar.png' alt='editar'>
