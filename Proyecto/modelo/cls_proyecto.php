@@ -19,22 +19,22 @@ class cls_proyecto extends Conexion
     }
 
     // Getters and Setters
-    public function getID_Proyecto()
+    public function get_ID_Proyecto()
     {
         return $this->ID_Proyecto;
     }
 
-    public function setID_Proyecto($ID_Proyecto)
+    public function set_ID_Proyecto($ID_Proyecto)
     {
         $this->ID_Proyecto = $ID_Proyecto;
     }
 
-    public function getNombre()
+    public function get_Nombre()
     {
         return $this->Nombre;
     }
 
-    public function setNombre($Nombre)
+    public function set_Nombre($Nombre)
     {
         $this->Nombre = $Nombre;
     }
@@ -49,12 +49,12 @@ class cls_proyecto extends Conexion
         $this->Descripción = $Descripción;
     }
 
-    public function getEstado()
+    public function get_Estado()
     {
         return $this->Estado;
     }
 
-    public function setEstado($Estado)
+    public function set_Estado($Estado)
     {
         $this->Estado = $Estado;
     }
@@ -62,12 +62,22 @@ class cls_proyecto extends Conexion
     public function agregarProyecto()
     {
 
-        $sql = "INSERT INTO proyecto (Nombre,Descripción) VALUES (:Nombre,:Descripción)";
+        $sql = "INSERT INTO proyecto (Nombre,Descripción,Estado) VALUES (:Nombre,:Descripción,:Estado)";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':Nombre', $this->Nombre);
         $stmt->bindParam(':Descripción', $this->Descripción);
+        $stmt->bindParam(':Estado', $this->Estado);
+        echo $stmt->debugDumpParams();
         $result = $stmt->execute();
+
         return $result ? 1 : 0;
+        $stmt->execute();
+        $errorInfo = $stmt->errorInfo();
+
+        if ($errorInfo[0] !== 0) {
+            echo "Error Code: " . $errorInfo[0] . "\n";
+            echo "Error Message: " . $errorInfo[1] . "\n";
+        }
     }
 
 
