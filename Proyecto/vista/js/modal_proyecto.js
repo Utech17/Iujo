@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Variables globales para los modales de edición
   const modal_section_editar = document.querySelector(".modal_section_editar");
   const cerrar_modalEditar = document.querySelectorAll(".finalizarEditar");
-  const abrir_modales_editar = document.querySelectorAll(".editarCategoria");
+  const abrir_modales_editar = document.querySelectorAll(".editarProyecto");
 
   // Abrir modal editar
   abrir_modales_editar.forEach(function (boton) {
