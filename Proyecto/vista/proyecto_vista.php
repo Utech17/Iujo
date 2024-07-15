@@ -27,7 +27,7 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
             <h1>Proyecto</h1>
         </div>
     </div>
-    <div class="contenedor-categoria px-6 pt-5">
+    <div class="contenedor-proyecto px-6 pt-5">
         <div id="tabla_div">
             <div class="row">
                 <div class="col-sm-3">
@@ -133,11 +133,7 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                         <input type="submit" value="Guardar cambios" class="btn btn-primary">
                         <input type="button" value="Cancelar" class="modal__cerrar finalizarEditar btn btn-secondary">
                     </div>
-
                 </form>
-
-
-
             </div>
         </section>
 
