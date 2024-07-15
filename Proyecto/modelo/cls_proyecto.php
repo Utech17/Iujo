@@ -61,13 +61,14 @@ class cls_proyecto extends Conexion
 
     public function agregarProyecto()
     {
-        $sql = "INSERT INTO Proyecto (Nombre,Descripción) VALUES (:Nombre,:Descripción)";
+        $sql = "INSERT INTO Proyecto (Nombre, Descripción) VALUES (:Nombre, :Descripcion)";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':Nombre', $this->Nombre);
-        $stmt->bindParam(':Descripción', $this->Descripción);
+        $stmt->bindParam(':Descripcion', $this->Descripción);
         $result = $stmt->execute();
         return $result ? 1 : 0;
     }
+
 
     public function buscarTodos()
     {
