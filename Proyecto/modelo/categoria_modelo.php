@@ -76,10 +76,10 @@ class Categoria extends Conexion {
             $stmt = $this->conexion->prepare($sql);
             $stmt->bindParam(':ID_Proyecto', $ID_Proyecto);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Utilizamos fetchAll para asegurar un array de arrays
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log("Error al buscar categorías por ID de proyecto: " . $e->getMessage(), 0);
-            return array(); // Devolvemos un array vacío en caso de error
+            return array();
         }
     }
 

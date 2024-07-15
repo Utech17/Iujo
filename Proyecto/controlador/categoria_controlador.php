@@ -6,10 +6,9 @@ $objCategoria = new Categoria();
 // Verificar si se ha pasado un ID de proyecto
 if (isset($_GET['id'])) {
     $idProyecto = $_GET['id'];
-    // Puedes usar $idProyecto según sea necesario, por ejemplo, para filtrar las categorías asociadas a ese proyecto
 }
 
-// Listar todas las categorías
+// Listar todas las categorías de ese proyecto
 $data = $objCategoria->buscarCategoriaPorIDProyecto($idProyecto); 
 
 // Llamar controlador con funciones de diseño, para no repetir el mismo código
@@ -18,7 +17,7 @@ require_once("vista_controlador.php");
 // Incluir una nueva categoría
 if (isset($_POST['Enviar'])) {
     if (isset($_POST['Nombre']) && $idProyecto !== null) {
-        $objCategoria->setID_Proyecto($idProyecto); // Suponiendo que hay un método para establecer el ID del proyecto
+        $objCategoria->setID_Proyecto($idProyecto); 
         $objCategoria->setNombre($_POST['Nombre']);
         $resultado = $objCategoria->agregarCategoria();
         
@@ -37,18 +36,16 @@ if (isset($_POST['editarId'], $_POST['idProyecto'])) {
     $idCategoria = $_POST['editarId'];
     $idProyecto = $_POST['idProyecto'];
     
-    // Verifica que los otros campos necesarios también estén presentes y válidos
     if (isset($_POST['editarNombre'], $_POST['editarEstado'])) {
         $nombre = $_POST['editarNombre'];
         $estado = $_POST['editarEstado'];
         
         // Setea los valores en el objeto Categoría
         $objCategoria->setID_Categoria($idCategoria);
-        $objCategoria->setID_Proyecto($idProyecto); // Asegúrate de establecer el ID del proyecto
+        $objCategoria->setID_Proyecto($idProyecto);
         $objCategoria->setNombre($nombre);
         $objCategoria->setEstado($estado);
         
-        // Intenta actualizar la categoría en la base de datos
         $resultado = $objCategoria->actualizarCategoria();
         
         if ($resultado) {
