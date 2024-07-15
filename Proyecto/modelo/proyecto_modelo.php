@@ -94,7 +94,7 @@ class proyecto extends Conexion
 
     public function actualizarProyecto()
     {
-        $sql = "UPDATE proyecto SET Nombre = :Nombre, Descripcion = :Descripcion, Estado = :Estado WHERE ID_proyecto = :ID_Proyecto";
+        $sql = "UPDATE proyecto SET Nombre = :Nombre, Descripcion = :Descripcion, Estado = :Estado WHERE ID_Proyecto = :ID_Proyecto";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':Nombre', $this->Nombre);
         $stmt->bindParam(':Descripcion ', $this->Descripcion);
