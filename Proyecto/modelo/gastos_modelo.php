@@ -139,5 +139,13 @@ class Gastos extends Conexion {
         $stmt->bindParam(':ID_Gasto', $this->ID_Gasto);
         return $stmt->execute();
     }
+
+
+    public function obtenerListaCategorias() {
+        $sql = "SELECT id_categoria, nombre FROM categoria";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>

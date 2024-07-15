@@ -1,15 +1,16 @@
 <?php
 require_once("../modelo/gastos_modelo.php");
+require_once("../modelo/CCategoria.php");
 
 $objGastos = new Gastos();
+$objCategoria = new Categoria();
 
 // Listar todos los gastos
 $data = $objGastos->buscarTodos(); 
 
-// Llamar controlador con funciones de diseño, para no repetir el mismo código
-require_once("vista_controlador.php");
+// Obtener listas de proyectos y categorías
 
-
+$lista_categorias = $objGastos->obtenerListaCategorias();
 
 // Incluir un nuevo gasto
 if (isset($_POST['Enviar'])) {
@@ -69,5 +70,19 @@ if (isset($_GET['eliminarId'])) {
     }
 }
 
+// Manejar la solicitud AJAX para filtrar por rango de fechas
+if (isset($_GET['start_date'], $_GET['end_date'])) {
+    $startDate = $_GET['start_date'];
+    $endDate = $_GET['end_date'];
+
+    // Aquí llamamos a una función del modelo para buscar gastos por rango de fechas
+    $data = $objGastos->buscarGastosPorFecha($startDate, $endDate);
+
+    // Convertir los resultados a JSON y enviarlos de vuelta a la vista
+    echo json_encode($data);
+    exit;
+}
+
+require_once("vista_controlador.php");
 require_once("../vista/Gastos_vista.php");
 ?>

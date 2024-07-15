@@ -13,7 +13,12 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../vista/css/bootstrap.min.css">
     <link rel="stylesheet" href="../vista/css/dataTables.bootstrap5.css">
+    <script src="https://kit.fontawesome.com/68b92f41c0.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="../vista/css/estilosinicio.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+<script src="https://cdn.jsdelivr.net/npm/moment/min/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.js"></script>
+    
     <title>Categorías</title>
 </head>
 <body>
@@ -32,7 +37,37 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
     </div>
         <div class="contenedor-categoria px-6 pt-5">
             <div id="tabla_div">
-                <a href="#" class="modal_abrir btn btn-primary">Agregar Gasto</a>
+            <div class="row">
+                    
+                <div class="col-sm-3">
+                    <input type="text" id="daterange" class="form-control">
+                </div>
+                <div class="col-sm-2">                 
+                <select id="idcategoria" name="idcategoria" class="form-control form-control-sm">
+                        <option value="0">-- Ninguna --</option>
+                        <?php foreach ($lista_categorias as $categoria) { ?>
+                            <option value="<?php echo $categoria['id_categoria']; ?>"><?php echo $categoria['nombre_categoria']; ?></option>
+                        <?php } ?>
+                    </select>
+                    </div>   
+                <div class="col-sm-2">                 
+                <select id="idcategoria" name="idcategoria" class="form-control form-control-sm">
+                        <option value="0">-- Ninguna --</option>
+                        <?php foreach ($lista_categorias as $categoria) { ?>
+                            <option value="<?php echo $categoria['id_categoria']; ?>"><?php echo $categoria['nombre']; ?></option>
+                        <?php } ?>
+                    </select>
+                    </div>               
+                <div class="col-sm-2">
+													<button type="button" class="btn btn-primary"> <i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+                                                    
+				</div>
+
+                <div class="col-sm-3">
+                    <a href="#" class="modal_abrir btn btn-primary"> <i class="fa-solid fa-plus"></i> Agregar Gasto</a>
+                </div>
+             </div>
+
                 <table id="tabla" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
@@ -166,6 +201,51 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
             </form>
         </div>
     </section>
+
+    <!-- Script para inicializar el selector de fechas y manejar la solicitud AJAX -->
+    <script>
+        $(function() {
+    $('#daterange').daterangepicker({
+        locale: {
+            format: 'YYYY-MM-DD'
+        }
+    });
+
+    $('#daterange').on('apply.daterangepicker', function(ev, picker) {
+        var startDate = picker.startDate.format('YYYY-MM-DD');
+        var endDate = picker.endDate.format('YYYY-MM-DD');
+        filtrarDatos(startDate, endDate);
+    });
+});
+
+        function filtrarDatos(startDate, endDate) {
+            $.ajax({
+                url: 'gastos_controlador.php', // Ruta al controlador PHP
+                method: 'GET',
+                data: {
+                    start_date: startDate,
+                    end_date: endDate
+                },
+                success: function(data) {
+                    // Actualizar la tabla con los datos filtrados
+                    var tableBody = '';
+                    data = JSON.parse(data);
+                    data.forEach(function(item) {
+                        tableBody += '<tr>';
+                        tableBody += '<td>' + item.Fecha + '</td>';
+                        tableBody += '<td>' + item.ID_Item + '</td>';
+                        tableBody += '<td>' + item.Monto_Gasto + '</td>';
+                        tableBody += '<td>' + item.ID_Categoria + '</td>';
+                        tableBody += '<td>Acciones</td>';
+                        tableBody += '</tr>';
+                    });
+                    $('#tabla tbody').html(tableBody);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
 
     </div>
     <script src="../vista/js/jquery-3.7.1.js"></script>
