@@ -36,10 +36,9 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                 <table id="tabla" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>Estado</th>
                             <th>Nombre</th>
                             <th>Descripción</th>
-                            <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -48,12 +47,17 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                         if (isset($data) && is_array($data)) {
                             foreach ($data as $row) {
                                 echo "<tr>";
-                                echo "<td>" . $row['ID_Proyecto'] . "</td>";
-                                echo "<td>" . $row['Nombre'] . "</td>";
-                                echo "<td>" . $row['Descripcion'] . "</td>";
                                 $estado = ($row['Estado'] == 1) ? 'Activo' : 'Inactivo';
                                 echo "<td>" . $estado . "</td>";
+                                echo "<td>" . $row['Nombre'] . "</td>";
+                                echo "<td>" . $row['Descripcion'] . "</td>";
                                 echo "<td>
+                                    <a href='../controlador/categoria_controlador.php'>
+                                            <button class='btn-azul'>
+                                                <img src='../vista/img/ojo.png' alt='ojo'>
+                                            </button>
+                                    </a>
+                                    | 
                                     <button class='editarProyecto btn-azul' data-id='" . $row['ID_Proyecto'] . "' data-nombre='" . $row['Nombre'] . "' data-descripcion='" . $row['Descripcion'] . "' data-estado='" . $row['Estado'] . "'>
                                         <img src='../vista/img/editar.png' alt='editar'>
                                     </button> 
@@ -73,11 +77,7 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Descripción</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
+                           
                         </tr>
                     </tfoot>
                 </table>

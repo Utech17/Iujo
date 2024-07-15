@@ -77,12 +77,7 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                     </tbody>
         <tfoot>
             <tr>
-                <th>Estado</th>
-                <!--<th>Categoria</th>-->
-                <th>Item</th>
-               <!-- <th>Presupuesto</th>
-                <th>Monto Gastado</th>-->
-                <th>Acciones</th>
+                
             </tr>
         </tfoot>
     </table>

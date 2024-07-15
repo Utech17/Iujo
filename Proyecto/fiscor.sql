@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-07-2024 a las 20:17:57
+-- Tiempo de generación: 15-07-2024 a las 07:55:15
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -29,17 +29,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categoria` (
   `ID_Categoria` int(11) NOT NULL,
+  `ID_Proyecto` int(11) NOT NULL,
   `Nombre` varchar(50) NOT NULL,
   `Estado` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `categoria`
---
-
-INSERT INTO `categoria` (`ID_Categoria`, `Nombre`, `Estado`) VALUES
-(1, 'Limpieza', 1),
-(3, 'Costos fijos', 1);
 
 -- --------------------------------------------------------
 
@@ -51,11 +44,10 @@ CREATE TABLE `gasto` (
   `ID_Gasto` int(11) NOT NULL,
   `ID_Proyecto` int(11) NOT NULL,
   `ID_Item` int(11) NOT NULL,
-  `ID_Usuario` int(11) NOT NULL,
   `Fecha` date NOT NULL,
   `Monto_Gasto` int(11) NOT NULL,
   `Comprobante` varchar(50) NOT NULL,
-  `Observación` varchar(100) NOT NULL
+  `Observacion` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -65,10 +57,10 @@ CREATE TABLE `gasto` (
 --
 
 CREATE TABLE `item` (
-  `ID_Item` int(11) NOT NULL,
+  `id_item` int(11) NOT NULL,
   `ID_Categoria` int(11) NOT NULL,
-  `Nombre` varchar(50) NOT NULL,
-  `Estado` tinyint(1) NOT NULL DEFAULT 1
+  `nombre` varchar(50) NOT NULL,
+  `estado` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -93,9 +85,16 @@ CREATE TABLE `presupuesto` (
 CREATE TABLE `proyecto` (
   `ID_Proyecto` int(11) NOT NULL,
   `Nombre` varchar(50) NOT NULL,
-  `Descripción` varchar(100) NOT NULL,
+  `Descripcion` varchar(100) NOT NULL,
   `Estado` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `proyecto`
+--
+
+INSERT INTO `proyecto` (`ID_Proyecto`, `Nombre`, `Descripcion`, `Estado`) VALUES
+(1, 'Laboratorios', 'JKKJKJ', 1);
 
 -- --------------------------------------------------------
 
@@ -126,7 +125,8 @@ INSERT INTO `usuario` (`ID_Usuario`, `Usuario`, `Contraseña`, `Nombre`, `Apelli
 -- Indices de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  ADD PRIMARY KEY (`ID_Categoria`);
+  ADD PRIMARY KEY (`ID_Categoria`),
+  ADD UNIQUE KEY `ID_Proyecto` (`ID_Proyecto`);
 
 --
 -- Indices de la tabla `gasto`
@@ -134,14 +134,13 @@ ALTER TABLE `categoria`
 ALTER TABLE `gasto`
   ADD PRIMARY KEY (`ID_Gasto`),
   ADD KEY `ID_Proyecto` (`ID_Proyecto`),
-  ADD KEY `ID_Item` (`ID_Item`),
-  ADD KEY `ID_Usuario` (`ID_Usuario`);
+  ADD KEY `ID_Item` (`ID_Item`);
 
 --
 -- Indices de la tabla `item`
 --
 ALTER TABLE `item`
-  ADD PRIMARY KEY (`ID_Item`),
+  ADD PRIMARY KEY (`id_item`),
   ADD KEY `ID_Categoria` (`ID_Categoria`);
 
 --
@@ -171,7 +170,19 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `ID_Categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_Categoria` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `item`
+--
+ALTER TABLE `item`
+  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `proyecto`
+--
+ALTER TABLE `proyecto`
+  MODIFY `ID_Proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
@@ -184,10 +195,15 @@ ALTER TABLE `usuario`
 --
 
 --
+-- Filtros para la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  ADD CONSTRAINT `categoria_ibfk_1` FOREIGN KEY (`ID_Proyecto`) REFERENCES `proyecto` (`ID_Proyecto`) ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `gasto`
 --
 ALTER TABLE `gasto`
-  ADD CONSTRAINT `gasto_ibfk_1` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuario` (`ID_Usuario`) ON UPDATE CASCADE,
   ADD CONSTRAINT `gasto_ibfk_2` FOREIGN KEY (`ID_Item`) REFERENCES `presupuesto` (`ID_Item`) ON UPDATE CASCADE,
   ADD CONSTRAINT `gasto_ibfk_3` FOREIGN KEY (`ID_Proyecto`) REFERENCES `presupuesto` (`ID_Proyecto`) ON UPDATE CASCADE;
 
@@ -202,7 +218,7 @@ ALTER TABLE `item`
 --
 ALTER TABLE `presupuesto`
   ADD CONSTRAINT `presupuesto_ibfk_1` FOREIGN KEY (`ID_Proyecto`) REFERENCES `proyecto` (`ID_Proyecto`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `presupuesto_ibfk_2` FOREIGN KEY (`ID_Item`) REFERENCES `item` (`ID_Item`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `presupuesto_ibfk_2` FOREIGN KEY (`ID_Item`) REFERENCES `item` (`id_item`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
