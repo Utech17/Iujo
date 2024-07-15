@@ -50,9 +50,8 @@
 		} */
 		
 		public function incluir() { // funcion para Incluir
-			$registro = "INSERT INTO item (id_item, nombre, estado) VALUES (:id_item,:nombre,:estado)";
+			$registro = "INSERT INTO item (nombre, estado) VALUES (:nombre,:estado)";
 			$preparado = $this->objbd->prepare($registro);
-			$preparado->bindParam(':id_item', $this->id_item);
 			$preparado->bindParam(':nombre', $this->nombre);
 			$preparado->bindParam(':estado', $this->estado);
 			$resul= $preparado->execute();
