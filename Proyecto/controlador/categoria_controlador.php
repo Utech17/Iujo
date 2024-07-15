@@ -33,16 +33,26 @@ if (isset($_POST['Enviar'])) {
 }
 
 // Actualizar una categoría
-if (isset($_POST['editarId'])) {
-    if (isset($_POST['editarNombre']) && isset($_POST['editarEstado'])) {
-        $objCategoria->setID_Categoria($_POST['editarId']); // Asegúrate de utilizar editarId aquí
-        $objCategoria->setNombre($_POST['editarNombre']);
-        $objCategoria->setEstado($_POST['editarEstado']);
+if (isset($_POST['editarId'], $_POST['idProyecto'])) {
+    $idCategoria = $_POST['editarId'];
+    $idProyecto = $_POST['idProyecto'];
+    
+    // Verifica que los otros campos necesarios también estén presentes y válidos
+    if (isset($_POST['editarNombre'], $_POST['editarEstado'])) {
+        $nombre = $_POST['editarNombre'];
+        $estado = $_POST['editarEstado'];
         
+        // Setea los valores en el objeto Categoría
+        $objCategoria->setID_Categoria($idCategoria);
+        $objCategoria->setID_Proyecto($idProyecto); // Asegúrate de establecer el ID del proyecto
+        $objCategoria->setNombre($nombre);
+        $objCategoria->setEstado($estado);
+        
+        // Intenta actualizar la categoría en la base de datos
         $resultado = $objCategoria->actualizarCategoria();
         
         if ($resultado) {
-            echo "<script>alert('Categoría actualizada con éxito');location.href='../controlador/categoria_controlador.php';</script>";
+            echo "<script>alert('Categoría actualizada con éxito');location.href='../controlador/categoria_controlador.php?id=$idProyecto';</script>";
         } else {
             echo "<script>alert('Error al actualizar categoría');</script>";
         }
@@ -57,7 +67,7 @@ if (isset($_GET['eliminarId'])) {
     $resultado = $objCategoria->eliminarCategoria();
     
     if ($resultado) {
-        echo "<script>alert('Categoría eliminada con éxito');location.href='../vista/categoria_vista.php';</script>";
+        echo "<script>alert('Categoría eliminada con éxito');location.href='../controlador/categoria_controlador.php?id=$idProyecto';</script>";
     } else {
         echo "<script>alert('Error al eliminar categoría');</script>";
     }

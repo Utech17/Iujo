@@ -99,6 +99,7 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
         <div class="modal__contenedor">
             <form id="formEditarCategoria" action="" method="POST">
                 <input type="hidden" id="editarId" name="editarId">
+                <input type="hidden" id="idProyecto" name="idProyecto" value="<?php echo htmlspecialchars($idProyecto, ENT_QUOTES, 'UTF-8'); ?>">
                 <div class="form-group">
                     <label for="editarEstado">Estado</label>
                     <select class="form-control" id="editarEstado" name="editarEstado">
