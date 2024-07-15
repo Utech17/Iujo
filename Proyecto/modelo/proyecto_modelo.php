@@ -96,10 +96,11 @@ class proyecto extends Conexion
     {
         $sql = "UPDATE proyecto SET Nombre = :Nombre, Descripcion = :Descripcion, Estado = :Estado WHERE ID_Proyecto = :ID_Proyecto";
         $stmt = $this->conexion->prepare($sql);
-        $stmt->bindParam(':Nombre', $this->Nombre);
-        $stmt->bindParam(':Descripcion ', $this->Descripcion);
-        $stmt->bindParam(':Estado', $this->Estado);
         $stmt->bindParam(':ID_Proyecto', $this->ID_Proyecto);
+        $stmt->bindParam(':Nombre', $this->Nombre);
+        $stmt->bindParam(':Descripcion', $this->Descripcion);
+        $stmt->bindParam(':Estado', $this->Estado);
+        $stmt->debugDumpParams();
         return $stmt->execute();
     }
 
