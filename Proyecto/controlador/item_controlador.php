@@ -46,6 +46,25 @@
         }
     }
 
+    // Actualizar un item
+    if (isset($_POST['editarId'])) {
+        if (isset($_POST['editarNombre']) && isset($_POST['editarEstado'])) {
+            $objItem->set_iditem($_POST['editarId']); // Asegúrate de utilizar editarId aquí
+            $objItem->set_nombre($_POST['editarNombre']);
+            $objItem->set_estado($_POST['editarEstado']);
+            
+            $resultado = $objItem->modificar();
+            
+            if ($resultado) {
+                echo "<script>alert('item actualizado con éxito');location.href='../controlador/item_controlador.php';</script>";
+            } else {
+                echo "<script>alert('Error al actualizar item');</script>";
+            }
+        } else {
+            echo "<script>alert('Faltan datos para actualizar el item');</script>";
+        }
+    }
+
     
     /*if(isset($_POST['Enviar'])){
         echo "<script>console.log('Conectado')</script>";
