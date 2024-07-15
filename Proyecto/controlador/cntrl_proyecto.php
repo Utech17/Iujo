@@ -1,70 +1,56 @@
 <?php
+require_once("../modelo/cls_proyecto.php");
 
-require_once BASE_PATH . "/model/cls_proyecto.php";
+$objProyecto = new cls_proyecto();
 
+$data = $objProyecto->buscarTodos();
 
-$objCliente = new cls_proyecto();
+if (isset($_POST['Enviar'])) {
+    if (isset($_POST['Nombre'])) {
+        $objProyecto->setNombre($_POST['Nombre']);
+        $objProyecto->set_Descripción($_POST['Descripción']);
+        $resultado = $objProyecto->agregarProyecto();
 
-$ID_Proyecto = "";
-$Nombre = "";
-$Descripción = "";
-$Estado = "";
-
-
-if (isset($_POST['guardar'])) {
-
-    $objCliente->set_ID_Proyecto($_POST['ID_Proyecto']);
-    $objCliente->set_Nombre($_POST['Nombre']);
-    $objCliente->set_Descripción($_POST['Descripción']);
-    $objCliente->set_Estado($_POST['Estado']);
-
-    $result = $objCliente->incluir();
-
-    if ($result == 1) {
-        echo "<script>alert('Registrado con éxito')</script>";
-    }
-}
-if (isset($_POST['buscar'])) {
-    $Nombre = $_POST['rif'];
-
-    if ($objCliente->buscar($Nombre)) {
-        $ID_Proyecto = $objCliente->get_ID_Proyecto();
-        $Nombre = $objCliente->get_Nombre();
-        $Descripción = $objCliente->get_Descripción();
-        $Estado = $objCliente->get_Estado();
+        if ($resultado == 1) {
+            echo "<script>alert('Proyecto agregada con éxito');location.href='../vista/Proyecto_vista.php';</script>";
+        } else {
+            echo "<script>alert('Error al agregar proyecto');</script>";
+        }
     } else {
-
-        echo "<script>alert('No se encontraron los datos')</script>";
+        echo "<script>alert('Faltan datos para agregar la proyecto');</script>";
     }
 }
 
-if (isset($_POST['modificar'])) {
+// Actualizar
+if (isset($_POST['editarId'])) {
+    if (isset($_POST['editarNombre']) && isset($_POST['editarEstado'])) {
+        $objProyecto->setID_Proyecto($_POST['editarId']); // Asegúrate de utilizar editarId aquí
+        $objProyecto->setNombre($_POST['editarNombre']);
+        $objProyecto->setNombre($_POST['editarDescripción']);
+        $objProyecto->setEstado($_POST['editarEstado']);
 
-    $objCliente->set_ID_Proyecto($_POST['ID_Proyecto']);
-    $objCliente->set_Nombre($_POST['Nombre']);
-    $objCliente->set_Descripción($_POST['Descripción']);
-    $objCliente->set_Estado($_POST['Estado']);
+        $resultado = $objProyecto->actualizarProyecto();
 
-
-
-
-    if ($objCliente->modificar()) {
-        echo "<script>alert('Registro Modficado con éxito')</script>";
+        if ($resultado) {
+            echo "<script>alert('Proyecto actualizada con éxito');location.href='../vista/Proyecto_vista.php';</script>";
+        } else {
+            echo "<script>alert('Error al actualizar proyecto');</script>";
+        }
     } else {
-        echo "<script>alert('No se pudo Modificar')</script>";
+        echo "<script>alert('Faltan datos para actualizar la proyecto');</script>";
     }
 }
 
-if (isset($_POST['eliminar'])) {
+// Eliminar una proyecto
+if (isset($_GET['eliminarId'])) {
+    $objProyecto->setID_Proyecto($_GET['eliminarId']);
+    $resultado = $objProyecto->eliminarProyecto();
 
-    $objCliente->set_ID_Proyecto($_POST['ID_Proyecto']);
-    $objCliente->set_Nombre($_POST['Nombre']);
-    $objCliente->set_Descripción($_POST['Descripción']);
-    $objCliente->set_Estado($_POST['Estado']);
-
-    if ($objCliente->eliminar()) {
-        echo "<script>alert('Registro Eliminado con éxito')</script>";
+    if ($resultado) {
+        echo "<script>alert('Proyecto eliminada con éxito');location.href='../vista/Proyecto_vista.php';</script>";
     } else {
-        echo "<script>alert('No se pudo Eliminar')</script>";
+        echo "<script>alert('Error al eliminar proyecto');</script>";
     }
 }
+
+require_once("../vista/proyecto_vista.php");

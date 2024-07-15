@@ -1,37 +1,40 @@
 <?php
+require_once("../modelo/conexionPDO.php");
 
-require_once BASE_PATH . "/conexionPOD.php";
-
-class cls_proyecto extends conexion
+class cls_proyecto extends Conexion
 {
-
+    // Attributes
     private $ID_Proyecto;
     private $Nombre;
     private $Descripción;
     private $Estado;
-    private $objbd;
 
+    private $conexion;
+
+    // Constructor
     public function __construct()
     {
-        parent::__construct();
-        $this->objbd = parent::conectar();
+        $this->conexion = new Conexion();
+        $this->conexion = $this->conexion->conectar();
     }
-    public function get_ID_Proyecto()
+
+    // Getters and Setters
+    public function getID_Proyecto()
     {
         return $this->ID_Proyecto;
     }
 
-    public function set_ID_Proyecto($ID_Proyecto)
+    public function setID_Proyecto($ID_Proyecto)
     {
         $this->ID_Proyecto = $ID_Proyecto;
     }
 
-    public function get_Nombre()
+    public function getNombre()
     {
         return $this->Nombre;
     }
 
-    public function set_Nombre($Nombre)
+    public function setNombre($Nombre)
     {
         $this->Nombre = $Nombre;
     }
@@ -46,82 +49,64 @@ class cls_proyecto extends conexion
         $this->Descripción = $Descripción;
     }
 
-    public function get_Estado()
+    public function getEstado()
     {
         return $this->Estado;
     }
 
-    public function set_Estado($Estado)
+    public function setEstado($Estado)
     {
         $this->Estado = $Estado;
     }
 
-
-    public function incluir()
+    public function agregarProyecto()
     {
-        // Verifica si ya existe un registro con los mismos valores en la base de datos
-        $registro = "SELECT * FROM cliente WHERE ID_Proyecto='" . $this->ID_Proyecto . "'";
-        $preparado = $this->objbd->prepare($registro);
-        $preparado->execute();
-        // Comprueba si la consulta devuelve algún resultado
-        if ($preparado->rowCount() > 0) {
-            // Mostrar mensaje de error al usuario
-            echo "<script>alert('Registrado duplicado, por favor verifique')</script>";
-        } else {
-            // Insertar los datos en la base de datos
-            $registro = "INSERT INTO cliente (Nombre,ID_Proyecto,Descripción,Estado) VALUES (:Nombre,:ID_Proyecto,:Descripción,:Estado)";
-            $preparado = $this->objbd->prepare($registro);
-            $preparado->bindParam(':Nombre', $this->Nombre);
-            $preparado->bindParam(':ID_Proyecto', $this->ID_Proyecto);
-            $preparado->bindParam(':Descripción', $this->Descripción);
-            $preparado->bindParam(':Estado', $this->Estado);
+        $sql = "INSERT INTO Proyecto (Nombre,Descripción) VALUES (:Nombre,:Descripción)";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':Nombre', $this->Nombre);
+        $stmt->bindParam(':Descripción', $this->Descripción);
+        $result = $stmt->execute();
+        return $result ? 1 : 0;
+    }
 
-
-            $resul = $preparado->execute();
-            if ($resul) {
-                $res = 1;
-            } else {
-                $res = 0;
-            }
-            return $res;
+    public function buscarTodos()
+    {
+        try {
+            $sql = "SELECT * FROM Proyecto";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error al buscar todos los Proyectos: " . $e->getMessage(), 0);
+            return array();
         }
     }
 
-    public function buscar($rif)
+    public function buscarProyectoPorID($ID_Proyecto)
     {
-        // Busca registro con los mismos valores en la base de datos
-
-        $registro = "SELECT * FROM cliente WHERE ID_Proyecto='" . $rif . "' AND activo=1";
-        $preparado = $this->objbd->prepare($registro);
-        $resul = $preparado->execute();
-        $datos = $preparado->fetch(PDO::FETCH_ASSOC);
-
-        if ($datos) {
-            $encontro = 1;
-            $this->Nombre = $datos['Nombre'];
-            $this->ID_Proyecto = $datos['ID_Proyecto'];
-            $this->Descripción = $datos['Descripción'];
-            $this->Estado = $datos['Estado'];
-        } else {
-
-            $encontro = 0;
-        }
-        return $encontro;
+        $sql = "SELECT * FROM Proyecto WHERE ID_Proyecto = :ID_Proyecto";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':ID_Proyecto', $ID_Proyecto);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function modificar()
+    public function actualizarProyecto()
     {
-        $registro = "UPDATE cliente SET Nombre='" . $this->Nombre . "', Descripción='" . $this->Descripción . "',Estado='" . $this->Estado . "' where ID_Proyecto='" . $this->ID_Proyecto . "'";
-        $preparado = $this->objbd->prepare($registro);
-        $resul = $preparado->execute();
-        return $resul;
+        $sql = "UPDATE Proyecto SET Nombre = :Nombre, Descripción = :Descripción, Estado = :Estado WHERE ID_Proyecto = :ID_Proyecto";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':Nombre', $this->Nombre);
+        $stmt->bindParam(':Descripción ', $this->Descripción);
+        $stmt->bindParam(':Estado', $this->Estado);
+        $stmt->bindParam(':ID_Proyecto', $this->ID_Proyecto);
+        return $stmt->execute();
     }
 
-    public function eliminar()
+    public function eliminarProyecto()
     {
-        $registro = "UPDATE cliente SET activo = 0 WHERE ID_Proyecto='" . $this->ID_Proyecto . "'";
-        $preparado = $this->objbd->prepare($registro);
-        $resul = $preparado->execute();
-        return $resul;
+        $sql = "DELETE FROM Proyecto WHERE ID_Proyecto = :ID_Proyecto";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':ID_Proyecto', $this->ID_Proyecto);
+        return $stmt->execute();
     }
 }
