@@ -31,44 +31,46 @@
 
     if(isset($_POST['Enviar'])){
         echo "<script>console.log('Conectado')</script>";
-
+    
         $objItem->set_idcategoria($idcategoria);
         $objItem->set_nombre($_POST['nombre_item_input']);
         $objItem->set_estado($_POST['estado']);
         echo "<script>console.log('Conectado2')</script>";
         
-        $result=$objItem->incluir();
-
+        $result = $objItem->incluir();
+    
         if ($result == 1) {
-            echo "<script>alert('Item agregado con éxito');location.href='../controlador/item_controlador.php';</script>";
+            $idItem = $objItem->get_iditem(); // Obtén el id del item recién creado
+            echo "<script>alert('Item agregado con éxito');location.href='../controlador/item_controlador.php?id=$idcategoria&idProyecto=$idProyecto';</script>";
         } else {
             echo "<script>alert('Error al agregar item');</script>";
         }
     } 
-
-    if (isset($_GET['eliminarId'])){
-			
-        $objItem->set_iditem($_GET['eliminarId']);
     
+    if (isset($_GET['eliminarId'])) {
+        $idItem = $_GET['eliminarId'];
+        $objItem->set_iditem($idItem);
+        
         if($objItem->eliminar()){
-            echo "<script>alert('Registro Eliminado con éxito');location.href='item_controlador.php'; </script>";
+            echo "<script>alert('Registro Eliminado con éxito');location.href='item_controlador.php?id=$idcategoria&idProyecto=$idProyecto'; </script>";
             
         } else {
             echo "<script>alert('No se pudo Eliminar')</script>";
         }
     }
-
+    
     // Actualizar un item
     if (isset($_POST['editarId'])) {
         if (isset($_POST['editarNombre']) && isset($_POST['editarEstado'])) {
-            $objItem->set_iditem($_POST['editarId']); // Asegúrate de utilizar editarId aquí
+            $idItem = $_POST['editarId'];
+            $objItem->set_iditem($idItem); // Asegúrate de utilizar editarId aquí
             $objItem->set_nombre($_POST['editarNombre']);
             $objItem->set_estado($_POST['editarEstado']);
             
             $resultado = $objItem->modificar();
             
             if ($resultado) {
-                echo "<script>alert('item actualizado con éxito');location.href='../controlador/item_controlador.php';</script>";
+                echo "<script>alert('item actualizado con éxito');location.href='../controlador/item_controlador.php?id=$idcategoria&idProyecto=$idProyecto';</script>";
             } else {
                 echo "<script>alert('Error al actualizar item');</script>";
             }

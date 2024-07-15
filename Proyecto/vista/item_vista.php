@@ -45,38 +45,31 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                         <tbody>
                             <?php
                             if (isset($data) && is_array($data)) {
-                            foreach ($data as $row) {
-                                echo "<tr>";
-                                echo "<td>" . ($row['estado'] == 1 ? 'Activo' : 'Inactivo') . "</td>";
-                                                        /*$Nombre_categoria = '';
-                            foreach ($data2 as $categoria) {
-                                if ($categoria['id_categoria'] == $row['id_categoria']) {
-                                    $Nombre_categoria = $categoria['nombre'];
-                                    break;
-                                }
-                            }
-                                echo "<td>" . $Nombre_categoria . "</td>";*/
-                                echo "<td>" . $row['nombre'] . "</td>";
-                                echo "<td>
-                                        <button class='agregar_presupuesto btn-azul' data-id='" . $row['id_item'] . "' data-nombre='" . $row['nombre'] . "' data-estado='" . $row['estado'] . "'>
-                                            <img src='../vista/img/ojo.png' alt='presupuesto'>
-                                        </button>
-                                        |
-                                        <button class='editaritem btn-azul' data-id='" . $row['id_item'] . "' data-nombre='" . $row['nombre'] . "' data-estado='" . $row['estado'] . "'>
-                                            <img src='../vista/img/editar.png' alt='editar'>
-                                        </button> 
-                                        | 
-                                        <a href='?eliminarId=" . $row['id_item'] . "'>
-                                            <button class='btn-rojo'>
-                                                <img src='../vista/img/eliminar.png' alt='eliminar'>
+                                foreach ($data as $row) {
+                                    // Aquí debes agregar una condición para verificar si la categoría de la fila es la misma que la de la URL
+                                    if ($row['id_categoria'] == $_GET['id']) {
+                                        echo "<tr>";
+                                        echo "<td>" . ($row['estado'] == 1 ? 'Activo' : 'Inactivo') . "</td>";
+                                        echo "<td>" . $row['nombre'] . "</td>";
+                                        echo "<td>
+                                            <button class='agregar_presupuesto btn-azul' data-id='" . $row['id_item'] . "' data-nombre='" . $row['nombre'] . "' data-estado='" . $row['estado'] . "'>
+                                                <img src='../vista/img/ojo.png' alt='presupuesto'>
                                             </button>
-                                        </a>
-                                    </td>";
-                                    echo "</tr>";
+                                            |
+                                            <button class='editaritem btn-azul' data-id='" . $row['id_item'] . "' data-nombre='" . $row['nombre'] . "' data-estado='" . $row['estado'] . "'>
+                                                <img src='../vista/img/editar.png' alt='editar'>
+                                            </button> 
+                                            | 
+                                            <a href='?eliminarId=" . $row['id_item'] . "'>
+                                                <button class='btn-rojo'>
+                                                    <img src='../vista/img/eliminar.png' alt='eliminar'>
+                                                </button>
+                                            </a>
+                                        </td>";
+                                        echo "</tr>";
+                                    }
                                 }
-                            } else {
-                                echo "<tr><td colspan='4'>No hay datos disponibles.</td></tr>";
-                            }
+                            } 
                         ?>
                     </tbody>
         <tfoot>
