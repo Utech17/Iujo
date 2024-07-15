@@ -1,7 +1,7 @@
 <?php
 require_once("../modelo/conexionPDO.php");
 
-class cls_proyecto extends Conexion
+class proyecto extends Conexion
 {
     // Attributes
     private $ID_Proyecto;

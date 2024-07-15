@@ -1,7 +1,7 @@
 <?php
-require_once("../modelo/cls_proyecto.php");
+require_once("../modelo/proyecto_modelo.php");
 
-$objProyecto = new cls_proyecto();
+$objProyecto = new proyecto();
 
 $data = $objProyecto->buscarTodos();
 
