@@ -24,7 +24,7 @@
     if(isset($_POST['Enviar'])){
         echo "<script>console.log('Conectado')</script>";
 
-        //$objItem->set_idcategoria($_POST['categoria_seleccionada']);
+        $objItem->set_idcategoria($_POST['categoria_seleccionada']);
         $objItem->set_nombre($_POST['nombre_item_input']);
         $objItem->set_estado($_POST['estado']);
         echo "<script>console.log('Conectado2')</script>";
