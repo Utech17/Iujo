@@ -35,11 +35,11 @@ require_once("../controlador/cntrl_proyecto.php");
                             echo "<tr>";
                             echo "<td>" . $row['ID_Proyecto'] . "</td>";
                             echo "<td>" . $row['Nombre'] . "</td>";
-                            echo "<td>" . $row['Descripción'] . "</td>";
+                            echo "<td>" . $row['Descripcion'] . "</td>";
                             $estado = ($row['Estado'] == 1) ? 'Activo' : 'Inactivo';
                             echo "<td>" . $estado . "</td>";
                             echo "<td>
-                                <button class='editarProyecto btn-azul' data-id='" . $row['ID_Proyecto'] . "' data-nombre='" . $row['Nombre'] . "' data-descripción='" . $row['Descripción'] . "' data-estado='" . $row['Estado'] . "'>
+                                <button class='editarProyecto btn-azul' data-id='" . $row['ID_Proyecto'] . "' data-nombre='" . $row['Nombre'] . "' data-descripcion='" . $row['Descripcion'] . "' data-estado='" . $row['Estado'] . "'>
                                     <img src='../vista/img/editar.png' alt='editar'>
                                 </button> 
                                 | 
@@ -60,7 +60,7 @@ require_once("../controlador/cntrl_proyecto.php");
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Descripción</th>
+                        <th>Descripcion</th>
                         <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
@@ -82,8 +82,8 @@ require_once("../controlador/cntrl_proyecto.php");
                     <input type="text" id="Nombre" name="Nombre" class="form-control form-control-sm" required value="">
                 </div>
                 <div class="form-group">
-                    <label for="Descripción">Descripción</label>
-                    <input type="text" id="Descripción" name="Descripción" class="form-control form-control-sm" value="">
+                    <label for="Descripcion">Descripcion</label>
+                    <input type="text" id="Descripcion" name="Descripcion" class="form-control form-control-sm" value="">
                 </div>
 
                 <div class="modal__botones-contenedor">
@@ -105,7 +105,7 @@ require_once("../controlador/cntrl_proyecto.php");
                     <input type="text" class="form-control" id="editarNombre" name="editarNombre">
                 </div>
                 <div class="form-group">
-                    <label for="editarDescripción">Descripción"</label>
+                    <label for="editarDescripción">Descripcion"</label>
                     <input type="text" class="form-control" id="editarDescripción"" name=" editarDescripción"">
                 </div>
                 <div class="form-group">

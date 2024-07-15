@@ -6,7 +6,7 @@ class cls_proyecto extends Conexion
     // Attributes
     private $ID_Proyecto;
     private $Nombre;
-    private $Descripción;
+    private $Descripcion;
     private $Estado;
 
     private $conexion;
@@ -39,14 +39,14 @@ class cls_proyecto extends Conexion
         $this->Nombre = $Nombre;
     }
 
-    public function get_Descripción()
+    public function get_Descripcion()
     {
-        return $this->Descripción;
+        return $this->Descripcion;
     }
 
-    public function set_Descripción($Descripción)
+    public function set_Descripcion($Descripcion)
     {
-        $this->Descripción = $Descripción;
+        $this->Descripcion = $Descripcion;
     }
 
     public function get_Estado()
@@ -62,10 +62,10 @@ class cls_proyecto extends Conexion
     public function agregarProyecto()
     {
 
-        $sql = "INSERT INTO proyecto (Nombre,Descripción) VALUES (:Nombre,:Descripción)";
+        $sql = "INSERT INTO proyecto (Nombre,Descripcion) VALUES (:Nombre,:Descripcion)";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':Nombre', $this->Nombre);
-        $stmt->bindParam(':Descripción', $this->Descripción);
+        $stmt->bindParam(':Descripcion', $this->Descripcion);
         echo $stmt->debugDumpParams();
         $result = $stmt->execute();
         return $result ? 1 : 0;
@@ -96,10 +96,10 @@ class cls_proyecto extends Conexion
 
     public function actualizarProyecto()
     {
-        $sql = "UPDATE proyecto SET Nombre = :Nombre, Descripción = :Descripción, Estado = :Estado WHERE ID_proyecto = :ID_Proyecto";
+        $sql = "UPDATE proyecto SET Nombre = :Nombre, Descripcion = :Descripcion, Estado = :Estado WHERE ID_proyecto = :ID_Proyecto";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':Nombre', $this->Nombre);
-        $stmt->bindParam(':Descripción ', $this->Descripción);
+        $stmt->bindParam(':Descripcion ', $this->Descripcion);
         $stmt->bindParam(':Estado', $this->Estado);
         $stmt->bindParam(':ID_Proyecto', $this->ID_Proyecto);
         return $stmt->execute();

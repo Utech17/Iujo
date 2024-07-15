@@ -9,7 +9,7 @@ if (isset($_POST['Enviar'])) {
 
     if (isset($_POST['Nombre'])) {
         $objProyecto->set_Nombre($_POST['Nombre']);
-        $objProyecto->set_Descripción($_POST['Descripción']);
+        $objProyecto->set_Descripcion($_POST['Descripcion']);
         //$objProyecto->set_Estado(1);
         $resultado = $objProyecto->agregarProyecto();
 
@@ -28,7 +28,7 @@ if (isset($_POST['editarId'])) {
     if (isset($_POST['editarNombre']) && isset($_POST['editarEstado'])) {
         $objProyecto->set_ID_Proyecto($_POST['editarId']); // Asegúrate de utilizar editarId aquí
         $objProyecto->set_Nombre($_POST['editarNombre']);
-        $objProyecto->set_Descripción($_POST['editarDescripción']);
+        $objProyecto->set_Descripcion($_POST['editarDescripcion']);
         $objProyecto->set_Estado($_POST['editarEstado']);
 
         $resultado = $objProyecto->actualizarProyecto();
