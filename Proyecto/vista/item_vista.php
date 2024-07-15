@@ -55,10 +55,10 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
     
                                 
                                 echo '<a href="#" class="btn btn-azul">';
-        echo '<img src="../vista/img/pencil.png" alt="Modificar" width="16" height="16"></a>';
+                                echo '<img src="../vista/img/pencil.png" alt="Modificar" width="16" height="16"></a>';
         
-        echo '<a href="../controlador/item_controlador.php?eliminarId=' . $row['id_item'] . '" class="btn btn-rojo">';
-echo '<img src="../vista/img/trash.png" alt="Eliminar" width="16" height="16"></a>';
+                                echo '<a href="../controlador/item_controlador.php?eliminarId=' . $row['id_item'] . '" class="btn btn-rojo">';
+                                echo '<img src="../vista/img/trash.png" alt="Eliminar" width="16" height="16"></a>';
                                 
                                 echo "</td>";
                                 echo "</tr>";
