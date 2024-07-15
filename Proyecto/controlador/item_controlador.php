@@ -31,8 +31,12 @@
         
         $result=$objItem->incluir();
 
-        echo "<script>console.log('Conectado3')</script>";
-    }
+        if ($result == 1) {
+            echo "<script>alert('Item agregado con éxito');location.href='../controlador/item_controlador.php';</script>";
+        } else {
+            echo "<script>alert('Error al agregar item');</script>";
+        }
+    } 
 
     if (isset($_GET['eliminarId'])){
 			
