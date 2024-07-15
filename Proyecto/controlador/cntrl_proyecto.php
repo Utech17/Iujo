@@ -10,7 +10,7 @@ if (isset($_POST['Enviar'])) {
     if (isset($_POST['Nombre'])) {
         $objProyecto->set_Nombre($_POST['Nombre']);
         $objProyecto->set_Descripción($_POST['Descripción']);
-        $objProyecto->set_Estado(1);
+        //$objProyecto->set_Estado(1);
         $resultado = $objProyecto->agregarProyecto();
         var_dump($resultado);
 
