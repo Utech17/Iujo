@@ -64,7 +64,7 @@ form {
 }
 
 .form-group input[type="submit"] {
-    background-color: #009fe3;
+    background-color: #5c89bb;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -72,38 +72,21 @@ form {
 }
 
 .form-group input[type="submit"]:hover {
-    background-color: #0079ad;
+    background-color: #045fb4;
 }
 
 .info-section {
     flex: 1;
-    background-color: #009fe3;
     color: #ffffff;
-    padding: 40px;
+    padding: 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.info-section h2 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 30px;
-    text-align: center;
-}
-
 .info-section img {
-    width: 300px;
-    height: auto;
-    margin-bottom: 30px;
-}
-
-.info-section p {
-    font-size: 18px;
-    text-align: center;
-}
-
-.info-section p strong {
-    color: #00e1ff;
+    max-width: 100%; /* Asegura que la imagen no exceda el ancho de su contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    object-fit: contain; /* Asegura que la imagen se adapte bien al espacio disponible */
 }

@@ -41,7 +41,7 @@ class Categoria extends Conexion {
     }
 
     public function agregarCategoria() {
-        $sql = "INSERT INTO Categoria (Nombre) VALUES (:Nombre)";
+        $sql = "INSERT INTO Categoria ( Nombre) VALUES (:Nombre)";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':Nombre', $this->Nombre);
         $result = $stmt->execute();

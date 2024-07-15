@@ -1,7 +1,7 @@
 <?php
 require_once("../modelo/conexionPDO.php");
 
-class cls_proyecto extends Conexion
+class proyecto extends Conexion
 {
     // Attributes
     private $ID_Proyecto;
@@ -61,16 +61,14 @@ class cls_proyecto extends Conexion
 
     public function agregarProyecto()
     {
-
         $sql = "INSERT INTO proyecto (Nombre,Descripcion) VALUES (:Nombre,:Descripcion)";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':Nombre', $this->Nombre);
         $stmt->bindParam(':Descripcion', $this->Descripcion);
-        echo $stmt->debugDumpParams();
         $result = $stmt->execute();
+
         return $result ? 1 : 0;
     }
-
 
     public function buscarTodos()
     {

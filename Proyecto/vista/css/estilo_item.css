@@ -1,7 +1,7 @@
 #tabla_div {
     width: 70%;
     margin-right: auto;
-    padding-left: 5%;
+    padding-left: 25%;
     padding-top: 5%;
 }
 
@@ -43,8 +43,8 @@
 
 .modal__contenedor{
     margin: auto;
-    width: 45%;
-    height: 90%;
+    width: 35%;
+    height: 50%;
     background-color: #fff;
     border-radius: 6px;
     padding: 3em 2.5em;
@@ -85,3 +85,25 @@
 }
 
 /* Estilos para el modal desplegable */
+
+.btn-azul {
+    background-color: #009fe3 !important;
+    color: #fff !important;
+    padding: 3px 8px !important;
+    font-size: 18px !important;
+    transition: background-color 0.3s !important;;
+  }
+  
+  .btn-rojo {
+    background-color: #ff4848 !important;
+    padding: 3px 8px !important;
+    font-size: 18px !important;
+  }
+  
+  .btn-azul:hover {
+    background-color: #0088c2 !important;
+  }
+  
+  .btn-rojo:hover {
+    background-color: #db3b3b !important;
+  }

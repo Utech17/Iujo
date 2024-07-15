@@ -1,27 +1,82 @@
 <?php
     require_once("../modelo/item_modelo.php");
+    require_once("../modelo/categoria_modelo.php");
+    require_once("vista_controlador.php");
+
+
     $objItem = new ItemModelo();
+    $objCategoria = new Categoria();
     
     $item_conexion = new Conexion();
+    $categoria_conexion = new Conexion();
     $conexion = $item_conexion->conectar();
+    $conexion2 = $categoria_conexion->conectar();
 
     $consulta = "SELECT * FROM item";
+    $consulta2 = "SELECT * FROM categoria";
     $resultado = $conexion->prepare($consulta);
+    $resultado2 = $conexion2->prepare($consulta2);
     $resultado->execute();
+    $resultado2->execute();
     $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+    $data2 = $resultado2->fetchAll(PDO::FETCH_ASSOC);
+
+    if(isset($_POST['Enviar'])){
+        echo "<script>console.log('Conectado')</script>";
+
+        //$objItem->set_idcategoria($_POST['categoria_seleccionada']);
+        $objItem->set_nombre($_POST['nombre_item_input']);
+        $objItem->set_estado($_POST['estado']);
+        echo "<script>console.log('Conectado2')</script>";
+        
+        $result=$objItem->incluir();
+
+        echo "<script>console.log('Conectado3')</script>";
+    }
+
+    if (isset($_GET['eliminarId'])){
+			
+        $objItem->set_iditem($_GET['eliminarId']);
+    
+        if($objItem->eliminar()){
+            echo "<script>alert('Registro Eliminado con éxito');location.href='item_controlador.php'; </script>";
+            
+        } else {
+            echo "<script>alert('No se pudo Eliminar')</script>";
+        }
+    }
+
+    // Actualizar un item
+    if (isset($_POST['editarId'])) {
+        if (isset($_POST['editarNombre']) && isset($_POST['editarEstado'])) {
+            $objItem->set_iditem($_POST['editarId']); // Asegúrate de utilizar editarId aquí
+            $objItem->set_nombre($_POST['editarNombre']);
+            $objItem->set_estado($_POST['editarEstado']);
+            
+            $resultado = $objItem->modificar();
+            
+            if ($resultado) {
+                echo "<script>alert('item actualizado con éxito');location.href='../controlador/item_controlador.php';</script>";
+            } else {
+                echo "<script>alert('Error al actualizar item');</script>";
+            }
+        } else {
+            echo "<script>alert('Faltan datos para actualizar el item');</script>";
+        }
+    }
 
     
     /*if(isset($_POST['Enviar'])){
         echo "<script>console.log('Conectado')</script>";
 
-        $objSalida->set_idcliente($_POST['cliente_codigo_input']);
-        $objSalida->set_idproducto($_POST['id_producto']);
-        $objSalida->set_idusuario($id_usuario);
-        $objSalida->set_cantsalida($_POST['cant_salida']);
-        $objSalida->set_fechasalida($_POST['fecha_s']);
+        $objItem->set_idcliente($_POST['cliente_codigo_input']);
+        $objItem->set_idproducto($_POST['id_producto']);
+        $objItem->set_idusuario($id_usuario);
+        $objItem->set_cantsalida($_POST['cant_salida']);
+        $objItem->set_fechasalida($_POST['fecha_s']);
         echo "<script>console.log('Conectado2')</script>";
         
-        $result=$objSalida->agregar();
+        $result=$objItem->agregar();
         if ($result == 1){
             // Actualizar la cantidad disponible del producto
             $id_producto = $_POST['id_producto'];
@@ -43,9 +98,9 @@
 
     if (isset($_GET['eliminarId'])){
 			
-        $objSalida->set_codigosalida($_GET['eliminarId']);
+        $objItem->set_codigosalida($_GET['eliminarId']);
     
-        if($objSalida->eliminar()){
+        if($objItem->eliminar()){
             echo "<script>alert('Registro Eliminado con éxito');location.href='transacciones_controlador.php'; </script>";
             
         } else {
