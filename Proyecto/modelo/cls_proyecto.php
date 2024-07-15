@@ -65,7 +65,7 @@ class cls_proyecto extends Conexion
         $sql = "INSERT INTO proyecto (Nombre,Descripción) VALUES (:Nombre,:Descripción)";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':Nombre', $this->Nombre);
-        $stmt->bindParam(':Descripcion', $this->Descripción);
+        $stmt->bindParam(':Descripción', $this->Descripción);
         $result = $stmt->execute();
         return $result ? 1 : 0;
     }
