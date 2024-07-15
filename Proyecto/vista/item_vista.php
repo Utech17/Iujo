@@ -56,7 +56,6 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                                     echo "<td>
                                             <button class='agregar_presupuesto btn-azul' data-id='" . $row['id_item'] . "' data-nombre='" . $row['nombre'] . "' data-estado='" . $row['estado'] . "'>
                                                 <img src='../vista/img/ojo.png' alt='presupuesto'>
->>>>>>> maikel
                                             </button>
                                             |
                                             <button class='editaritem btn-azul' data-id='" . $row['id_item'] . "' data-nombre='" . $row['nombre'] . "' data-estado='" . $row['estado'] . "'>
