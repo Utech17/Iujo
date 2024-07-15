@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-07-2024 a las 20:14:05
+-- Tiempo de generación: 15-07-2024 a las 21:27:21
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -84,10 +84,10 @@ CREATE TABLE `item` (
 --
 
 CREATE TABLE `presupuesto` (
-  `ID_Item` int(11) NOT NULL,
-  `ID_Proyecto` int(11) NOT NULL,
-  `Cantidad` int(11) NOT NULL,
-  `Monto_Presupuesto` decimal(8,2) NOT NULL
+  `id_item` int(11) NOT NULL,
+  `id_proyecto` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `monto_presupuesto` decimal(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -162,8 +162,8 @@ ALTER TABLE `item`
 -- Indices de la tabla `presupuesto`
 --
 ALTER TABLE `presupuesto`
-  ADD KEY `ID_Item` (`ID_Item`),
-  ADD KEY `ID_Proyecto` (`ID_Proyecto`);
+  ADD KEY `ID_Item` (`id_item`),
+  ADD KEY `ID_Proyecto` (`id_proyecto`);
 
 --
 -- Indices de la tabla `proyecto`
