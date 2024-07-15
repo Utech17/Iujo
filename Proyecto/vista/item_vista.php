@@ -1,3 +1,11 @@
+<?php
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+$nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +13,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../vista/css/bootstrap.min.css">
     <link rel="stylesheet" href="../vista/css/dataTables.bootstrap5.css">
+    <link rel="stylesheet" type="text/css" href="../vista/css/estilosinicio.css">
     <link rel="stylesheet" href="../vista/css/estilo_item.css">
     <title>Item</title>
 </head>
 <body>
+
+<?php imprimirTopBar($nombreUsuario); ?>
+    <div class="contenedor">
+        <div class="barra-lateral">
+            <?php imprimirBarraLateral(); ?>
+        </div>
+
     <div id="tabla_div">
     <a href="#" class="btn btn-info modal_abrir">Agregar item</a>
 <table id="tabla" class="table table-striped" style="width:100%">
@@ -16,15 +32,15 @@
                             <th>Estado</th>
                             <!--<th>Categoria</th>-->
                             <th>Item</th>
-                            <th>Presupuesto</th>
-                            <th>Monto Gastado</th>
+                            <!--<th>Presupuesto</th>
+                            <th>Monto Gastado</th>-->
                             <th>Acciones</th>
                         </tr>
                         <tbody>
                             <?php
                             foreach ($data as $row) {
                                 echo "<tr>";
-                                echo "<td>" . $row['estado'] . "</td>";
+                                echo "<td>" . ($row['estado'] == 1 ? 'Activo' : 'Inactivo') . "</td>";
                                                         /*$Nombre_categoria = '';
                             foreach ($data2 as $categoria) {
                                 if ($categoria['id_categoria'] == $row['id_categoria']) {
@@ -35,8 +51,6 @@
 
                                 echo "<td>" . $Nombre_categoria . "</td>";*/
                                 echo "<td>" . $row['nombre'] . "</td>";
-                                echo "<td></td>"; // Columna vacía
-                                echo "<td></td>"; // Columna vacía
                                 echo "<td>";
     
                                 
@@ -56,8 +70,8 @@ echo '<img src="../vista/img/trash.png" alt="Eliminar" width="16" height="16"></
                 <th>Estado</th>
                 <!--<th>Categoria</th>-->
                 <th>Item</th>
-                <th>Presupuesto</th>
-                <th>Monto Gastado</th>
+               <!-- <th>Presupuesto</th>
+                <th>Monto Gastado</th>-->
                 <th>Acciones</th>
             </tr>
         </tfoot>
@@ -104,15 +118,19 @@ echo '<img src="../vista/img/trash.png" alt="Eliminar" width="16" height="16"></
                 <br>
                         
                             <div class="col-md-12">
+
+                            <p>Elegir estado:</p>
+                        
+                            <select class="form-control" id="estado" name="estado">
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                            </select>
+
+                            <br>
+
                                 <label for=nombre_item>Nombre</label> 
                                 <input type="text" id="nombre_item_input" name="nombre_item_input" class="form-control form-control-sm">
                             </div>
-                            
-                            <p>Elegir estado:</p>
-                            <p>
-                                Activo: <input type="radio" value="1" id="estado" name="estado" checked="yes" />
-                                Inactivo: <input type="radio" value="0" id="estado" name="estado" />
-                            </p>
 
                             <input type="submit" value="Enviar" name="Enviar" class="btn btn-info">
 
