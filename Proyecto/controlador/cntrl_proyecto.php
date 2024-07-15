@@ -6,6 +6,7 @@ $objProyecto = new cls_proyecto();
 $data = $objProyecto->buscarTodos();
 
 if (isset($_POST['Enviar'])) {
+    var_dump($Nombre);
     if (isset($_POST['Nombre'])) {
         $objProyecto->setNombre($_POST['Nombre']);
         $objProyecto->set_Descripción($_POST['Descripción']);

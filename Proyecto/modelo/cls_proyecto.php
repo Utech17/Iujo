@@ -61,7 +61,7 @@ class cls_proyecto extends Conexion
 
     public function agregarProyecto()
     {
-        $sql = "INSERT INTO Proyecto (Nombre,Descripción) VALUES (:Nombre,:Descripción)";
+        $sql = "INSERT INTO proyecto (Nombre,Descripción) VALUES (:Nombre,:Descripción)";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':Nombre', $this->Nombre);
         $stmt->bindParam(':Descripción', $this->Descripción);
@@ -72,7 +72,7 @@ class cls_proyecto extends Conexion
     public function buscarTodos()
     {
         try {
-            $sql = "SELECT * FROM Proyecto";
+            $sql = "SELECT * FROM proyecto";
             $stmt = $this->conexion->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -84,7 +84,7 @@ class cls_proyecto extends Conexion
 
     public function buscarProyectoPorID($ID_Proyecto)
     {
-        $sql = "SELECT * FROM Proyecto WHERE ID_Proyecto = :ID_Proyecto";
+        $sql = "SELECT * FROM proyecto WHERE ID_Proyecto = :ID_Proyecto";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':ID_Proyecto', $ID_Proyecto);
         $stmt->execute();
@@ -93,7 +93,7 @@ class cls_proyecto extends Conexion
 
     public function actualizarProyecto()
     {
-        $sql = "UPDATE Proyecto SET Nombre = :Nombre, Descripción = :Descripción, Estado = :Estado WHERE ID_Proyecto = :ID_Proyecto";
+        $sql = "UPDATE proyecto SET Nombre = :Nombre, Descripción = :Descripción, Estado = :Estado WHERE ID_proyecto = :ID_Proyecto";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':Nombre', $this->Nombre);
         $stmt->bindParam(':Descripción ', $this->Descripción);
@@ -104,7 +104,7 @@ class cls_proyecto extends Conexion
 
     public function eliminarProyecto()
     {
-        $sql = "DELETE FROM Proyecto WHERE ID_Proyecto = :ID_Proyecto";
+        $sql = "DELETE FROM proyecto WHERE ID_Proyecto = :ID_Proyecto";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':ID_Proyecto', $this->ID_Proyecto);
         return $stmt->execute();
