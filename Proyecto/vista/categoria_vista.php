@@ -83,12 +83,12 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                             <label for="Nombre">Nombre</label>
                             <input type="text" id="Nombre" name="Nombre" class="form-control form-control-sm">
                     </div>
+                
+                    <div class="modal__botones-contenedor">
+                        <input type="button" value="Cancelar" class="modal__cerrar finalizar btn btn-secondary">
+                        <input type="submit" value="Enviar" name="Enviar" class="btn btn-primary">
+                    </div>
                 </form>
-                <div class="modal__botones-contenedor">
-                <input type="submit" value="Enviar" name="Enviar" class="btn btn-primary">
-                <input type="reset" value="Limpiar" class="btn btn-warning">
-                    <input type="button" value="Cancelar" class="modal__cerrar finalizar btn btn-secondary">
-                </div>
             </div>
         </section>
 

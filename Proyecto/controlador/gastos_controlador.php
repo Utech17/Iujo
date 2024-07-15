@@ -1,6 +1,6 @@
 <?php
 require_once("../modelo/gastos_modelo.php");
-require_once("../modelo/CCategoria.php");
+require_once("../modelo/categoria_modelo.php");
 
 $objGastos = new Gastos();
 $objCategoria = new Categoria();
@@ -13,7 +13,7 @@ $data = $objGastos->buscarTodos();
 $lista_categorias = $objGastos->obtenerListaCategorias();
 
 // Incluir un nuevo gasto
-if (isset($_POST['Enviar'])) {
+if (isset($_POST['Guardar'])) {
     if (isset($_POST['ID_Proyecto'], $_POST['ID_Item'], $_POST['Fecha'], $_POST['Monto_Gasto'], $_POST['Comprobante'], $_POST['Observacion'])) {
         $objGastos->setID_Proyecto($_POST['ID_Proyecto']);
         $objGastos->setID_Item($_POST['ID_Item']);

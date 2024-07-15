@@ -16,7 +16,7 @@ if (isset($_POST['Enviar'])) {
         $resultado = $objCategoria->agregarCategoria();
         
         if ($resultado == 1) {
-            echo "<script>alert('Categoría agregada con éxito');location.href='../vista/categoria_vista.php';</script>";
+            echo "<script>alert('Categoría agregada con éxito');location.href='../controlador/categoria_controlador.php';</script>";
         } else {
             echo "<script>alert('Error al agregar categoría');</script>";
         }
@@ -35,7 +35,7 @@ if (isset($_POST['editarId'])) {
         $resultado = $objCategoria->actualizarCategoria();
         
         if ($resultado) {
-            echo "<script>alert('Categoría actualizada con éxito');location.href='../vista/categoria_vista.php';</script>";
+            echo "<script>alert('Categoría actualizada con éxito');location.href='../controlador/categoria_controlador.php';</script>";
         } else {
             echo "<script>alert('Error al actualizar categoría');</script>";
         }

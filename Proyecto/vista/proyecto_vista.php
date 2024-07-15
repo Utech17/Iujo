@@ -1,6 +1,8 @@
 <?php
-require_once("../controlador/cntrl_proyecto.php");
-
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+$nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,64 +12,77 @@ require_once("../controlador/cntrl_proyecto.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../vista/css/bootstrap.min.css">
     <link rel="stylesheet" href="../vista/css/dataTables.bootstrap5.css">
-    <link rel="stylesheet" href="../vista/css/estilo_item.css">
+    <link rel="stylesheet" type="text/css" href="../vista/css/estilosinicio.css">
     <title>Proyecto</title>
 </head>
 
 <body>
-    <div class="contenedor-Proyecto px-6 pt-5">
-        <div id="tabla_div">
-            <a href="#" class="modal_abrir btn btn-primary">Agregar proyecto</a>
-            <table id="tabla" class="table table-striped" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    if (isset($data) && is_array($data)) {
-                        foreach ($data as $row) {
-                            echo "<tr>";
-                            echo "<td>" . $row['ID_Proyecto'] . "</td>";
-                            echo "<td>" . $row['Nombre'] . "</td>";
-                            echo "<td>" . $row['Descripción'] . "</td>";
-                            $estado = ($row['Estado'] == 1) ? 'Activo' : 'Inactivo';
-                            echo "<td>" . $estado . "</td>";
-                            echo "<td>
-                                <button class='editarProyecto btn-azul' data-id='" . $row['ID_Proyecto'] . "' data-nombre='" . $row['Nombre'] . "' data-descripción='" . $row['Descripción'] . "' data-estado='" . $row['Estado'] . "'>
-                                    <img src='../vista/img/editar.png' alt='editar'>
-                                </button> 
-                                | 
-                                <a href='?eliminarId=" . $row['ID_Proyecto'] . "'>
-                                    <button class='btn-rojo'>
-                                        <img src='../vista/img/eliminar.png' alt='eliminar'>
-                                    </button>
-                                </a>
-                            </td>";
-                            echo "</tr>";
-                        }
-                    } else {
-                        echo "<tr><td colspan='4'>No hay datos disponibles.</td></tr>";
-                    }
-                    ?>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </tfoot>
-            </table>
+<?php imprimirTopBar($nombreUsuario); ?>
+    <div class="contenedor">
+        <div class="barra-lateral">
+            <?php imprimirBarraLateral(); ?>
+        </div>
+    
+        <div class="contenido">
+            <h1>Proyecto</h1>
         </div>
     </div>
+    <div class="contenedor-categoria px-6 pt-5">
+            <div id="tabla_div">
+            <div class="row">
+                <div class="col-sm-3">
+                    <a href="#" class="modal_abrir btn btn-primary"> <i class="fa-solid fa-plus"></i> Agregar Proyecto</a>
+                </div>
+                <table id="tabla" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if (isset($data) && is_array($data)) {
+                            foreach ($data as $row) {
+                                echo "<tr>";
+                                echo "<td>" . $row['ID_Proyecto'] . "</td>";
+                                echo "<td>" . $row['Nombre'] . "</td>";
+                                echo "<td>" . $row['Descripcion'] . "</td>";
+                                $estado = ($row['Estado'] == 1) ? 'Activo' : 'Inactivo';
+                                echo "<td>" . $estado . "</td>";
+                                echo "<td>
+                                    <button class='editarProyecto btn-azul' data-id='" . $row['ID_Proyecto'] . "' data-nombre='" . $row['Nombre'] . "' data-descripcion='" . $row['Descripcion'] . "' data-estado='" . $row['Estado'] . "'>
+                                        <img src='../vista/img/editar.png' alt='editar'>
+                                    </button> 
+                                    | 
+                                    <a href='?eliminarId=" . $row['ID_Proyecto'] . "'>
+                                        <button class='btn-rojo'>
+                                            <img src='../vista/img/eliminar.png' alt='eliminar'>
+                                        </button>
+                                    </a>
+                                </td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='4'>No hay datos disponibles.</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
 
     <section class="modal_section">
         <div class="modal__contenedor">
@@ -82,14 +97,13 @@ require_once("../controlador/cntrl_proyecto.php");
                     <input type="text" id="Nombre" name="Nombre" class="form-control form-control-sm" required value="">
                 </div>
                 <div class="form-group">
-                    <label for="Descripción">Descripción</label>
-                    <input type="text" id="Descripción" name="Descripción" class="form-control form-control-sm" value="">
+                    <label for="Descripcion">Descripción</label>
+                    <input type="text" id="Descripcion" name="Descripcion" class="form-control form-control-sm" value="">
                 </div>
 
                 <div class="modal__botones-contenedor">
-                    <input type="submit" value="Enviar" name="Enviar" class="btn btn-primary">
-                    <input type="reset" value="Limpiar" class="btn btn-warning">
                     <input type="button" value="Cancelar" class="modal__cerrar finalizar btn btn-secondary">
+                    <input type="submit" value="Enviar" name="Enviar" class="btn btn-primary">
                 </div>
             </form>
 

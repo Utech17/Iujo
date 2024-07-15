@@ -14,19 +14,25 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
     <link rel="stylesheet" href="../vista/css/bootstrap.min.css">
     <link rel="stylesheet" href="../vista/css/dataTables.bootstrap5.css">
     <link rel="stylesheet" type="text/css" href="../vista/css/estilosinicio.css">
-    <link rel="stylesheet" href="../vista/css/estilo_item.css">
     <title>Item</title>
 </head>
 <body>
-
 <?php imprimirTopBar($nombreUsuario); ?>
     <div class="contenedor">
         <div class="barra-lateral">
             <?php imprimirBarraLateral(); ?>
         </div>
-
+    
+        <div class="contenido">
+            <h1>Item</h1>
+        </div>
+    </div>
+    <div class="contenedor-categoria px-6 pt-5">
     <div id="tabla_div">
-    <a href="#" class="btn btn-info modal_abrir">Agregar item</a>
+    <div class="row">
+    <div class="col-sm-3">
+        <a href="#" class="modal_abrir btn btn-primary"> <i class="fa-solid fa-plus"></i> Agregar Item</a>
+    </div>
 <table id="tabla" class="table table-striped" style="width:100%">
         <thead>
                             <th>Estado</th>
@@ -52,8 +58,6 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                                 echo "<td>" . $Nombre_categoria . "</td>";*/
                                 echo "<td>" . $row['nombre'] . "</td>";
                                 echo "<td>";
-    
-                                
                                 echo '<a href="#" class="btn btn-azul">';
                                 echo '<img src="../vista/img/pencil.png" alt="Modificar" width="16" height="16"></a>';
         
@@ -77,16 +81,11 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
         </tfoot>
     </table>
     </div>
-
-
-
-
-
-
+    </div>
+    </div>
 
     <section class="modal_section">
                 <div class="modal__contenedor">
-
                     <form id="itemForm" action="" method="POST" target="_self" onsubmit="return confirmacion()">
                     
                         <!--<div id="subtabla_div">        

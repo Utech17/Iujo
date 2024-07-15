@@ -16,14 +16,12 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
     <script src="https://kit.fontawesome.com/68b92f41c0.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="../vista/css/estilosinicio.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
-<script src="https://cdn.jsdelivr.net/npm/moment/min/moment.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment/min/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.js"></script>
     
     <title>Categorías</title>
 </head>
 <body>
-
-
 
 <?php imprimirTopBar($nombreUsuario); ?>
     <div class="contenedor">

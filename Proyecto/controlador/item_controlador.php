@@ -1,6 +1,6 @@
 <?php
     require_once("../modelo/item_modelo.php");
-    require_once("../modelo/CCategoria.php");
+    require_once("../modelo/categoria_modelo.php");
     require_once("vista_controlador.php");
 
 

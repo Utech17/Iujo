@@ -5,17 +5,18 @@ $objProyecto = new proyecto();
 
 $data = $objProyecto->buscarTodos();
 
+// Llamar controlador con funciones de diseño, para no repetir el mismo código
+require_once("vista_controlador.php");
+
 if (isset($_POST['Enviar'])) {
 
     if (isset($_POST['Nombre'])) {
         $objProyecto->set_Nombre($_POST['Nombre']);
-        $objProyecto->set_Descripción($_POST['Descripción']);
-        $objProyecto->set_Estado(1);
+        $objProyecto->set_Descripcion($_POST['Descripcion']);
         $resultado = $objProyecto->agregarProyecto();
-        var_dump($resultado);
 
         if ($resultado == 1) {
-            echo "<script>alert('Proyecto agregada con éxito');location.href='../vista/Proyecto_vista.php';</script>";
+            echo "<script>alert('Proyecto agregada con éxito');location.href='../controlador/Proyecto_controlador.php';</script>";
         } else {
             echo "<script>alert('Error al agregar proyecto');</script>";
         }
@@ -29,13 +30,13 @@ if (isset($_POST['editarId'])) {
     if (isset($_POST['editarNombre']) && isset($_POST['editarEstado'])) {
         $objProyecto->set_ID_Proyecto($_POST['editarId']); // Asegúrate de utilizar editarId aquí
         $objProyecto->set_Nombre($_POST['editarNombre']);
-        $objProyecto->set_Descripción($_POST['editarDescripción']);
+        $objProyecto->set_Descripcion($_POST['editarDescripcion']);
         $objProyecto->set_Estado($_POST['editarEstado']);
 
         $resultado = $objProyecto->actualizarProyecto();
 
         if ($resultado) {
-            echo "<script>alert('Proyecto actualizada con éxito');location.href='../vista/Proyecto_vista.php';</script>";
+            echo "<script>alert('Proyecto actualizada con éxito');location.href='../controlador/Proyecto_controlador.php';</script>";
         } else {
             echo "<script>alert('Error al actualizar proyecto');</script>";
         }
@@ -50,7 +51,7 @@ if (isset($_GET['eliminarId'])) {
     $resultado = $objProyecto->eliminarProyecto();
 
     if ($resultado) {
-        echo "<script>alert('Proyecto eliminada con éxito');location.href='../vista/Proyecto_vista.php';</script>";
+        echo "<script>alert('Proyecto eliminada con éxito');location.href='../controlador/Proyecto_controlador.php';</script>";
     } else {
         echo "<script>alert('Error al eliminar proyecto');</script>";
     }
