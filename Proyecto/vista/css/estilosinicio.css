@@ -169,11 +169,11 @@ h1 {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
-    width: 300px;
+    width: 500px;
 }
 
 .modal__botones-contenedor {
-    text-align: center;
+    text-align: right;
     margin-top: 10px;
 }
 
@@ -194,3 +194,4 @@ h1 {
     cursor: pointer;
     border-radius: 10px;
 }
+

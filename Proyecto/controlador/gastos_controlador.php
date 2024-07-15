@@ -14,10 +14,9 @@ $lista_categorias = $objGastos->obtenerListaCategorias();
 
 // Incluir un nuevo gasto
 if (isset($_POST['Enviar'])) {
-    if (isset($_POST['ID_Proyecto'], $_POST['ID_Item'], $_POST['ID_Usuario'], $_POST['Fecha'], $_POST['Monto_Gasto'], $_POST['Comprobante'], $_POST['Observacion'])) {
+    if (isset($_POST['ID_Proyecto'], $_POST['ID_Item'], $_POST['Fecha'], $_POST['Monto_Gasto'], $_POST['Comprobante'], $_POST['Observacion'])) {
         $objGastos->setID_Proyecto($_POST['ID_Proyecto']);
         $objGastos->setID_Item($_POST['ID_Item']);
-        $objGastos->setID_Usuario($_POST['ID_Usuario']);
         $objGastos->setFecha($_POST['Fecha']);
         $objGastos->setMonto_Gasto($_POST['Monto_Gasto']);
         $objGastos->setComprobante($_POST['Comprobante']);

@@ -40,34 +40,37 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
             <div class="row">
                     
                 <div class="col-sm-3">
-                    <input type="text" id="daterange" class="form-control">
+                    <label>Selecciona una fecha</label>
+                    <input type="date" class="form-control" id="editarFecha" name="editarFecha">
                 </div>
-                <div class="col-sm-2">                 
-                <select id="idcategoria" name="idcategoria" class="form-control form-control-sm">
-                        <option value="0">-- Ninguna --</option>
-                        <?php foreach ($lista_categorias as $categoria) { ?>
-                            <option value="<?php echo $categoria['id_categoria']; ?>"><?php echo $categoria['nombre_categoria']; ?></option>
-                        <?php } ?>
-                    </select>
-                    </div>   
-                <div class="col-sm-2">                 
+                <div class="col-sm-2">         
+                <label>Proyecto</label>
                 <select id="idcategoria" name="idcategoria" class="form-control form-control-sm">
                         <option value="0">-- Ninguna --</option>
                         <?php foreach ($lista_categorias as $categoria) { ?>
                             <option value="<?php echo $categoria['id_categoria']; ?>"><?php echo $categoria['nombre']; ?></option>
                         <?php } ?>
                     </select>
-                    </div>               
+                    </div>   
+                <div class="col-sm-2">      
+                <label>Categoría</label>           
+                <select id="idcategoria" name="idcategoria" class="form-control form-control-sm">
+                        <option value="0">-- Ninguna --</option>
+                        <?php foreach ($lista_categorias as $categoria) { ?>
+                            <option value="<?php echo $categoria['id_categoria']; ?>"><?php echo $categoria['nombre']; ?></option>
+                        <?php } ?>
+                    </select>
+                    </div>            
+                    <br>   
                 <div class="col-sm-2">
-													<button type="button" class="btn btn-primary"> <i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
-                                                    
+					<button type="button" class="btn btn-primary"> <i class="fa-solid fa-magnifying-glass"></i> Buscar</button>                               
 				</div>
-
+                <br>
                 <div class="col-sm-3">
                     <a href="#" class="modal_abrir btn btn-primary"> <i class="fa-solid fa-plus"></i> Agregar Gasto</a>
                 </div>
              </div>
-
+             <br> 
                 <table id="tabla" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
@@ -122,12 +125,17 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                     <input type="text" id="ID_Proyecto" name="ID_Proyecto" class="form-control form-control-sm">
                 </div>
                 <div class="form-group">
+                <label>Categoría</label>           
+                <select id="idcategoria" name="idcategoria" class="form-control form-control-sm">
+                        <option value="0">-- Ninguna --</option>
+                        <?php foreach ($lista_categorias as $categoria) { ?>
+                            <option value="<?php echo $categoria['id_categoria']; ?>"><?php echo $categoria['nombre']; ?></option>
+                        <?php } ?>
+                    </select>
+                    </div> 
+                <div class="form-group">
                     <label for="ID_Item">Item</label>
                     <input type="text" id="ID_Item" name="ID_Item" class="form-control form-control-sm">
-                </div>
-                <div class="form-group">
-                    <label for="ID_Usuario">Usuario</label>
-                    <input type="text" id="ID_Usuario" name="ID_Usuario" class="form-control form-control-sm">
                 </div>
                 <div class="form-group">
                     <label for="Fecha">Fecha</label>
@@ -145,14 +153,11 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                     <label for="Observacion">Observación</label>
                     <input type="text" id="Observacion" name="Observacion" class="form-control form-control-sm">
                 </div>
-                <div class="form-group">
-                    <label for="ID_Categoria">Categoría</label>
-                    <input type="text" id="ID_Categoria" name="ID_Categoria" class="form-control form-control-sm">
-                </div>
+
                 <div class="modal__botones-contenedor">
-                    <input type="submit" value="Enviar" name="Enviar" class="btn btn-primary">
-                    <input type="reset" value="Limpiar" class="btn btn-warning">
                     <input type="button" value="Cancelar" class="modal__cerrar finalizar btn btn-secondary">
+                    <input type="submit" value="Guardar" name="Guardar" class="btn btn-primary">
+
                 </div>
             </form>
         </div>
@@ -167,12 +172,12 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                     <input type="text" class="form-control" id="editarID_Proyecto" name="editarID_Proyecto">
                 </div>
                 <div class="form-group">
-                    <label for="editarID_Item">Item</label>
-                    <input type="text" class="form-control" id="editarID_Item" name="editarID_Item">
+                    <label for="editarID_Categoria">Categoría</label>
+                    <input type="text" class="form-control" id="editarID_Categoria" name="editarID_Categoria">
                 </div>
                 <div class="form-group">
-                    <label for="editarID_Usuario">Usuario</label>
-                    <input type="text" class="form-control" id="editarID_Usuario" name="editarID_Usuario">
+                    <label for="editarID_Item">Item</label>
+                    <input type="text" class="form-control" id="editarID_Item" name="editarID_Item">
                 </div>
                 <div class="form-group">
                     <label for="editarFecha">Fecha</label>
@@ -190,60 +195,15 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                     <label for="editarObservacion">Observación</label>
                     <input type="text" class="form-control" id="editarObservacion" name="editarObservacion">
                 </div>
-                <div class="form-group">
-                    <label for="editarID_Categoria">Categoría</label>
-                    <input type="text" class="form-control" id="editarID_Categoria" name="editarID_Categoria">
-                </div>
                 <div class="modal__botones-contenedor">
-                    <input type="submit" value="Guardar cambios" class="btn btn-primary">
                     <input type="button" value="Cancelar" class="modal__cerrar finalizarEditar btn btn-secondary">
+                    <input type="submit" value="Actualizar" class="btn btn-primary">
+                    
                 </div>
             </form>
         </div>
     </section>
 
-    <!-- Script para inicializar el selector de fechas y manejar la solicitud AJAX -->
-    <script>
-        $(function() {
-    $('#daterange').daterangepicker({
-        locale: {
-            format: 'YYYY-MM-DD'
-        }
-    });
-
-    $('#daterange').on('apply.daterangepicker', function(ev, picker) {
-        var startDate = picker.startDate.format('YYYY-MM-DD');
-        var endDate = picker.endDate.format('YYYY-MM-DD');
-        filtrarDatos(startDate, endDate);
-    });
-});
-
-        function filtrarDatos(startDate, endDate) {
-            $.ajax({
-                url: 'gastos_controlador.php', // Ruta al controlador PHP
-                method: 'GET',
-                data: {
-                    start_date: startDate,
-                    end_date: endDate
-                },
-                success: function(data) {
-                    // Actualizar la tabla con los datos filtrados
-                    var tableBody = '';
-                    data = JSON.parse(data);
-                    data.forEach(function(item) {
-                        tableBody += '<tr>';
-                        tableBody += '<td>' + item.Fecha + '</td>';
-                        tableBody += '<td>' + item.ID_Item + '</td>';
-                        tableBody += '<td>' + item.Monto_Gasto + '</td>';
-                        tableBody += '<td>' + item.ID_Categoria + '</td>';
-                        tableBody += '<td>Acciones</td>';
-                        tableBody += '</tr>';
-                    });
-                    $('#tabla tbody').html(tableBody);
-                }
-            });
-        }
-    </script>
 </body>
 </html>
 
