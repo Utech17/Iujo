@@ -11,7 +11,6 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 $nombreUsuario = $_SESSION['usuario'];
-$idProyecto = isset($_GET['idProyecto']) ? $_GET['idProyecto'] : '0';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -55,7 +54,7 @@ $idProyecto = isset($_GET['idProyecto']) ? $_GET['idProyecto'] : '0';
                                 echo "<td>" . htmlspecialchars($estado, ENT_QUOTES, 'UTF-8') . "</td>";
                                 echo "<td>" . htmlspecialchars($row['Nombre'], ENT_QUOTES, 'UTF-8') . "</td>";
                                 echo "<td>
-                                        <a href='../controlador/item_controlador.php?id=" . htmlspecialchars($row['ID_Categoria'], ENT_QUOTES, 'UTF-8') . "&idProyecto=" . htmlspecialchars($idProyecto, ENT_QUOTES, 'UTF-8') . "'>
+                                        <a href='../controlador/item_controlador.php?id=" . htmlspecialchars($row['ID_Categoria'], ENT_QUOTES, 'UTF-8') . "&idProyecto=" . htmlspecialchars($row['ID_Proyecto'], ENT_QUOTES, 'UTF-8') . "'>
                                             <button class='btn-azul'>
                                                 <img src='../vista/img/ojo.png' alt='ojo'>
                                             </button>
