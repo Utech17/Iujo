@@ -67,9 +67,9 @@ $nombreUsuario = $_SESSION['usuario'];
                                 echo "<td>" . $Nombre_categoria . "</td>";*/
                                 echo "<td>" . $row['nombre'] . "</td>";
                                 echo "<td>
-                                        <button class='agregar_presupuesto btn-azul' data-iditem='" . $row['id_item'] . "' data-idproyecto='" . $row2['id_proyecto'] . "'>
-                                            <img src='../vista/img/ojo.png' alt='presupuesto'>
-                                        </button>
+                                  <button class='agregar_presupuesto btn-azul' data-id='" . $row['id_item'] . "' data-nombre='" . $row['nombre'] . "' data-estado='" . $row['estado'] . "'>
+                                            <img src='../vista/img/ojo.png' alt='ojo'>
+                                        </button> 
                                         |
                                         <button class='editaritem btn-azul' data-id='" . $row['id_item'] . "' data-nombre='" . $row['nombre'] . "' data-estado='" . $row['estado'] . "'>
                                             <img src='../vista/img/editar.png' alt='editar'>
@@ -170,6 +170,29 @@ $nombreUsuario = $_SESSION['usuario'];
                 <div class="form-group">
                     <label for="editarNombre">Nombre</label>
                     <input type="text" class="form-control" id="editarNombre" name="editarNombre">
+                </div>
+                
+                <div class="modal__botones-contenedor">
+                    <input type="submit" value="Guardar cambios" class="btn btn-primary">
+                    <input type="button" value="Cancelar" class="modal__cerrar finalizarEditar btn btn-secondary">
+                </div>
+            </form>
+            </form>
+        </div>
+    </section>
+
+            <section class="modal_section modal_section_editar">
+            <div class="modal__contenedor">
+            <form id="formAgregarPresupuesto" action="" method="POST">
+                <input type="hidden" id="editarId" name="editarId">
+                <div class="form-group">
+                    <label for="agregarcantidad">Cantidad</label>
+                    <input type="text"class="form-control" id="agregarcantidad" name="agregarcantidad">
+        
+                </div>
+                <div class="form-group">
+                    <label for="agregarmonto_presupuesto">Monto</label>
+                    <input type="text" class="form-control" id="agregarmonto_presupuesto" name="agregarmonto_presupuesto">
                 </div>
                 
                 <div class="modal__botones-contenedor">
