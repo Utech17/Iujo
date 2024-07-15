@@ -12,7 +12,6 @@ if (isset($_POST['Enviar'])) {
         $objProyecto->set_Descripción($_POST['Descripción']);
         //$objProyecto->set_Estado(1);
         $resultado = $objProyecto->agregarProyecto();
-        var_dump($resultado);
 
         if ($resultado == 1) {
             echo "<script>alert('Proyecto agregada con éxito');location.href='../vista/Proyecto_vista.php';</script>";

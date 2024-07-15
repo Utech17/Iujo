@@ -66,7 +66,7 @@ class cls_proyecto extends Conexion
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':Nombre', $this->Nombre);
         $stmt->bindParam(':Descripción', $this->Descripción);
-        //echo $stmt->debugDumpParams();
+        echo $stmt->debugDumpParams();
         $result = $stmt->execute();
         return $result ? 1 : 0;
     }
