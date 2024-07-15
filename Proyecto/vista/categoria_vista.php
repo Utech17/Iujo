@@ -1,10 +1,17 @@
 <?php
+// Inicia la sesión si no está iniciada aún
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-$nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado';
-$idProyecto = isset($_GET['idProyecto']) ? $_GET['idProyecto'] : '0';
 
+// Verifica si el usuario está autenticado
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ../index.php");
+    exit();
+}
+
+$nombreUsuario = $_SESSION['usuario'];
+$idProyecto = isset($_GET['idProyecto']) ? $_GET['idProyecto'] : '0';
 ?>
 <!DOCTYPE html>
 <html lang="es">
