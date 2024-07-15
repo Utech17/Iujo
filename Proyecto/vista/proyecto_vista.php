@@ -1,8 +1,16 @@
 <?php
+// Inicia la sesión si no está iniciada aún
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-$nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado';
+
+// Verifica si el usuario está autenticado
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ../index.php");
+    exit();
+}
+
+$nombreUsuario = $_SESSION['usuario'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,31 +36,34 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
         </div>
     </div>
     <div class="contenedor-categoria px-6 pt-5">
-        <div id="tabla_div">
-            <a href="#" class="modal_abrir btn btn-primary">Agregar proyecto</a>
-            <table id="tabla" class="table table-striped" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Estado</th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    if (isset($data) && is_array($data)) {
-                        foreach ($data as $row) {
-                            echo "<tr>";
-                            $estado = ($row['Estado'] == 1) ? 'Activo' : 'Inactivo';
-                            echo "<td>" . $estado . "</td>";
-                            echo "<td>" . $row['Nombre'] . "</td>";
-                            echo "<td>" . $row['Descripcion'] . "</td>";
-                            echo "<td>
-                                    <a href='../controlador/categoria_controlador.php'>
-                                            <button class='btn-azul'>
-                                                <img src='../vista/img/ojo.png' alt='ojo'>
-                                            </button>
+            <div id="tabla_div">
+            <div class="row">
+                <div class="col-sm-3">
+                    <a href="#" class="modal_abrir btn btn-primary"> <i class="fa-solid fa-plus"></i> Agregar Proyecto</a>
+                </div>
+                <table id="tabla" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Estado</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if (isset($data) && is_array($data)) {
+                            foreach ($data as $row) {
+                                echo "<tr>";
+                                $estado = ($row['Estado'] == 1) ? 'Activo' : 'Inactivo';
+                                echo "<td>" . $estado . "</td>";
+                                echo "<td>" . $row['Nombre'] . "</td>";
+                                echo "<td>" . $row['Descripcion'] . "</td>";
+                                echo "<td>
+                                    <a href='../controlador/categoria_controlador.php?id=" . $row['ID_Proyecto'] . "'>
+                                        <button class='btn-azul'>
+                                            <img src='../vista/img/ojo.png' alt='ojo'>
+                                        </button>
                                     </a>
                                     | 
                                     <button class='editarProyecto btn-azul' data-id='" . $row['ID_Proyecto'] . "' data-nombre='" . $row['Nombre'] . "' data-descripcion='" . $row['Descripcion'] . "' data-estado='" . $row['Estado'] . "'>
@@ -141,5 +152,4 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
     <script src="../vista/js/tableScript.js"></script>
     <script src="../vista/js/modal_proyecto.js"></script>
 </body>
-
 </html>

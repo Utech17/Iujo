@@ -3,6 +3,7 @@
 
     class ItemModelo extends Conexion {
         private $id_item;
+		private $id_categoria;
         private $nombre;
         private $estado;
         private $objbd;
@@ -19,6 +20,14 @@
 		
 		public function set_iditem( $id_item ){
 			$this->id_item = $id_item;	
+		}
+
+		public function get_idcategoria(){
+			return $this->id_categoria;
+		}
+		
+		public function set_idcategoria( $id_categoria ){
+			$this->id_categoria = $id_categoria;
 		}
 	
 		public function get_nombre(){
@@ -50,8 +59,10 @@
 		} */
 		
 		public function incluir() { // funcion para Incluir
-			$registro = "INSERT INTO item (nombre, estado) VALUES (:nombre,:estado)";
+			$registro = "INSERT INTO item (id_item, id_categoria, nombre, estado) VALUES (:id_item,:id_categoria,:nombre,:estado)";
 			$preparado = $this->objbd->prepare($registro);
+			$preparado->bindParam(':id_item', $this->id_item);
+			$preparado->bindParam(':id_categoria', $this->id_categoria);
 			$preparado->bindParam(':nombre', $this->nombre);
 			$preparado->bindParam(':estado', $this->estado);
 			$resul= $preparado->execute();

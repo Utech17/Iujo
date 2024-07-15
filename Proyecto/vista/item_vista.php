@@ -1,11 +1,17 @@
 <?php
-
+// Inicia la sesión si no está iniciada aún
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-$nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado';
-?>
 
+// Verifica si el usuario está autenticado
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ../index.php");
+    exit();
+}
+
+$nombreUsuario = $_SESSION['usuario'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,8 +50,11 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                         </tr>
                         <tbody>
                             <?php
-                            if (isset($data) && is_array($data)) {
+                            if (isset($data) && is_array($data) && isset($data2) && is_array($data2)) {
                             foreach ($data as $row) {
+                                foreach ($data2 as $row2) {
+                                    
+                                
                                 echo "<tr>";
                                 echo "<td>" . ($row['estado'] == 1 ? 'Activo' : 'Inactivo') . "</td>";
                                                         /*$Nombre_categoria = '';
@@ -58,6 +67,10 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                                 echo "<td>" . $Nombre_categoria . "</td>";*/
                                 echo "<td>" . $row['nombre'] . "</td>";
                                 echo "<td>
+                                        <button class='agregar_presupuesto btn-azul' data-iditem='" . $row['id_item'] . "' data-idproyecto='" . $row2['id_proyecto'] . "'>
+                                            <img src='../vista/img/ojo.png' alt='presupuesto'>
+                                        </button>
+                                        |
                                         <button class='editaritem btn-azul' data-id='" . $row['id_item'] . "' data-nombre='" . $row['nombre'] . "' data-estado='" . $row['estado'] . "'>
                                             <img src='../vista/img/editar.png' alt='editar'>
                                         </button> 
@@ -69,10 +82,15 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                                         </a>
                                     </td>";
                                     echo "</tr>";
+
+                                    echo "<script>";
+            echo "console.log('id_proyecto:', " . $row2['id_proyecto'] . ", 'id_item:', " . $row['id_item'] . ");";
+            echo "</script>";
                                 }
                             } else {
                                 echo "<tr><td colspan='4'>No hay datos disponibles.</td></tr>";
                             }
+                        }
                         ?>
                     </tbody>
         <tfoot>
@@ -98,12 +116,12 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                                                         </tr>
                                                         <tbody>
                                                             <?php
-                                                            foreach ($data2 as $row) {
-                                                                echo "<tr>";
-                                                                echo "<td><input type='radio' class='categoria_seleccionada' name='categoria_seleccionada' value='" . $row['id_categoria'] . "'></td>";
-                                                                echo "<td>" . $row['nombre'] . "</td>";
-                                                                echo "</tr>";
-                                                            }
+                                                           // foreach ($data2 as $row) {
+                                                               // echo "<tr>";
+                                                               // echo "<td><input type='radio' class='categoria_seleccionada' name='categoria_seleccionada' value='" . $row['id_categoria'] . "'></td>";
+                                                                //echo "<td>" . $row['nombre'] . "</td>";
+                                                                //echo "</tr>";
+                                                          //  }
                                                             ?>
                                                         </tbody>
                                         <tfoot>
@@ -128,10 +146,10 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                                 <input type="text" id="nombre_item_input" name="nombre_item_input" class="form-control form-control-sm">
                             </div>
 
-                            <input type="submit" value="Enviar" name="Enviar" class="btn btn-info">
+                            
 
                             <div class="modal__botones-contenedor">
-                                <input type="submit" for value="Guardar" name="Guardar" class="modal__agregar finalizar" id="modal_cliente">
+                                <input type="submit" value="Agregar" name="Enviar">
                                 <input type="button" value="Cancelar" class=" modal__cerrar finalizar">
                             </div>
                     </form>
