@@ -25,99 +25,98 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
             <h1>Categoría</h1>
         </div>
     </div>
-        <div class="contenedor-categoria px-6 pt-5">
-            <div id="tabla_div">
-                <a href="#" class="modal_abrir btn btn-primary">Agregar categoría</a>
-                <table id="tabla" class="table table-striped" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>Estado</th>
-                            <th>Nombre</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        if (isset($data) && is_array($data)) {
-                            foreach ($data as $row) {
+    <div class="contenedor-categoria px-6 pt-5">
+        <div id="tabla_div">
+            <a href="#" class="modal_abrir btn btn-primary">Agregar categoría</a>
+            <table id="tabla" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Estado</th>
+                        <th>Nombre</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if (isset($data) && is_array($data)) {
+                        foreach ($data as $row) {
+                            if (is_array($row)) {
                                 echo "<tr>";
                                 $estado = ($row['Estado'] == 1) ? 'Activo' : 'Inactivo';
-                                echo "<td>" . $estado . "</td>";
-                                echo "<td>" . $row['Nombre'] . "</td>";
-                                
+                                echo "<td>" . htmlspecialchars($estado, ENT_QUOTES, 'UTF-8') . "</td>";
+                                echo "<td>" . htmlspecialchars($row['Nombre'], ENT_QUOTES, 'UTF-8') . "</td>";
                                 echo "<td>
-                                        <a href='../controlador/item_controlador.php'>
+                                        <a href='../controlador/item_controlador.php?id=" . htmlspecialchars($row['ID_Categoria'], ENT_QUOTES, 'UTF-8') . "'>
                                             <button class='btn-azul'>
                                                 <img src='../vista/img/ojo.png' alt='ojo'>
                                             </button>
                                         </a>
                                         | 
-                                        <button class='editarCategoria btn-azul' data-id='" . $row['ID_Categoria'] . "' data-nombre='" . $row['Nombre'] . "' data-estado='" . $row['Estado'] . "'>
+                                        <button class='editarCategoria btn-azul' data-id='" . htmlspecialchars($row['ID_Categoria'], ENT_QUOTES, 'UTF-8') . "' data-nombre='" . htmlspecialchars($row['Nombre'], ENT_QUOTES, 'UTF-8') . "' data-estado='" . htmlspecialchars($row['Estado'], ENT_QUOTES, 'UTF-8') . "'>
                                             <img src='../vista/img/editar.png' alt='editar'>
                                         </button> 
                                         | 
-                                        <a href='?eliminarId=" . $row['ID_Categoria'] . "'>
+                                        <a href='?eliminarId=" . htmlspecialchars($row['ID_Categoria'], ENT_QUOTES, 'UTF-8') . "'>
                                             <button class='btn-rojo'>
                                                 <img src='../vista/img/eliminar.png' alt='eliminar'>
                                             </button>
                                         </a>
                                     </td>";
                                 echo "</tr>";
+                            } else {
+                                echo "<tr><td colspan='3'>Dato incorrecto en la fila.</td></tr>";
                             }
-                        } else {
-                            echo "<tr><td colspan='4'>No hay datos disponibles.</td></tr>";
                         }
-                        ?>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
+                    } else {
+                        echo "<tr><td colspan='3'>No hay datos disponibles.</td></tr>";
+                    }
+                    ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <!-- Empty footer -->
+                    </tr>
+                </tfoot>
+            </table>
         </div>
-    
-        <section class="modal_section">
-            <div class="modal__contenedor">
-                <form id="categoriaForm" action="" method="POST">
-                    <div class="form-group">
-                            <label for="Nombre">Nombre</label>
-                            <input type="text" id="Nombre" name="Nombre" class="form-control form-control-sm">
-                    </div>
-                
-                    <div class="modal__botones-contenedor">
-                        <input type="button" value="Cancelar" class="modal__cerrar finalizar btn btn-secondary">
-                        <input type="submit" value="Enviar" name="Enviar" class="btn btn-primary">
-                    </div>
-                </form>
-            </div>
-        </section>
-
-        <section class="modal_section modal_section_editar">
-            <div class="modal__contenedor">
-                <form id="formEditarCategoria" action="" method="POST">
-                    <input type="hidden" id="editarId" name="editarId">
-                    <div class="form-group">
-                        <label for="editarEstado">Estado</label>
-                        <select class="form-control" id="editarEstado" name="editarEstado">
-                            <option value="1">Activo</option>
-                            <option value="0">Inactivo</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="editarNombre">Nombre</label>
-                        <input type="text" class="form-control" id="editarNombre" name="editarNombre">
-                    </div>
-                    
-                    <div class="modal__botones-contenedor">
-                        <input type="submit" value="Guardar cambios" class="btn btn-primary">
-                        <input type="button" value="Cancelar" class="modal__cerrar finalizarEditar btn btn-secondary">
-                    </div>
-                </form>
-            </div>
-        </section>
     </div>
+    <section class="modal_section">
+        <div class="modal__contenedor">
+            <form id="categoriaForm" action="" method="POST">
+                <div class="form-group">
+                    <label for="Nombre">Nombre</label>
+                    <input type="text" id="Nombre" name="Nombre" class="form-control form-control-sm">
+                </div>
+                <div class="modal__botones-contenedor">
+                    <input type="button" value="Cancelar" class="modal__cerrar finalizar btn btn-secondary">
+                    <input type="submit" value="Enviar" name="Enviar" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="modal_section modal_section_editar">
+        <div class="modal__contenedor">
+            <form id="formEditarCategoria" action="" method="POST">
+                <input type="hidden" id="editarId" name="editarId">
+                <div class="form-group">
+                    <label for="editarEstado">Estado</label>
+                    <select class="form-control" id="editarEstado" name="editarEstado">
+                        <option value="1">Activo</option>
+                        <option value="0">Inactivo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editarNombre">Nombre</label>
+                    <input type="text" class="form-control" id="editarNombre" name="editarNombre">
+                </div>
+                <div class="modal__botones-contenedor">
+                    <input type="submit" value="Guardar cambios" class="btn btn-primary">
+                    <input type="button" value="Cancelar" class="modal__cerrar finalizarEditar btn btn-secondary">
+                </div>
+            </form>
+        </div>
+    </section>
     <script src="../vista/js/jquery-3.7.1.js"></script>
     <script src="../vista/js/bootstrap.bundle.min.js"></script>
     <script src="../vista/js/dataTables.js"></script>

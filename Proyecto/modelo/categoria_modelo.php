@@ -4,6 +4,7 @@ require_once("../modelo/conexionPDO.php");
 class Categoria extends Conexion {
     // Attributes
     private $ID_Categoria;
+    private $ID_Proyecto;
     private $Nombre;
     private $Estado;
 
@@ -24,6 +25,14 @@ class Categoria extends Conexion {
         $this->ID_Categoria = $ID_Categoria;
     }
 
+    public function getID_Proyecto() {
+        return $this->ID_Proyecto;
+    }
+
+    public function setID_Proyecto($ID_Proyecto) {
+        $this->ID_Proyecto = $ID_Proyecto;
+    }
+
     public function getNombre() {
         return $this->Nombre;
     }
@@ -41,8 +50,9 @@ class Categoria extends Conexion {
     }
 
     public function agregarCategoria() {
-        $sql = "INSERT INTO Categoria ( Nombre) VALUES (:Nombre)";
+        $sql = "INSERT INTO Categoria (ID_Proyecto, Nombre ) VALUES (:ID_Proyecto, :Nombre)";
         $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':ID_Proyecto', $this->ID_Proyecto);
         $stmt->bindParam(':Nombre', $this->Nombre);
         $result = $stmt->execute();
         return $result ? 1 : 0;
@@ -60,12 +70,17 @@ class Categoria extends Conexion {
         }
     }
 
-    public function buscarCategoriaPorID($ID_Categoria) {
-        $sql = "SELECT * FROM Categoria WHERE ID_Categoria = :ID_Categoria";
-        $stmt = $this->conexion->prepare($sql);
-        $stmt->bindParam(':ID_Categoria', $ID_Categoria);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+    public function buscarCategoriaPorIDProyecto($ID_Proyecto) {
+        try {
+            $sql = "SELECT * FROM Categoria WHERE ID_Proyecto = :ID_Proyecto";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':ID_Proyecto', $ID_Proyecto);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Utilizamos fetchAll para asegurar un array de arrays
+        } catch (PDOException $e) {
+            error_log("Error al buscar categorías por ID de proyecto: " . $e->getMessage(), 0);
+            return array(); // Devolvemos un array vacío en caso de error
+        }
     }
 
     public function actualizarCategoria() {

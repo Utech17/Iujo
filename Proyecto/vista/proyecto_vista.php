@@ -52,10 +52,10 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                                 echo "<td>" . $row['Nombre'] . "</td>";
                                 echo "<td>" . $row['Descripcion'] . "</td>";
                                 echo "<td>
-                                    <a href='../controlador/categoria_controlador.php'>
-                                            <button class='btn-azul'>
-                                                <img src='../vista/img/ojo.png' alt='ojo'>
-                                            </button>
+                                    <a href='../controlador/categoria_controlador.php?id=" . $row['ID_Proyecto'] . "'>
+                                        <button class='btn-azul'>
+                                            <img src='../vista/img/ojo.png' alt='ojo'>
+                                        </button>
                                     </a>
                                     | 
                                     <button class='editarProyecto btn-azul' data-id='" . $row['ID_Proyecto'] . "' data-nombre='" . $row['Nombre'] . "' data-descripcion='" . $row['Descripcion'] . "' data-estado='" . $row['Estado'] . "'>

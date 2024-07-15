@@ -3,20 +3,27 @@ require_once("../modelo/categoria_modelo.php");
 
 $objCategoria = new Categoria();
 
+// Verificar si se ha pasado un ID de proyecto
+if (isset($_GET['id'])) {
+    $idProyecto = $_GET['id'];
+    // Puedes usar $idProyecto según sea necesario, por ejemplo, para filtrar las categorías asociadas a ese proyecto
+}
+
 // Listar todas las categorías
-$data = $objCategoria->buscarTodos(); 
+$data = $objCategoria->buscarCategoriaPorIDProyecto($idProyecto); 
 
 // Llamar controlador con funciones de diseño, para no repetir el mismo código
 require_once("vista_controlador.php");
 
 // Incluir una nueva categoría
 if (isset($_POST['Enviar'])) {
-    if ( isset($_POST['Nombre'])) {
+    if (isset($_POST['Nombre']) && $idProyecto !== null) {
+        $objCategoria->setID_Proyecto($idProyecto); // Suponiendo que hay un método para establecer el ID del proyecto
         $objCategoria->setNombre($_POST['Nombre']);
         $resultado = $objCategoria->agregarCategoria();
         
         if ($resultado == 1) {
-            echo "<script>alert('Categoría agregada con éxito');location.href='../controlador/categoria_controlador.php';</script>";
+            echo "<script>alert('Categoría agregada con éxito');location.href='../controlador/categoria_controlador.php?id=$idProyecto';</script>";
         } else {
             echo "<script>alert('Error al agregar categoría');</script>";
         }
