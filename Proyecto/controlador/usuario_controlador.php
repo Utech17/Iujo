@@ -1,5 +1,5 @@
 <?php
-require_once('modelo/CUsuario.php');
+require_once('modelo/usuario_modelo.php');
 
 if (isset($_POST['iniciar_sesion'])) {
     $usuario = $_POST['usuario'];
