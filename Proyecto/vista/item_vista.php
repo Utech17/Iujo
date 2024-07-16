@@ -133,6 +133,5 @@ $idCategoria = isset($_GET['idCategoria']) ? $_GET['idCategoria'] : '0';
     <script src="../vista/js/dataTables.bootstrap5.js"></script>
     <script src="../vista/js/tableScript.js"></script>
     <script src="../vista/js/modal_item.js"></script>
-
 </body>
 </html>
