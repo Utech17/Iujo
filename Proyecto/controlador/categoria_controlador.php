@@ -3,16 +3,23 @@ require_once("../modelo/categoria_modelo.php");
 
 $objCategoria = new Categoria();
 
-// Verificar si se ha pasado un ID de proyecto
-if (isset($_GET['id'])) {
-    $idProyecto = $_GET['id'];
+// Inicia la sesión si no está iniciada aún
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
 }
 
-// Listar todas las categorías de ese proyecto
-$data = $objCategoria->buscarCategoriaPorIDProyecto($idProyecto); 
+// Verificar si se ha pasado un ID de proyecto y guardarlo en la sesión
+if (isset($_GET['id'])) {
+    $_SESSION['idProyecto'] = $_GET['id'];
+}
+
+$idProyecto = isset($_SESSION['idProyecto']) ? $_SESSION['idProyecto'] : null;
 
 // Llamar controlador con funciones de diseño, para no repetir el mismo código
 require_once("vista_controlador.php");
+
+// Listar todas las categorías de ese proyecto
+$data = $objCategoria->buscarCategoriaPorIDProyecto($idProyecto); 
 
 // Incluir una nueva categoría
 if (isset($_POST['Enviar'])) {
