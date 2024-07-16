@@ -39,8 +39,9 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                     <thead>
                         <th>Estado</th>
                         <th>Item</th>
-                        <!--<th>Presupuesto</th>
-                            <th>Monto Gastado</th>-->
+                        <th>Acciones</th>
+                        <th>Presupuesto</th>
+                        <th>Monto Gastado</th>
                         <th>Acciones</th>
                         </tr>
                     <tbody>
@@ -48,15 +49,12 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                         if (isset($data) && is_array($data)) {
                             foreach ($data as $row) {
                                 // Aquí debes agregar una condición para verificar si la categoría de la fila es la misma que la de la URL
-                                if ($row['id_item'] == $_GET['id']) {
+                                if ($row['ID_Categoria'] == $_GET['id']) {
                                     echo "<tr>";
                                     echo "<td>" . ($row['estado'] == 1 ? 'Activo' : 'Inactivo') . "</td>";
                                     echo "<td>" . $row['nombre'] . "</td>";
                                     echo "<td>
-                                            <button class='agregar_presupuesto btn-azul' data-id='" . $row['id_item'] . "' data-nombre='" . $row['nombre'] . "' data-estado='" . $row['estado'] . "'>
-                                                <img src='../vista/img/ojo.png' alt='presupuesto'>
-                                            </button>
-                                            |
+                                           
                                             <button class='editaritem btn-azul' data-id='" . $row['id_item'] . "' data-nombre='" . $row['nombre'] . "' data-estado='" . $row['estado'] . "'>
                                                 <img src='../vista/img/editar.png' alt='editar'>
                                             </button> 
@@ -67,29 +65,6 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                                                 </button>
                                             </a>
                                         </td>";
-                                    echo "</tr>";
-                                }
-                            }
-                            if (isset($data2) && is_array($data2)) {
-                                foreach ($data2 as $row2) {
-                                    echo "<tr>";
-                                    echo "<td>" . $row['cantidad'] . "</td>";
-                                    echo "<td>" . $row['monto_presupuesto'] . "</td>";
-                                    echo "<td>
-                                        <button class='agregarpresupuesto btn-azul' data-id='" . $row['ID_Proyecto'] . "' data2-id='" . $row['id_item'] . "' data-cantidad='" . $row['cantidad'] . "' data-monto_presupuesto='" . $row['monto_presupuesto'] . "'>
-                                            <img src='../vista/img/editar.png' alt='Agregar'>
-                                        </button> 
-                                        | 
-                                        <button class='editarpresupuesto btn-azul' data-id='" . $row['ID_Proyecto'] . "' data2-id='" . $row['id_item'] . "' data-cantidad='" . $row['cantidad'] . "' data-monto_presupuesto='" . $row['monto_presupuesto'] . "'>
-                                            <img src='../vista/img/editar.png' alt='editar'>
-                                        </button> 
-                                        | 
-                                        <a href='?eliminarId=" . $row['ID_Proyecto'] . "'>
-                                            <button class='btn-rojo'>
-                                                <img src='../vista/img/eliminar.png' alt='eliminar'>
-                                            </button>
-                                        </a>
-                                    </td>";
                                     echo "</tr>";
                                 }
                             }
@@ -109,7 +84,6 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
     <section class="modal_section">
         <div class="modal__contenedor">
             <form id="itemForm" action="" method="POST" target="_self" onsubmit="return confirmacion()">
-
                 <h2>Agregar item</h2>
                 <br>
                 <div class="col-md-12">
@@ -119,13 +93,9 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                         <option value="0">Inactivo</option>
                     </select>
                     <br>
-
                     <label for=nombre_item>Nombre</label>
                     <input type="text" id="nombre_item_input" name="nombre_item_input" class="form-control form-control-sm">
                 </div>
-
-
-
                 <div class="modal__botones-contenedor">
                     <input type="submit" value="Agregar" name="Enviar">
                     <input type="button" value="Cancelar" class=" modal__cerrar finalizar">
@@ -181,6 +151,33 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
             </form>
         </div>
     </section>
+
+    <section class="modal_section">
+        <div class="modal__contenedor">
+            <form id="presupuestoForm" action="" method="POST">
+                <center>
+                    <div class="card-header ">
+                        <h3>Agregar presupuesto </h3>
+                    </div>
+                </center>
+                <div class="form-group">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="text" id="cantidad" name="cantidad" class="form-control form-control-sm" required value="">
+                </div>
+                <div class="form-group">
+                    <label for="monto_presupuesto>Monto/label>
+                    <input type=" text" id="monto_presupuesto" name="monto_presupuesto" class="form-control form-control-sm" value="">
+                </div>
+
+                <div class="modal__botones-contenedor">
+                    <input type="button" value="Cancelar" class="modal__cerrar finalizar btn btn-secondary">
+                    <input type="submit" value="Enviar" name="Enviar" class="btn btn-primary">
+                </div>
+            </form>
+
+        </div>
+    </section>
+
     <section class="modal_section modal_section_editar">
         <div class="modal__contenedor">
             <form id="formEditarPresupuesto" action="" method="POST">
@@ -207,9 +204,9 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
     <script src="../vista/js/bootstrap.bundle.min.js"></script>
     <script src="../vista/js/dataTables.js"></script>
     <script src="../vista/js/dataTables.bootstrap5.js"></script>
-
     <script src="../vista/js/tableScript.js"></script>
     <script src="../vista/js/modal_item.js"></script>
+    <script src="../vista/js/modal_presupuesto.js"></script>
 
 </body>
 
