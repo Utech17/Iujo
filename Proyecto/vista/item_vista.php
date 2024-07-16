@@ -34,7 +34,7 @@ $idCategoria = isset($_GET['idCategoria']) ? $_GET['idCategoria'] : '0';
         <div class="contenido">
             <h1> <a href="proyecto_controlador.php"><?php echo $proyecto['nombre'] ?></a>
             > <a href="categoria_controlador.php?idProyecto=<?php echo $idProyecto ?>"><?php echo $categoria['nombre'] ?></a>
-            > Categorías</h1>
+            > Ítems</h1>
         </div>
     </div>
     <div class="contenedor-categoria px-6 pt-5">

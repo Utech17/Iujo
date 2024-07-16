@@ -14,7 +14,7 @@ function imprimirTopBar($nombreUsuario) {
 function imprimirBarraLateral() {
     ?>
     <div class="logo">
-        <img src="../vista/img/logo.png" alt="Logo">
+        <img src="../vista/img/logo_blanco.png" alt="Logo">
     </div>
     <ul class="menu">
         <li><img src="../vista/img/dashboard.png" alt="dashboard"><a href="#"><i class="icon-dashboard"></i><b>Dashboard</b></a></li>

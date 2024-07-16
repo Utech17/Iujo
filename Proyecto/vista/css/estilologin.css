@@ -56,15 +56,17 @@ form {
 }
 
 .form-group input {
-    width: 100%;
+    width: 95%;
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 20px;
+
 }
 
 .form-group input[type="submit"] {
-    background-color: #5c89bb;
+    width: 100%;
+    background-color: #045fb4;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -72,7 +74,7 @@ form {
 }
 
 .form-group input[type="submit"]:hover {
-    background-color: #045fb4;
+    background-color: #006dd3;
 }
 
 .info-section {
