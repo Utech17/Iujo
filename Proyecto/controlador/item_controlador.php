@@ -24,10 +24,22 @@
 
     // maikel aqui recibes el id de la categoria recuerda que solo debes mostrar, agregar y 
     // editar segun la categoria que se te esta enviando, puedes revisar mi controlador para que te guies
-    if (isset($_GET['id']) && isset($_GET['idProyecto'])) {
-        $idcategoria = $_GET['id'];
-        $idProyecto = $_GET['idProyecto'];
+    
+
+    if (isset($_GET['id'])) {
+        $_SESSION['idcategoria'] = $_GET['id'];
+        $_SESSION['idProyecto'] = $_GET['idProyecto'];
     }
+    
+    $idcategoria = isset($_SESSION['idcategoria']) ? $_SESSION['idcategoria'] : null;
+    $idProyecto = isset($_SESSION['idProyecto']) ? $_SESSION['idProyecto'] : null;
+
+
+
+
+
+
+
 
     if(isset($_POST['Enviar'])){
         echo "<script>console.log('Conectado')</script>";
@@ -49,10 +61,11 @@
     
     if (isset($_GET['eliminarId'])) {
         $idItem = $_GET['eliminarId'];
+        echo "<script>console.log('$idItem')</script>";
         $objItem->set_iditem($idItem);
         
         if($objItem->eliminar()){
-            echo "<script>alert('Registro Eliminado con éxito');location.href='item_controlador.php?id=$idcategoria&idProyecto=$idProyecto'; </script>";
+            echo "<script>alert('Registro Eliminado con éxito');location.href='../controlador/item_controlador.php?id=$idcategoria&idProyecto=$idProyecto'; </script>";
             
         } else {
             echo "<script>alert('No se pudo Eliminar')</script>";
