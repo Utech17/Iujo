@@ -1,5 +1,5 @@
 <?php
-    require_once('controlador/usuario_controlador.php');
+    require_once('controlador/autenticador_controlador.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
