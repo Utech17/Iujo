@@ -50,12 +50,25 @@ class Categoria extends Conexion {
     }
 
     public function agregarCategoria() {
-        $sql = "INSERT INTO Categoria (ID_Proyecto, Nombre ) VALUES (:ID_Proyecto, :Nombre)";
+        $sql = "INSERT INTO Categoria (ID_Proyecto, Nombre, Estado ) VALUES (:ID_Proyecto, :Nombre, :Estado)";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':ID_Proyecto', $this->ID_Proyecto);
         $stmt->bindParam(':Nombre', $this->Nombre);
+        $stmt->bindParam(':Estado', $this->Estado);
         $result = $stmt->execute();
         return $result ? 1 : 0;
+    }
+
+    public function buscarProyectoNombreId(){ // funcion para Buscar
+        $res = array();
+        $registro="SELECT nombre from proyecto where ID_Proyecto ='".$this->ID_Proyecto."' LIMIT 1";
+        $preparado = $this->conexion->prepare($registro);
+        $preparado->execute();
+        $datos = $preparado->fetch(PDO::FETCH_ASSOC);
+        if( $datos) {
+            $res['nombre'] = $datos['nombre'];
+        }
+        return $res;
     }
 
     public function buscarTodos() {
@@ -79,6 +92,19 @@ class Categoria extends Conexion {
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log("Error al buscar categorías por ID de proyecto: " . $e->getMessage(), 0);
+            return array();
+        }
+    }
+
+    public function buscarPresupuestoPorIDProyecto() {
+        try {
+            $sql = "SELECT item.id_item, item.ID_Categoria, presupuesto.id_proyecto, presupuesto.monto_presupuesto FROM item, presupuesto WHERE presupuesto.id_proyecto = :ID_Proyecto && item.id_item = presupuesto.id_item";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':ID_Proyecto', $this->ID_Proyecto);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error al buscar todos los Proyectos: " . $e->getMessage(), 0);
             return array();
         }
     }
