@@ -140,9 +140,22 @@ class Gastos extends Conexion {
         return $stmt->execute();
     }
 
+    public function obtenerListaProyectos() {
+        $sql = "SELECT id_proyecto, nombre FROM proyecto";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function obtenerListaCategorias() {
         $sql = "SELECT id_categoria, nombre FROM categoria";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function obtenerListaItems() {
+        $sql = "SELECT id_item, nombre FROM item";
         $stmt = $this->conexion->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -25,7 +25,7 @@ $nombreUsuario = $_SESSION['usuario'];
     <script src="https://cdn.jsdelivr.net/npm/moment/min/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.js"></script>
     
-    <title>Categorías</title>
+    <title>Gastos</title>
 </head>
 <body>
 
@@ -49,10 +49,10 @@ $nombreUsuario = $_SESSION['usuario'];
                 </div>
                 <div class="col-sm-2">         
                 <label>Proyecto</label>
-                <select id="idcategoria" name="idcategoria" class="form-control form-control-sm">
+                <select id="idproyecto" name="idproyecto" class="form-control form-control-sm">
                         <option value="0">-- Ninguna --</option>
-                        <?php foreach ($lista_categorias as $categoria) { ?>
-                            <option value="<?php echo $categoria['id_categoria']; ?>"><?php echo $categoria['nombre']; ?></option>
+                        <?php foreach ($lista_proyectos as $proyecto) { ?>
+                            <option value="<?php echo $proyecto['id_proyecto']; ?>"><?php echo $proyecto['nombre']; ?></option>
                         <?php } ?>
                     </select>
                     </div>   
@@ -71,7 +71,7 @@ $nombreUsuario = $_SESSION['usuario'];
 				</div>
                 <br>
                 <div class="col-sm-3">
-                    <a href="#" class="modal_abrir btn btn-primary"> <i class="fa-solid fa-plus"></i> Agregar Gasto</a>
+                    <a href="#" class="modal_abrir btn btn-primary" onClick="agregarItem();"> <i class="fa-solid fa-plus"></i> Agregar Gasto</a>
                 </div>
              </div>
              <br> 
@@ -121,47 +121,56 @@ $nombreUsuario = $_SESSION['usuario'];
             </div>
         </div>
     
-        <section class="modal_section">
+        <section id="modalItem" class="modal_section">
         <div class="modal__contenedor">
             <form id="gastoForm" action="" method="POST">
-                <div class="form-group">
-                    <label for="ID_Proyecto">Proyecto</label>
-                    <input type="text" id="ID_Proyecto" name="ID_Proyecto" class="form-control form-control-sm">
-                </div>
+            <div class="form-group">
+                <label>Proyecto</label>           
+                <select id="idproyecto" name="idproyecto" class="form-control form-control-sm">
+                        <option value="0">-- Selecciona --</option>
+                        <?php foreach ($lista_proyectos as $proyecto) { ?>
+                            <option value="<?php echo $proyecto['id_proyecto']; ?>"><?php echo $proyecto['nombre']; ?></option>
+                        <?php } ?>
+                    </select>
+                    </div> 
                 <div class="form-group">
                 <label>Categoría</label>           
                 <select id="idcategoria" name="idcategoria" class="form-control form-control-sm">
-                        <option value="0">-- Ninguna --</option>
+                        <option value="0">-- Selecciona --</option>
                         <?php foreach ($lista_categorias as $categoria) { ?>
                             <option value="<?php echo $categoria['id_categoria']; ?>"><?php echo $categoria['nombre']; ?></option>
                         <?php } ?>
                     </select>
                     </div> 
+                    <div class="form-group">
+                <label>Ítem</label>           
+                <select id="iditem" name="iditem" class="form-control form-control-sm">
+                        <option value="0">-- Selecciona --</option>
+                        <?php foreach ($lista_items as $item) { ?>
+                            <option value="<?php echo $item['id_item']; ?>"><?php echo $item['nombre']; ?></option>
+                        <?php } ?>
+                    </select>
+                    </div> 
                 <div class="form-group">
-                    <label for="ID_Item">Item</label>
-                    <input type="text" id="ID_Item" name="ID_Item" class="form-control form-control-sm">
+                    <label for="fecha">Fecha</label>
+                    <input type="date" id="fecha" name="fecha" class="form-control form-control-sm">
                 </div>
                 <div class="form-group">
-                    <label for="Fecha">Fecha</label>
-                    <input type="date" id="Fecha" name="Fecha" class="form-control form-control-sm">
+                    <label for="montogasto">Monto</label>
+                    <input type="number" id="montogasto" name="montogasto" class="form-control form-control-sm">
                 </div>
                 <div class="form-group">
-                    <label for="Monto_Gasto">Monto</label>
-                    <input type="number" id="Monto_Gasto" name="Monto_Gasto" class="form-control form-control-sm">
+                    <label for="comprobante">Comprobante</label>
+                    <input type="text" id="comprobante" name="comprobante" class="form-control form-control-sm">
                 </div>
                 <div class="form-group">
-                    <label for="Comprobante">Comprobante</label>
-                    <input type="text" id="Comprobante" name="Comprobante" class="form-control form-control-sm">
-                </div>
-                <div class="form-group">
-                    <label for="Observacion">Observación</label>
-                    <input type="text" id="Observacion" name="Observacion" class="form-control form-control-sm">
+                    <label for="observacion">Observación</label>
+                    <input type="text" id="observacion" name="observacion" class="form-control form-control-sm">
                 </div>
 
                 <div class="modal__botones-contenedor">
-                    <input type="button" value="Cancelar" class="modal__cerrar finalizar btn btn-secondary">
-                    <input type="submit" value="Guardar" name="Guardar" class="btn btn-primary">
-
+                    <input type="button" value="Cancelar" class="btn btn-secondary" onClick="cerrarModal()">
+                    <input id="buttonSubmit" type="submit" name="Enviar" class="btn btn-primary">
                 </div>
             </form>
         </div>
@@ -200,9 +209,8 @@ $nombreUsuario = $_SESSION['usuario'];
                     <input type="text" class="form-control" id="editarObservacion" name="editarObservacion">
                 </div>
                 <div class="modal__botones-contenedor">
-                    <input type="button" value="Cancelar" class="modal__cerrar finalizarEditar btn btn-secondary">
-                    <input type="submit" value="Actualizar" class="btn btn-primary">
-                    
+                    <input type="button" value="Cancelar" class="btn btn-secondary" onClick="cerrarModal()">
+                    <input id="buttonSubmit" type="submit" name="Enviar" class="btn btn-primary">
                 </div>
             </form>
         </div>
@@ -217,6 +225,7 @@ $nombreUsuario = $_SESSION['usuario'];
     <script src="../vista/js/dataTables.js"></script>
     <script src="../vista/js/dataTables.bootstrap5.js"></script>
     <script src="../vista/js/tableScript.js"></script>
-    <script src="../vista/js/modal_categoria.js"></script>
+    <script src="../vista/js/modal_gasto.js"></script>
+    <script src="../vista/js/modal_item.js"></script>
 </body>
 </html>

@@ -11,6 +11,8 @@ $data = $objGastos->buscarTodos();
 // Obtener listas de proyectos y categorías
 
 $lista_categorias = $objGastos->obtenerListaCategorias();
+$lista_proyectos = $objGastos->obtenerListaProyectos();
+$lista_items = $objGastos->obtenerListaItems();
 
 // Incluir un nuevo gasto
 if (isset($_POST['Guardar'])) {
