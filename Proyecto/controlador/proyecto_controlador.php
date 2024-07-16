@@ -45,7 +45,7 @@ if (isset($_POST['editarId'])) {
 }
 
 if (isset($_GET['eliminarId'])) {
-    $objProyecto->setID_Proyecto($_GET['eliminarId']);
+    $objProyecto->set_ID_Proyecto($_GET['eliminarId']);
     $resultado = $objProyecto->eliminarProyecto();
 
     if ($resultado) {
@@ -56,4 +56,3 @@ if (isset($_GET['eliminarId'])) {
 }
 
 require_once("../vista/proyecto_vista.php");
-?>

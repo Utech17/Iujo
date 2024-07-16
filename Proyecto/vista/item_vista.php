@@ -8,6 +8,7 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,42 +17,42 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
     <link rel="stylesheet" type="text/css" href="../vista/css/estilosinicio.css">
     <title>Item</title>
 </head>
+
 <body>
-<?php imprimirTopBar($nombreUsuario); ?>
+    <?php imprimirTopBar($nombreUsuario); ?>
     <div class="contenedor">
         <div class="barra-lateral">
             <?php imprimirBarraLateral(); ?>
         </div>
-    
+
         <div class="contenido">
             <h1>Item</h1>
         </div>
     </div>
     <div class="contenedor-categoria px-6 pt-5">
-    <div id="tabla_div">
-    <div class="row">
-    <div class="col-sm-3">
-        <a href="#" class="modal_abrir btn btn-primary"> <i class="fa-solid fa-plus"></i> Agregar Item</a>
-    </div>
-<table id="tabla" class="table table-striped" style="width:100%">
-        <thead>
-                            <th>Estado</th>
-                            <!--<th>Categoria</th>-->
-                            <th>Item</th>
-                            <!--<th>Presupuesto</th>
+        <div id="tabla_div">
+            <div class="row">
+                <div class="col-sm-3">
+                    <a href="#" class="modal_abrir btn btn-primary"> <i class="fa-solid fa-plus"></i> Agregar Item</a>
+                </div>
+                <table id="tabla" class="table table-striped" style="width:100%">
+                    <thead>
+                        <th>Estado</th>
+                        <th>Item</th>
+                        <!--<th>Presupuesto</th>
                             <th>Monto Gastado</th>-->
-                            <th>Acciones</th>
+                        <th>Acciones</th>
                         </tr>
-                        <tbody>
-                            <?php
-                            if (isset($data) && is_array($data)) {
-                                foreach ($data as $row) {
-                                    // Aquí debes agregar una condición para verificar si la categoría de la fila es la misma que la de la URL
-                                    if ($row['id_categoria'] == $_GET['id']) {
-                                        echo "<tr>";
-                                        echo "<td>" . ($row['estado'] == 1 ? 'Activo' : 'Inactivo') . "</td>";
-                                        echo "<td>" . $row['nombre'] . "</td>";
-                                        echo "<td>
+                    <tbody>
+                        <?php
+                        if (isset($data) && is_array($data)) {
+                            foreach ($data as $row) {
+                                // Aquí debes agregar una condición para verificar si la categoría de la fila es la misma que la de la URL
+                                if ($row['id_item'] == $_GET['id']) {
+                                    echo "<tr>";
+                                    echo "<td>" . ($row['estado'] == 1 ? 'Activo' : 'Inactivo') . "</td>";
+                                    echo "<td>" . $row['nombre'] . "</td>";
+                                    echo "<td>
                                             <button class='agregar_presupuesto btn-azul' data-id='" . $row['id_item'] . "' data-nombre='" . $row['nombre'] . "' data-estado='" . $row['estado'] . "'>
                                                 <img src='../vista/img/ojo.png' alt='presupuesto'>
                                             </button>
@@ -66,73 +67,71 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                                                 </button>
                                             </a>
                                         </td>";
-                                        echo "</tr>";
-                                    }
+                                    echo "</tr>";
                                 }
-                            } 
+                            }
+                            if (isset($data2) && is_array($data2)) {
+                                foreach ($data2 as $row2) {
+                                    echo "<tr>";
+                                    echo "<td>" . $row['cantidad'] . "</td>";
+                                    echo "<td>" . $row['monto_presupuesto'] . "</td>";
+                                    echo "<td>
+                                        <button class='agregarpresupuesto btn-azul' data-id='" . $row['ID_Proyecto'] . "' data2-id='" . $row['id_item'] . "' data-cantidad='" . $row['cantidad'] . "' data-monto_presupuesto='" . $row['monto_presupuesto'] . "'>
+                                            <img src='../vista/img/editar.png' alt='Agregar'>
+                                        </button> 
+                                        | 
+                                        <button class='editarpresupuesto btn-azul' data-id='" . $row['ID_Proyecto'] . "' data2-id='" . $row['id_item'] . "' data-cantidad='" . $row['cantidad'] . "' data-monto_presupuesto='" . $row['monto_presupuesto'] . "'>
+                                            <img src='../vista/img/editar.png' alt='editar'>
+                                        </button> 
+                                        | 
+                                        <a href='?eliminarId=" . $row['ID_Proyecto'] . "'>
+                                            <button class='btn-rojo'>
+                                                <img src='../vista/img/eliminar.png' alt='eliminar'>
+                                            </button>
+                                        </a>
+                                    </td>";
+                                    echo "</tr>";
+                                }
+                            }
+                        }
                         ?>
                     </tbody>
-        <tfoot>
-            <tr>
-                
-            </tr>
-        </tfoot>
-    </table>
-    </div>
-    </div>
+                    <tfoot>
+                        <tr>
+
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
     </div>
 
     <section class="modal_section">
-                <div class="modal__contenedor">
-                    <form id="itemForm" action="" method="POST" target="_self" onsubmit="return confirmacion()">
-                    
-                        <!--<div id="subtabla_div">        
+        <div class="modal__contenedor">
+            <form id="itemForm" action="" method="POST" target="_self" onsubmit="return confirmacion()">
 
-                                <table id="subtabla" class="table table-striped" style="width:100%">
-                                        <thead>
-                                                            <th>Seleccionar</th>
-                                                            <th>Nombre</th>
-                                                        </tr>
-                                                        <tbody>
-                                                            <?php
-                                                           // foreach ($data2 as $row) {
-                                                               // echo "<tr>";
-                                                               // echo "<td><input type='radio' class='categoria_seleccionada' name='categoria_seleccionada' value='" . $row['id_categoria'] . "'></td>";
-                                                                //echo "<td>" . $row['nombre'] . "</td>";
-                                                                //echo "</tr>";
-                                                          //  }
-                                                            ?>
-                                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Seleccionar</th>
-                                                <th>Nombre</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                        </div>-->
                 <h2>Agregar item</h2>
-                <br> 
-                            <div class="col-md-12">
-                            <p>Elegir estado:</p>
-                            <select class="form-control" id="estado" name="estado">
-                                <option value="1">Activo</option>
-                                <option value="0">Inactivo</option>
-                            </select>
-                            <br>
+                <br>
+                <div class="col-md-12">
+                    <p>Elegir estado:</p>
+                    <select class="form-control" id="estado" name="estado">
+                        <option value="1">Activo</option>
+                        <option value="0">Inactivo</option>
+                    </select>
+                    <br>
 
-                                <label for=nombre_item>Nombre</label> 
-                                <input type="text" id="nombre_item_input" name="nombre_item_input" class="form-control form-control-sm">
-                            </div>
+                    <label for=nombre_item>Nombre</label>
+                    <input type="text" id="nombre_item_input" name="nombre_item_input" class="form-control form-control-sm">
+                </div>
 
-                            
 
-                            <div class="modal__botones-contenedor">
-                                <input type="submit" value="Agregar" name="Enviar">
-                                <input type="button" value="Cancelar" class=" modal__cerrar finalizar">
-                            </div>
-                    </form>
-                </div>                                           
+
+                <div class="modal__botones-contenedor">
+                    <input type="submit" value="Agregar" name="Enviar">
+                    <input type="button" value="Cancelar" class=" modal__cerrar finalizar">
+                </div>
+            </form>
+        </div>
     </section>
 
     <section class="modal_section modal_section_editar">
@@ -150,7 +149,52 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                     <label for="editarNombre">Nombre</label>
                     <input type="text" class="form-control" id="editarNombre" name="editarNombre">
                 </div>
-                
+
+                <div class="modal__botones-contenedor">
+                    <input type="submit" value="Guardar cambios" class="btn btn-primary">
+                    <input type="button" value="Cancelar" class="modal__cerrar finalizarEditar btn btn-secondary">
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="modal_section modal_section_editar">
+        <div class="modal__contenedor">
+            <form id="formEditarCategoria" action="" method="POST">
+                <input type="hidden" id="editarId" name="editarId">
+                <div class="form-group">
+                    <label for="editarEstado">Estado</label>
+                    <select class="form-control" id="editarEstado" name="editarEstado">
+                        <option value="1">Activo</option>
+                        <option value="0">Inactivo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editarNombre">Nombre</label>
+                    <input type="text" class="form-control" id="editarNombre" name="editarNombre">
+                </div>
+
+                <div class="modal__botones-contenedor">
+                    <input type="submit" value="Guardar cambios" class="btn btn-primary">
+                    <input type="button" value="Cancelar" class="modal__cerrar finalizarEditar btn btn-secondary">
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="modal_section modal_section_editar">
+        <div class="modal__contenedor">
+            <form id="formEditarPresupuesto" action="" method="POST">
+                <input type="hidden" id="editarId" name="editarId">
+
+                <div class="form-group">
+                    <label for="editarcantidad">Cantidad</label>
+                    <input type="text" class="form-control" id="editarcantidad" name="editarcantidad">
+                </div>
+                <div class="form-group">
+                    <label for="editarmonto_presupuesto">Monto</label>
+                    <input type="text" class="form-control" id="editarmonto_presupuesto" name="editarmonto_presupuesto">
+                </div>
+
                 <div class="modal__botones-contenedor">
                     <input type="submit" value="Guardar cambios" class="btn btn-primary">
                     <input type="button" value="Cancelar" class="modal__cerrar finalizarEditar btn btn-secondary">
@@ -163,9 +207,10 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
     <script src="../vista/js/bootstrap.bundle.min.js"></script>
     <script src="../vista/js/dataTables.js"></script>
     <script src="../vista/js/dataTables.bootstrap5.js"></script>
-    
+
     <script src="../vista/js/tableScript.js"></script>
     <script src="../vista/js/modal_item.js"></script>
 
 </body>
+
 </html>

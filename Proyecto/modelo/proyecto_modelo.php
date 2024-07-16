@@ -1,51 +1,62 @@
 <?php
 require_once("../modelo/conexionPDO.php");
 
-class Proyecto {
+class Proyecto
+{
     private $conexion;
     private $ID_Proyecto;
     private $Nombre;
     private $Descripcion;
     private $Estado;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->conexion = new Conexion();
         $this->conexion = $this->conexion->conectar();
     }
 
-    public function get_ID_Proyecto() {
+    public function get_ID_Proyecto()
+    {
         return $this->ID_Proyecto;
     }
 
-    public function setID_Proyecto($ID_Proyecto) {
+    public function set_ID_Proyecto($ID_Proyecto)
+    {
         $this->ID_Proyecto = $ID_Proyecto;
     }
 
-    public function get_Nombre() {
+    public function get_Nombre()
+    {
         return $this->Nombre;
     }
 
-    public function set_Nombre($Nombre) {
+    public function set_Nombre($Nombre)
+    {
         $this->Nombre = $Nombre;
     }
 
-    public function get_Descripcion() {
+    public function get_Descripcion()
+    {
         return $this->Descripcion;
     }
 
-    public function set_Descripcion($Descripcion) {
+    public function set_Descripcion($Descripcion)
+    {
         $this->Descripcion = $Descripcion;
     }
 
-    public function get_Estado() {
+    public function get_Estado()
+    {
         return $this->Estado;
     }
 
-    public function set_Estado($Estado) {
+    public function set_Estado($Estado)
+    {
         $this->Estado = $Estado;
     }
 
-    public function agregarProyecto() {
+    public function agregarProyecto()
+    {
         $sql = "INSERT INTO proyecto (Nombre, Descripcion) VALUES (:Nombre, :Descripcion)";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':Nombre', $this->Nombre);
@@ -54,7 +65,8 @@ class Proyecto {
         return $result ? 1 : 0;
     }
 
-    public function buscarTodos() {
+    public function buscarTodos()
+    {
         try {
             $sql = "SELECT * FROM proyecto";
             $stmt = $this->conexion->prepare($sql);
@@ -66,7 +78,8 @@ class Proyecto {
         }
     }
 
-    public function buscarProyectoPorID($ID_Proyecto) {
+    public function buscarProyectoPorID($ID_Proyecto)
+    {
         $sql = "SELECT * FROM proyecto WHERE ID_Proyecto = :ID_Proyecto";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':ID_Proyecto', $ID_Proyecto);
@@ -74,7 +87,8 @@ class Proyecto {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function actualizarProyecto() {
+    public function actualizarProyecto()
+    {
         $sql = "UPDATE proyecto SET Nombre = :Nombre, Descripcion = :Descripcion, Estado = :Estado WHERE ID_Proyecto = :ID_Proyecto";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':ID_Proyecto', $this->ID_Proyecto);
@@ -84,14 +98,16 @@ class Proyecto {
         return $stmt->execute();
     }
 
-    public function eliminarCategoriasPorProyecto() {
+    public function eliminarCategoriasPorProyecto()
+    {
         $sql = "DELETE FROM categoria WHERE ID_Proyecto = :ID_Proyecto";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':ID_Proyecto', $this->ID_Proyecto);
         return $stmt->execute();
     }
 
-    public function eliminarProyecto() {
+    public function eliminarProyecto()
+    {
         try {
             $this->conexion->beginTransaction();
             $this->eliminarCategoriasPorProyecto();
