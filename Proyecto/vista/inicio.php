@@ -21,7 +21,6 @@ if( isset($_GET['Volver'])){
         location.href='../index.php';
     </script>";
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
