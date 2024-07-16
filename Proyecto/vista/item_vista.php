@@ -87,32 +87,6 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
     <section class="modal_section">
         <div class="modal__contenedor">
             <form id="itemForm" action="" method="POST" target="_self" onsubmit="return confirmacion()">
-
-                <!--<div id="subtabla_div">        
-
-                                <table id="subtabla" class="table table-striped" style="width:100%">
-                                        <thead>
-                                                            <th>Seleccionar</th>
-                                                            <th>Nombre</th>
-                                                        </tr>
-                                                        <tbody>
-                                                            <?php
-                                                            // foreach ($data2 as $row) {
-                                                            // echo "<tr>";
-                                                            // echo "<td><input type='radio' class='categoria_seleccionada' name='categoria_seleccionada' value='" . $row['id_categoria'] . "'></td>";
-                                                            //echo "<td>" . $row['nombre'] . "</td>";
-                                                            //echo "</tr>";
-                                                            //  }
-                                                            ?>
-                                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Seleccionar</th>
-                                                <th>Nombre</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                        </div>-->
                 <h2>Agregar item</h2>
                 <br>
                 <div class="col-md-12">
