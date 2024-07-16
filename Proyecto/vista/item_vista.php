@@ -49,7 +49,7 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'
                         if (isset($data) && is_array($data)) {
                             foreach ($data as $row) {
                                 // Aquí debes agregar una condición para verificar si la categoría de la fila es la misma que la de la URL
-                                if ($row['ID_Categoria'] == $_GET['id']) {
+                                if ($row['id_categoria'] == $_GET['id']) {
                                     echo "<tr>";
                                     echo "<td>" . ($row['estado'] == 1 ? 'Activo' : 'Inactivo') . "</td>";
                                     echo "<td>" . $row['nombre'] . "</td>";
