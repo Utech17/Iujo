@@ -1,23 +1,25 @@
 <?php
-require_once('modelo/usuario_modelo.php');
+require_once('../modelo/usuario_modelo.php');
 
-if (isset($_POST['iniciar_sesion'])) {
-    $usuario = $_POST['usuario'];
-    $clave = $_POST['clave'];
-    
-    $objUsuario = new Usuario();
-    if ($objUsuario->autenticarUsuario($usuario, $clave)) {
-        // Iniciar sesión
-        session_start();
-        $_SESSION['usuario'] = $objUsuario->get_Usuario();
-        $_SESSION['nombre'] = $objUsuario->get_Nombre();
-        $_SESSION['apellido'] = $objUsuario->get_Apellido();
 
-        // Redirigir a la página de inicio
-        header('Location: vista/inicio.php');
-        exit();
-    } else {
-        echo "<script>alert('Usuario o contraseña incorrectos.');</script>";
-    }
+// Llamar controlador con funciones de diseño, para no repetir el mismo código
+require_once("vista_controlador.php");
+
+// Inicia la sesión si no está iniciada aún
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
 }
+
+// Verificar si se ha iniciado sesión y si las variables de sesión están definidas
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ../index.php");
+    exit();
+}
+
+// Obtener los datos del usuario de la sesión
+$usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
+$nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : '';
+$apellido = isset($_SESSION['apellido']) ? $_SESSION['apellido'] : '';
+
+require_once("../vista/usuario_vista.php");
 ?>
