@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-07-2024 a las 00:15:29
+-- Tiempo de generación: 16-07-2024 a las 08:07:54
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -34,22 +34,6 @@ CREATE TABLE `categoria` (
   `Estado` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `categoria`
---
-
-INSERT INTO `categoria` (`ID_Categoria`, `ID_Proyecto`, `Nombre`, `Estado`) VALUES
-(5, 1, 'Sueldos', 0),
-(6, 1, 'Costos fijos', 1),
-(7, 1, 'Costos indirectos', 1),
-(8, 1, 'Materiales', 1),
-(9, 2, 'Sueldos', 1),
-(11, 2, 'Costos fijos', 1),
-(12, 2, 'materiales', 1),
-(13, 2, 'Costos indirectos', 1),
-(16, 1, 'Limpieza', 1),
-(17, 1, 'Limpieza', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -79,13 +63,6 @@ CREATE TABLE `item` (
   `estado` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `item`
---
-
-INSERT INTO `item` (`id_item`, `id_categoria`, `nombre`, `estado`) VALUES
-(1, 6, 'hggh', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -111,14 +88,6 @@ CREATE TABLE `proyecto` (
   `Descripcion` varchar(100) NOT NULL,
   `Estado` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `proyecto`
---
-
-INSERT INTO `proyecto` (`ID_Proyecto`, `Nombre`, `Descripcion`, `Estado`) VALUES
-(1, 'Laboratorios', 'por motivos xs', 1),
-(2, 'aulas', 'se inundaron', 1);
 
 -- --------------------------------------------------------
 
@@ -194,19 +163,25 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `ID_Categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `ID_Categoria` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `gasto`
+--
+ALTER TABLE `gasto`
+  MODIFY `ID_Gasto` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `item`
 --
 ALTER TABLE `item`
-  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
-  MODIFY `ID_Proyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID_Proyecto` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
@@ -235,7 +210,7 @@ ALTER TABLE `gasto`
 -- Filtros para la tabla `item`
 --
 ALTER TABLE `item`
-  ADD CONSTRAINT `item_ibfk_1` FOREIGN KEY (`ID_Categoria`) REFERENCES `categoria` (`ID_Categoria`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `item_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`ID_Categoria`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `presupuesto`
