@@ -116,7 +116,6 @@
 
 		public function buscarProyectoNombreId(){ // funcion para Buscar
 			$res = array();
-			echo $this->id_proyecto;
 			$registro="SELECT nombre from proyecto where ID_Proyecto ='".$this->id_proyecto."' LIMIT 1";
 			$preparado = $this->conexion->prepare($registro);
 			$preparado->execute();
